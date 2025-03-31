@@ -1,0 +1,95 @@
+[gd_scene load_steps=10 format=3 uid="uid://buvga5rhpvcdy"]
+
+[ext_resource type="Script" uid="uid://conegcjn4wgw3" path="res://scripts/player.gd" id="1_yptnv"]
+[ext_resource type="Texture2D" uid="uid://cngdn7htkjn0j" path="res://assets/sprites/reimu.png" id="2_wn7uk"]
+[ext_resource type="Texture2D" uid="uid://bxl2x1g8bg0yc" path="res://assets/sprites/bullets.png" id="3_3uiw6"]
+[ext_resource type="PackedScene" uid="uid://bqd8fiu5m8b2j" path="res://scenes/player_basic_spawner.tscn" id="4_go2pc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vknqm"]
+radius = 2.23607
+
+[sub_resource type="Animation" id="Animation_5cjad"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite-character:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 32, 48)]
+}
+
+[sub_resource type="Animation" id="Animation_y80cc"]
+resource_name = "idle"
+loop_mode = 1
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite-character:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Rect2(0, 0, 32, 48), Rect2(32, 0, 32, 48), Rect2(64, 0, 32, 48), Rect2(96, 0, 32, 48), Rect2(128, 0, 32, 48), Rect2(160, 0, 32, 48), Rect2(192, 0, 32, 48), Rect2(224, 0, 32, 48)]
+}
+
+[sub_resource type="Animation" id="Animation_o32fy"]
+resource_name = "left"
+length = 0.5
+loop_mode = 1
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite-character:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Rect2(128, 48, 32, 48), Rect2(160, 48, 32, 48), Rect2(192, 48, 32, 48), Rect2(224, 48, 32, 48)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bvtjo"]
+_data = {
+&"RESET": SubResource("Animation_5cjad"),
+&"idle": SubResource("Animation_y80cc"),
+&"left": SubResource("Animation_o32fy")
+}
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_yptnv")
+
+[node name="Sprite-character" type="Sprite2D" parent="."]
+position = Vector2(0, -22)
+texture = ExtResource("2_wn7uk")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 48)
+
+[node name="Sprite-focus" type="Sprite2D" parent="."]
+position = Vector2(0, -22)
+scale = Vector2(0.71875, 0.730159)
+texture = ExtResource("3_3uiw6")
+region_enabled = true
+region_rect = Rect2(257.278, 17.5491, 64.2967, 63.4106)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -22)
+shape = SubResource("CircleShape2D_vknqm")
+
+[node name="Player_basic_spawner" parent="." instance=ExtResource("4_go2pc")]
+position = Vector2(0, -22)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bvtjo")
+}
+autoplay = "idle"

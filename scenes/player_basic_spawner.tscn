@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bqd8fiu5m8b2j"]
+
+[node name="Player_basic_spawner" type="Node2D"]
+
+[node name="spawner-1" type="Marker2D" parent="."]
+position = Vector2(-40, 0)
+
+[node name="spawner-2" type="Marker2D" parent="."]
+position = Vector2(-24, 0)
+
+[node name="spawner-3" type="Marker2D" parent="."]
+position = Vector2(40, 0)
+
+[node name="spawner-4" type="Marker2D" parent="."]
+position = Vector2(24, 0)
