@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cy1rtgekhdua0"]
+[gd_scene load_steps=8 format=3 uid="uid://cy1rtgekhdua0"]
 
 [ext_resource type="Script" uid="uid://boi0khglse556" path="res://scripts/ocean.gd" id="1_7i2eo"]
 [ext_resource type="Shader" uid="uid://51u2c83akubc" path="res://shaders/ocean.gdshader" id="1_fiuhb"]
@@ -6,13 +6,18 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fiuhb"]
 render_priority = 0
 shader = ExtResource("1_fiuhb")
-shader_parameter/albedo_color = Color(0, 0.67451, 1, 1)
+shader_parameter/albedo_color = Color(0, 0.67451, 1, 0.752941)
 shader_parameter/metallic = 0.8
 shader_parameter/roughness = 0.1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_7i2eo"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_fiuhb"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_fiuhb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fiuhb"]
+albedo_color = Color(0, 0, 0, 1)
 
 [node name="Ocean" type="Node3D"]
 
@@ -28,3 +33,9 @@ mesh = SubResource("BoxMesh_fiuhb")
 transform = Transform3D(0.969415, -0.155043, 0.190251, -4.44089e-16, 0.775187, 0.631732, -0.245426, -0.61241, 0.751478, 0, 0, 0)
 light_energy = 2.0
 shadow_enabled = true
+
+[node name="Bg plane" type="MeshInstance3D" parent="."]
+transform = Transform3D(200, 0, 0, 0, 200, 0, 0, 0, 200, 0, -13.2756, 0)
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_fiuhb")
+surface_material_override/0 = SubResource("StandardMaterial3D_fiuhb")
