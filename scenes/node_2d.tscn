@@ -1,12 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://ddiq5usw0sjtv"]
+[gd_scene load_steps=5 format=3 uid="uid://ddiq5usw0sjtv"]
 
 [ext_resource type="Script" uid="uid://16pxynvlvl3k" path="res://scripts/node_2d.gd" id="1_rdo7a"]
 [ext_resource type="PackedScene" uid="uid://devmk4at6fcf0" path="res://scenes/debug_ui.tscn" id="2_v53iu"]
 [ext_resource type="PackedScene" uid="uid://buvga5rhpvcdy" path="res://scenes/player.tscn" id="3_qidjt"]
+[ext_resource type="PackedScene" uid="uid://cy1rtgekhdua0" path="res://scenes/ocean.tscn" id="4_4vge2"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_rdo7a")
 
 [node name="Player" parent="." instance=ExtResource("3_qidjt")]
+position = Vector2(562, 326)
 
 [node name="Debug-UI" parent="." instance=ExtResource("2_v53iu")]
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="Ocean" parent="Node3D" instance=ExtResource("4_4vge2")]
+
+[node name="Camera3D" type="Camera3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 0.392177, 0.91989, 0, -0.91989, 0.392177, 0, 50, 19.6099)
