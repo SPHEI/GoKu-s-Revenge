@@ -9,17 +9,15 @@ varying vec3 world_pos;
 
 void fragment() {
     ALBEDO = albedo_color.rgb * 0.5;
-	ALBEDO += (vec3(1.0,1.0,1.0) * ((sin((world_pos.x + world_pos.z) * .5 + TIME) * 1.0 + 
-	sin((world_pos.x) * 0.02 + TIME) * 1.0 + 
-	cos((world_pos.x - world_pos.z) * 0.1 + TIME)))/17.5).rgb;
+	ALBEDO += (vec3(1.0,1.0,1.0) * world_pos.y * 0.009).rgb;
     ALPHA = albedo_color.a;
     METALLIC = metallic;
     ROUGHNESS = roughness;
 }
 
 void vertex() {
+    VERTEX.y = sin((VERTEX.x + VERTEX.z) * .5 + TIME) * -1.0 + 
+	sin((VERTEX.x) * 0.02 + TIME) * -1.0;
+	
 	world_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
-    VERTEX.y += sin((VERTEX.x + VERTEX.z) * .5 + TIME) * 1.0 + 
-	sin((VERTEX.x) * 0.02 + TIME) * 1.0 + 
-	cos((VERTEX.x - VERTEX.z) * 0.1 + TIME) * .5;
 }

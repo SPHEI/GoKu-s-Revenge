@@ -1,37 +1,36 @@
 extends MeshInstance3D
-@export var density = 1.0;
 func _ready():
-	# Create vertices
+	var size = 255
+	
 	var vertices = PackedVector3Array()
-	var increment = 1.0/density
+	var indices = PackedInt32Array()
 	
-	var start = -75.0 * density
-	var end = 75.0 * density
-	
-	var n = start * 2
-	while n < end * 2:
-		var m = start
-		while m < end:
-			var n1 = n/density
-			var n2 = (n + 1.0)/density
-			var m1 =  m/density
-			var m2 = (m + 1.0)/density
-			vertices.push_back(Vector3(n1, 0, m1))
-			vertices.push_back(Vector3(n2, 0, m1))
-			vertices.push_back(Vector3(n1, 0, m2))
+	for n in range(size*2):
+			for m in range(size):
+				vertices.push_back(Vector3(n, 0, m))
+				
+	for n in range(size*2-1):
+		for m in range(size-1):
+			var tl = n * size + m         
+			var tr = tl + 1                    
+			var bl = (n + 1) * size + m    
+			var br = bl + 1                  
+			indices.push_back(tl)
+			indices.push_back(bl)
+			indices.push_back(tr)
 			
-			vertices.push_back(Vector3(n2, 0, m1))
-			vertices.push_back(Vector3(n2, 0, m2))
-			vertices.push_back(Vector3(n1, 0, m2))
-			m += increment
-		n += increment
-	# Create mesh arrays
+			indices.push_back(tr)
+			indices.push_back(bl)
+			indices.push_back(br)
+			
+	var arr_mesh = ArrayMesh.new()
 	var arrays = []
 	arrays.resize(Mesh.ARRAY_MAX)
 	arrays[Mesh.ARRAY_VERTEX] = vertices
-
-	# Create ArrayMesh and assign to this MeshInstance3D
-	var arr_mesh = ArrayMesh.new()
+	arrays[Mesh.ARRAY_INDEX] = indices
 	arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 	
 	mesh = arr_mesh
+	
+	mesh.set_custom_aabb(mesh.get_aabb().grow(1000.0))
+	position += Vector3(-255,0,-128)

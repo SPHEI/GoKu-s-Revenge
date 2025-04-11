@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://csoo77f80f1gt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fgvf8"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_662v2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tmmpn"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_662v2"]
+albedo_color = Color(0.368627, 1, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_4hvc5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2mhwl"]
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_40vgr"]
+
+[node name="TestPlane" type="Node3D"]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 50, 0, 50)
+material_override = SubResource("StandardMaterial3D_fgvf8")
+mesh = SubResource("PlaneMesh_662v2")
+skeleton = NodePath("../MeshInstance3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, -50, 0, 50)
+material_override = SubResource("StandardMaterial3D_tmmpn")
+mesh = SubResource("PlaneMesh_662v2")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, -50, 0, -50)
+material_override = SubResource("StandardMaterial3D_662v2")
+mesh = SubResource("PlaneMesh_4hvc5")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 50, 0, -50)
+material_override = SubResource("StandardMaterial3D_2mhwl")
+mesh = SubResource("PlaneMesh_40vgr")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.985142, 0.17174, 5.69044e-10, -0.0670655, 0.384704, 0.9206, 0.158104, -0.906922, 0.390506, 0, 21.8653, 0)
