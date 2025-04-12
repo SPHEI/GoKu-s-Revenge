@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://cy1rtgekhdua0"]
+[gd_scene load_steps=12 format=3 uid="uid://cy1rtgekhdua0"]
 
 [ext_resource type="Script" uid="uid://boi0khglse556" path="res://scripts/ocean.gd" id="1_7i2eo"]
 [ext_resource type="Shader" uid="uid://51u2c83akubc" path="res://shaders/ocean.gdshader" id="1_fiuhb"]
+[ext_resource type="Texture2D" uid="uid://iogap7r54eon" path="res://assets/textures/Sky.png" id="3_mn261"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fiuhb"]
 render_priority = 0
 shader = ExtResource("1_fiuhb")
-shader_parameter/albedo_color = Color(0, 0.67451, 1, 1)
+shader_parameter/albedo_color = Color(0, 0.419608, 1, 1)
 shader_parameter/metallic = 0.0
 shader_parameter/roughness = 1.0
 
@@ -19,25 +20,55 @@ shader_parameter/roughness = 1.0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fiuhb"]
 albedo_color = Color(0, 0, 0, 1)
 
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_a1ohp"]
+panorama = ExtResource("3_mn261")
+
+[sub_resource type="Sky" id="Sky_ogne1"]
+sky_material = SubResource("PanoramaSkyMaterial_a1ohp")
+
+[sub_resource type="Environment" id="Environment_vjho5"]
+background_mode = 2
+sky = SubResource("Sky_ogne1")
+sky_rotation = Vector3(0, -1.91114, 0)
+ambient_light_sky_contribution = 0.0
+ambient_light_energy = 0.0
+reflected_light_source = 2
+tonemap_exposure = 1.2
+glow_hdr_scale = 2.35
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.005
+volumetric_fog_anisotropy = 0.9
+volumetric_fog_length = 274.82
+volumetric_fog_detail_spread = 0.965936
+volumetric_fog_ambient_inject = 0.13
+
 [node name="Ocean" type="Node3D"]
 
 [node name="OceanMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -0.725)
 material_override = SubResource("ShaderMaterial_fiuhb")
 mesh = SubResource("ArrayMesh_7i2eo")
 script = ExtResource("1_7i2eo")
 
 [node name="ReferenceCube" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.3623, 0)
 mesh = SubResource("BoxMesh_fiuhb")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.969415, -0.155043, 0.190251, -4.44089e-16, 0.775187, 0.631732, -0.245426, -0.61241, 0.751478, 0, 0, 0)
-light_energy = 2.0
+transform = Transform3D(-0.87462, -0.0708224, 0.479609, 0, 0.989272, 0.146083, -0.48481, 0.127767, -0.865237, 0, 0, 0)
+light_color = Color(1, 0.946, 0.73, 1)
+light_energy = 3.0
+light_angular_distance = 1.0
 shadow_enabled = true
-directional_shadow_fade_start = 1.0
-directional_shadow_max_distance = 8192.0
+shadow_opacity = 0.3
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 291.7
 
 [node name="Bg plane" type="MeshInstance3D" parent="."]
 transform = Transform3D(200, 0, 0, 0, 200, 0, 0, 0, 200, 0, -13.2756, 0)
 cast_shadow = 0
 mesh = SubResource("PlaneMesh_fiuhb")
 surface_material_override/0 = SubResource("StandardMaterial3D_fiuhb")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vjho5")
