@@ -2,16 +2,19 @@
 
 [ext_resource type="Script" uid="uid://boi0khglse556" path="res://scripts/ocean.gd" id="1_7i2eo"]
 [ext_resource type="Shader" uid="uid://51u2c83akubc" path="res://shaders/ocean.gdshader" id="1_fiuhb"]
-[ext_resource type="Texture2D" uid="uid://iogap7r54eon" path="res://assets/textures/Sky.png" id="3_mn261"]
+[ext_resource type="Texture2D" uid="uid://dwpsohevhhoyb" path="res://assets/textures/dayfair.png" id="3_mn261"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fiuhb"]
 render_priority = 0
 shader = ExtResource("1_fiuhb")
-shader_parameter/albedo_color = Color(0, 0.419608, 1, 1)
-shader_parameter/metallic = 0.0
-shader_parameter/roughness = 1.0
+shader_parameter/albedo_color = Color(0, 0.5, 1, 1)
+shader_parameter/metallic = 0.29
+shader_parameter/roughness = 0.065
 shader_parameter/use_foam_texture = false
 shader_parameter/foam = true
+shader_parameter/foamDetail = 10
+shader_parameter/maxAmp = 2.0
+shader_parameter/speedMult = 1.0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_7i2eo"]
 
@@ -34,7 +37,6 @@ sky = SubResource("Sky_ogne1")
 sky_rotation = Vector3(0, -1.91114, 0)
 ambient_light_sky_contribution = 0.0
 ambient_light_energy = 0.0
-reflected_light_source = 2
 tonemap_exposure = 1.2
 glow_hdr_scale = 2.35
 volumetric_fog_enabled = true
