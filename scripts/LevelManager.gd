@@ -1,14 +1,14 @@
 extends Node3D
 
 var currentLevelObjects = [null,null,null]
-var currentLevelId = 0
+var currentLevelId = 1
 #speed up to check if scrolling is aligned properly
 @export var speed = 10.0
 #Add new levels here
 var sceneList = [
 	#[Scene name, Scene length]
 	["res://scenes/testPlane.tscn",200],
-	["res://scenes/ocean.tscn", 254]
+	["res://scenes/ocean.tscn", 255]
 ]
 
 func _ready():
@@ -44,3 +44,8 @@ func updateLevel():
 		currentLevelObjects[i] = l.instantiate()
 		add_child(currentLevelObjects[i])
 		currentLevelObjects[i].position = Vector3(0,0,-sceneList[currentLevelId][1] * i)
+		if i > 0:
+			for child in currentLevelObjects[i].get_children():
+				if child is DirectionalLight3D or child is WorldEnvironment:
+					currentLevelObjects[i].remove_child(child)
+					
