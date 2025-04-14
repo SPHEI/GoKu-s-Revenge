@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://csbwni6mwkoul"
+path="res://.godot/imported/foam.glsl-692b7c8bfa22673f9284f73f22928656.res"
+
+[deps]
+
+source_file="res://shaders/foam.glsl"
+dest_files=["res://.godot/imported/foam.glsl-692b7c8bfa22673f9284f73f22928656.res"]
+
+[params]
+

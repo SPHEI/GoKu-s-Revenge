@@ -10,6 +10,8 @@ shader = ExtResource("1_fiuhb")
 shader_parameter/albedo_color = Color(0, 0.419608, 1, 1)
 shader_parameter/metallic = 0.0
 shader_parameter/roughness = 1.0
+shader_parameter/use_foam_texture = false
+shader_parameter/foam = true
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_7i2eo"]
 
