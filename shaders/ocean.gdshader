@@ -56,18 +56,21 @@ void fragment() {
 	ALBEDO += (vec3(1.0,1.0,1.0) * (local_pos.y-1.0) * 0.025).rgb;
 	if(foam)
 	{
+		float d1 = totalDerivative(TIME);
+		float d2 = totalDerivative(TIME + 0.5);
+		float d3 = totalDerivative(TIME - 0.5);
 		if(use_foam_texture)
 		{
 			vec4 foamt = texture(foam_texture, vec2(local_pos.x/512.0,local_pos.z/256.0), 0.0);
 			ALBEDO = mix(ALBEDO, foamt.rgb, foamt.a * 0.5);
 		}
-		else if(abs(totalDerivative(TIME)) < 0.5 && totalDerivative(TIME - 0.5) > 0.0 && totalDerivative(TIME + 0.5) < 0.0)
+		else if(abs(d1) < 0.5 && d3 > 0.0 && d2 < 0.0)
 		{
 			ALBEDO = vec3(1.0,1.0,1.0).rgb;
 		}
-		else if(totalDerivative(TIME) > -1.0 && totalDerivative(TIME) < 0.0 && totalDerivative(TIME + 1.0) >= 0.0)
+		else if(d1 > -1.0 && d1 < 0.0 && d2 >= 0.0)
 		{
-			ALBEDO += vec3(1.0,1.0,1.0).rgb * (totalDerivative(TIME) + 1.0) * 0.1;
+			ALBEDO += vec3(1.0,1.0,1.0).rgb * (d1 + 1.0) * 0.1;
 		}
 	}
 	ALPHA = albedo_color.a;
