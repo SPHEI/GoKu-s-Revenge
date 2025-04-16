@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cy1rtgekhdua0"]
+[gd_scene load_steps=9 format=3 uid="uid://cy1rtgekhdua0"]
 
 [ext_resource type="Script" uid="uid://boi0khglse556" path="res://scripts/ocean.gd" id="1_7i2eo"]
 [ext_resource type="Shader" uid="uid://51u2c83akubc" path="res://shaders/ocean.gdshader" id="1_fiuhb"]
@@ -17,13 +17,6 @@ shader_parameter/maxAmp = 2.0
 shader_parameter/speedMult = 1.0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_7i2eo"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_fiuhb"]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_fiuhb"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fiuhb"]
-albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_a1ohp"]
 panorama = ExtResource("3_mn261")
@@ -54,10 +47,6 @@ material_override = SubResource("ShaderMaterial_fiuhb")
 mesh = SubResource("ArrayMesh_7i2eo")
 script = ExtResource("1_7i2eo")
 
-[node name="ReferenceCube" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.3623, 0)
-mesh = SubResource("BoxMesh_fiuhb")
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.87462, -0.0708224, 0.479609, 0, 0.989272, 0.146083, -0.48481, 0.127767, -0.865237, 0, 0, 0)
 light_color = Color(1, 0.946, 0.73, 1)
@@ -67,12 +56,6 @@ shadow_enabled = true
 shadow_opacity = 0.4
 directional_shadow_blend_splits = true
 directional_shadow_max_distance = 291.7
-
-[node name="Bg plane" type="MeshInstance3D" parent="."]
-transform = Transform3D(200, 0, 0, 0, 200, 0, 0, 0, 200, 0, -13.2756, 0)
-cast_shadow = 0
-mesh = SubResource("PlaneMesh_fiuhb")
-surface_material_override/0 = SubResource("StandardMaterial3D_fiuhb")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_vjho5")
