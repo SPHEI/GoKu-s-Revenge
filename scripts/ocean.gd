@@ -1,14 +1,22 @@
+@tool
 extends MeshInstance3D
 
+@export var button: bool = false : set = set_button
+
+#Press the in-editor checkbox to regenerate mesh
+@warning_ignore("unused_parameter")
+func set_button(new_value: bool) -> void:
+	regenMesh()
+	
 var vertices = PackedVector3Array()
 #@export var foamResolution = 256.0
 #Don't turn this on or your pc will burn
 #@export var computeFoam = false
 #@export var foamFps = 60;
-func _ready():
+func regenMesh():
 	var size = 256
 	var indices = PackedInt32Array()
-	
+		
 	for n in range(size*2):
 			for m in range(size):
 				vertices.push_back(Vector3(n, 0, m))
@@ -21,88 +29,88 @@ func _ready():
 			indices.push_back(tl)
 			indices.push_back(bl)
 			indices.push_back(tre)
-			
+				
 			indices.push_back(tre)
 			indices.push_back(bl)
 			indices.push_back(br)
-			
+				
 	var arr_mesh = ArrayMesh.new()
 	var arrays = []
 	arrays.resize(Mesh.ARRAY_MAX)
 	arrays[Mesh.ARRAY_VERTEX] = vertices
 	arrays[Mesh.ARRAY_INDEX] = indices
 	arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-	
+		
 	mesh = arr_mesh
-	
+		
 	mesh.set_custom_aabb(mesh.get_aabb().grow(1000.0))
-	position += Vector3(255,0,128)
-	
+	position = Vector3(255,0,128)
+		
 	material_override.set_shader_parameter("use_foam_texture", false)
-	
+		
 	'''
-	#This is my amazing fucking attempt at making a compute shader
-	#MAYBE reaches 20fps with a 1024 resolution (the minimum for it to look good).
-	#Apparently godot can't pass textures GPU->GPU meaning the only way is GPU->CPU-GPU, which kills any performance gain from compute shaders.
-	
-	material_override.set_shader_parameter("use_foam_texture", computeFoam)
-	if computeFoam:
-		var img_format = RDTextureFormat.new()
-		img_format.width = foamResolution*2
-		img_format.height = foamResolution
-		img_format.format = RenderingDevice.DATA_FORMAT_R32G32B32A32_SFLOAT
-		img_format.usage_bits = RenderingDevice.TEXTURE_USAGE_STORAGE_BIT | RenderingDevice.TEXTURE_USAGE_SAMPLING_BIT
-		img_format.usage_bits = (
-		RenderingDevice.TEXTURE_USAGE_STORAGE_BIT |
-		RenderingDevice.TEXTURE_USAGE_SAMPLING_BIT |
-		RenderingDevice.TEXTURE_USAGE_CAN_COPY_FROM_BIT |
-		RenderingDevice.TEXTURE_USAGE_CAN_COPY_TO_BIT
-		)
-		rd = RenderingServer.create_local_rendering_device()
+		#This is my amazing fucking attempt at making a compute shader
+		#MAYBE reaches 20fps with a 1024 resolution (the minimum for it to look good).
+		#Apparently godot can't pass textures GPU->GPU meaning the only way is GPU->CPU-GPU, which kills any performance gain from compute shaders.
 		
-		image_texture = rd.texture_create(img_format, RDTextureView.new())
-		
-		var shader_file := load("res://shaders/foam.glsl")
-		var shader_spirv: RDShaderSPIRV = shader_file.get_spirv()
-		shader = rd.shader_create_from_spirv(shader_spirv)
-		
-		time_buffer = rd.uniform_buffer_create(16)  # 4 bytes for one float
-		
-		var input_bytes = vertices.to_byte_array()
-		var buffer := rd.storage_buffer_create(input_bytes.size(), input_bytes)
-		# Create a uniform to assign the buffer to the rendering device
-		uniformImg = RDUniform.new()
-		uniformImg.uniform_type = RenderingDevice.UNIFORM_TYPE_IMAGE
-		uniformImg.binding = 0 # this needs to match the "binding" in our shader file
-		uniformImg.add_id(image_texture)
-		
-		
-		uniform = RDUniform.new()
-		uniform.uniform_type = RenderingDevice.UNIFORM_TYPE_STORAGE_BUFFER
-		uniform.binding = 1 # this needs to match the "binding" in our shader file
-		uniform.add_id(buffer)
-		
-		time_uniform = RDUniform.new()
-		time_uniform.uniform_type = RenderingDevice.UNIFORM_TYPE_UNIFORM_BUFFER
-		time_uniform.binding = 2
-		
-		
-		var bytes2 = PackedByteArray()
-		bytes2.resize(16)
-		bytes2.encode_float(0, foamResolution)
-		
-		var size_buffer = rd.uniform_buffer_create(16)  # 4 bytes for one float
-		rd.buffer_update(size_buffer,0,16,bytes2)
-		
-		size_uniform = RDUniform.new()
-		size_uniform.uniform_type = RenderingDevice.UNIFORM_TYPE_UNIFORM_BUFFER
-		size_uniform.binding = 3
-		size_uniform.add_id(size_buffer)
-		
-		pipeline = rd.compute_pipeline_create(shader)
-		foam_image = Image.create(foamResolution*2, foamResolution, false, Image.FORMAT_RGBAF)
-		img_tex = ImageTexture.create_from_image(foam_image)
-		material_override.set_shader_parameter("foam_texture", img_tex)
+		material_override.set_shader_parameter("use_foam_texture", computeFoam)
+		if computeFoam:
+			var img_format = RDTextureFormat.new()
+			img_format.width = foamResolution*2
+			img_format.height = foamResolution
+			img_format.format = RenderingDevice.DATA_FORMAT_R32G32B32A32_SFLOAT
+			img_format.usage_bits = RenderingDevice.TEXTURE_USAGE_STORAGE_BIT | RenderingDevice.TEXTURE_USAGE_SAMPLING_BIT
+			img_format.usage_bits = (
+			RenderingDevice.TEXTURE_USAGE_STORAGE_BIT |
+			RenderingDevice.TEXTURE_USAGE_SAMPLING_BIT |
+			RenderingDevice.TEXTURE_USAGE_CAN_COPY_FROM_BIT |
+			RenderingDevice.TEXTURE_USAGE_CAN_COPY_TO_BIT
+			)
+			rd = RenderingServer.create_local_rendering_device()
+			
+			image_texture = rd.texture_create(img_format, RDTextureView.new())
+			
+			var shader_file := load("res://shaders/foam.glsl")
+			var shader_spirv: RDShaderSPIRV = shader_file.get_spirv()
+			shader = rd.shader_create_from_spirv(shader_spirv)
+			
+			time_buffer = rd.uniform_buffer_create(16)  # 4 bytes for one float
+			
+			var input_bytes = vertices.to_byte_array()
+			var buffer := rd.storage_buffer_create(input_bytes.size(), input_bytes)
+			# Create a uniform to assign the buffer to the rendering device
+			uniformImg = RDUniform.new()
+			uniformImg.uniform_type = RenderingDevice.UNIFORM_TYPE_IMAGE
+			uniformImg.binding = 0 # this needs to match the "binding" in our shader file
+			uniformImg.add_id(image_texture)
+			
+			
+			uniform = RDUniform.new()
+			uniform.uniform_type = RenderingDevice.UNIFORM_TYPE_STORAGE_BUFFER
+			uniform.binding = 1 # this needs to match the "binding" in our shader file
+			uniform.add_id(buffer)
+			
+			time_uniform = RDUniform.new()
+			time_uniform.uniform_type = RenderingDevice.UNIFORM_TYPE_UNIFORM_BUFFER
+			time_uniform.binding = 2
+			
+			
+			var bytes2 = PackedByteArray()
+			bytes2.resize(16)
+			bytes2.encode_float(0, foamResolution)
+			
+			var size_buffer = rd.uniform_buffer_create(16)  # 4 bytes for one float
+			rd.buffer_update(size_buffer,0,16,bytes2)
+			
+			size_uniform = RDUniform.new()
+			size_uniform.uniform_type = RenderingDevice.UNIFORM_TYPE_UNIFORM_BUFFER
+			size_uniform.binding = 3
+			size_uniform.add_id(size_buffer)
+			
+			pipeline = rd.compute_pipeline_create(shader)
+			foam_image = Image.create(foamResolution*2, foamResolution, false, Image.FORMAT_RGBAF)
+			img_tex = ImageTexture.create_from_image(foam_image)
+			material_override.set_shader_parameter("foam_texture", img_tex)
 	
 var rd: RenderingDevice
 var shader: RID

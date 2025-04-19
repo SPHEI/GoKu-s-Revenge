@@ -46,13 +46,14 @@ func _process(delta: float):
 func updateLevel():
 	label.text = "Current Level: " + str(currentLevelId)
 	ResourceLoader.load_threaded_request(sceneList[currentLevelId][0])
+	for i in range(3):
+		if currentLevelObjects[i] != null:
+			remove_child(currentLevelObjects[i])
 	while(ResourceLoader.load_threaded_get_status(sceneList[currentLevelId][0]) == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_IN_PROGRESS):
 			await get_tree().create_timer(0.2).timeout
 	var l = ResourceLoader.load_threaded_get(sceneList[currentLevelId][0])
 	for i in range(3):
-		if currentLevelObjects[i] != null:
-			remove_child(currentLevelObjects[i])
-		currentLevelObjects[i] = await l.instantiate()
+		currentLevelObjects[i] = l.instantiate()
 		add_child(currentLevelObjects[i])
 		currentLevelObjects[i].position = Vector3(0,0,-sceneList[currentLevelId][1] * i)
 		if i > 0:
