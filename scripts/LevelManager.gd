@@ -21,18 +21,19 @@ func _ready():
 	#change number to change starting level
 	updateLevel()
 func _process(delta: float):
-	#Ctrl + =
-	if Input.is_action_just_pressed("debug_nextScene"):
-		currentLevelId += 1
-		if currentLevelId >= sceneList.size():
-			currentLevelId = 0
-		updateLevel()
-	#Ctrl + -
-	if Input.is_action_just_pressed("debug_previousScene"):
-		currentLevelId -= 1
-		if currentLevelId < 0:
-			currentLevelId = sceneList.size() - 1
-		updateLevel()
+	if not updating:
+		#Ctrl + =
+		if Input.is_action_just_pressed("debug_nextScene"):
+			currentLevelId += 1
+			if currentLevelId >= sceneList.size():
+				currentLevelId = 0
+			updateLevel()
+		#Ctrl + -
+		if Input.is_action_just_pressed("debug_previousScene"):
+			currentLevelId -= 1
+			if currentLevelId < 0:
+				currentLevelId = sceneList.size() - 1
+			updateLevel()
 		
 	
 	if currentLevelObjects[0] != null and currentLevelObjects[1] != null and currentLevelObjects[2] != null:
@@ -42,8 +43,10 @@ func _process(delta: float):
 			for i in range(3):
 				currentLevelObjects[i].position = Vector3(0,0,-sceneList[currentLevelId][1] * i)
 
-	
+
+var updating = false
 func updateLevel():
+	updating = true
 	label.text = "Current Level: " + str(currentLevelId)
 	ResourceLoader.load_threaded_request(sceneList[currentLevelId][0])
 	for i in range(3):
@@ -60,3 +63,4 @@ func updateLevel():
 			for child in currentLevelObjects[i].get_children():
 				if child is DirectionalLight3D or child is WorldEnvironment:
 					currentLevelObjects[i].remove_child(child)
+	updating = false
