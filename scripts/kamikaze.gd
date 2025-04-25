@@ -17,7 +17,7 @@ func _physics_process(delta: float) -> void:
 func _on_body_entered(body: Node2D):
 	if body.is_in_group("player"):
 		body.hit()
-		get_parent().stuffSpawned -= 1
+		get_parent().stuff_spawned -= 1
 		queue_free()
 		
 #Call this from player bullet script

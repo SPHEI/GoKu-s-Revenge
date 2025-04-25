@@ -11,7 +11,7 @@ func _ready():
 func  _physics_process(delta: float) -> void:
 	position += dir * delta
 	if position.x > screen_size.x + 5.0 or position.x < -5.0 or position.y > screen_size.y + 5.0 or position.y < -5.0:
-		get_parent().stuffSpawned -= 1
+		get_parent().stuff_spawned -= 1
 		queue_free()
 
 func _on_body_entered(body: Node2D):
