@@ -19,3 +19,7 @@ func _on_body_entered(body: Node2D):
 		body.hit()
 		get_parent().stuffSpawned -= 1
 		queue_free()
+		
+#Call this from player bullet script
+func get_hit():
+	queue_free()
