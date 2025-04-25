@@ -11,6 +11,7 @@ var can_attack = true
 var screen_size # Size of the game window.
 
 func _ready():
+	add_to_group("player")
 	screen_size = get_viewport_rect().size
 
 func get_input(delta: float):
@@ -53,7 +54,8 @@ func get_input(delta: float):
 	#	can_attack = false
 	#	get_tree().create_timer(0.1).timeout.connect(func(): can_attack = true)
 
-
+func hit():
+	print("Player got hit")
 #func shoot():
 #	var bullet_1 = scene_bullet.instantiate()
 #	bullet_1.position = $Spawn_1.global_position

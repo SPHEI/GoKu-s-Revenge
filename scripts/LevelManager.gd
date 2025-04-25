@@ -64,3 +64,9 @@ func updateLevel():
 				if child is DirectionalLight3D or child is WorldEnvironment:
 					currentLevelObjects[i].remove_child(child)
 	updating = false
+
+func nextLevel():
+	currentLevelId += 1
+	if currentLevelId >= sceneList.size():
+		currentLevelId = 0
+	updateLevel()
