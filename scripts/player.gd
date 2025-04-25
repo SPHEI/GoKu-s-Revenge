@@ -56,6 +56,8 @@ func get_input(delta: float):
 
 func hit():
 	print("Player got hit")
+
+
 #func shoot():
 #	var bullet_1 = scene_bullet.instantiate()
 #	bullet_1.position = $Spawn_1.global_position

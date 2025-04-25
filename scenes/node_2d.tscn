@@ -12,6 +12,7 @@ script = ExtResource("1_rdo7a")
 position = Vector2(550, 600)
 
 [node name="Debug-UI" parent="." instance=ExtResource("2_v53iu")]
+z_index = 4096
 
 [node name="3DEnviorment" type="Node3D" parent="." node_paths=PackedStringArray("ui")]
 script = ExtResource("4_4vge2")

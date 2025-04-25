@@ -7,8 +7,8 @@ var currentLevelId = 0
 #Add new levels here
 var sceneList = [
 	#[Scene name, Scene length]
-	["res://scenes/testPlane.tscn",200],
-	["res://scenes/ocean.tscn", 255]
+	["res://scenes/levels/testPlane.tscn",200],
+	["res://scenes/levels/ocean.tscn", 255]
 ]
 
 @export var ui: Control = null;
@@ -20,7 +20,7 @@ func _ready():
 			label = l;
 	#change number to change starting level
 	updateLevel()
-func _process(delta: float):
+func _physics_process(delta: float):
 	if not updating:
 		#Ctrl + =
 		if Input.is_action_just_pressed("debug_nextScene"):
@@ -69,4 +69,4 @@ func nextLevel():
 	currentLevelId += 1
 	if currentLevelId >= sceneList.size():
 		currentLevelId = 0
-	updateLevel()
+	await updateLevel()
