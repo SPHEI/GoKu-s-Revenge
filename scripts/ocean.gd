@@ -6,14 +6,14 @@ extends MeshInstance3D
 #Press the in-editor checkbox to regenerate mesh
 @warning_ignore("unused_parameter")
 func set_button(new_value: bool) -> void:
-	regenMesh()
+	regen_mesh()
 	
 var vertices = PackedVector3Array()
 #@export var foamResolution = 256.0
 #Don't turn this on or your pc will burn
 #@export var computeFoam = false
 #@export var foamFps = 60;
-func regenMesh():
+func regen_mesh():
 	var size = 256
 	var indices = PackedInt32Array()
 		
