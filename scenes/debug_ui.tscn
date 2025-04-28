@@ -1,6 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://devmk4at6fcf0"]
+[gd_scene load_steps=3 format=3 uid="uid://devmk4at6fcf0"]
 
 [ext_resource type="Script" uid="uid://8mkjgu4rvcbl" path="res://scripts/label.gd" id="1_r5sbi"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_loc82"]
+font_size = 50
+font_color = Color(1, 1, 0.317647, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 6
+shadow_color = Color(0, 0, 0, 0.219608)
 
 [node name="Debug-UI" type="Control"]
 layout_mode = 3
@@ -23,3 +31,12 @@ offset_top = 23.0
 offset_right = 122.0
 offset_bottom = 46.0
 text = "Current Level: 0"
+
+[node name="WinText" type="Label" parent="."]
+layout_mode = 0
+offset_right = 1156.0
+offset_bottom = 649.0
+text = "You win!"
+label_settings = SubResource("LabelSettings_loc82")
+horizontal_alignment = 1
+vertical_alignment = 1

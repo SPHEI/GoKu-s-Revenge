@@ -12,7 +12,14 @@ var stuff_spawned = 0
 #Add new enemies here
 @onready var kamikaze = preload("res://scenes/enemies/kamikaze.tscn")
 
+@export var ui: Control = null;
+var win_text: Label = null;
+
 func _ready() -> void:
+	for l in ui.get_children():
+		if l.name == "WinText":
+			win_text = l;
+			win_text.text = ""
 	stage_1()
 func _process(_delta: float) -> void:
 	pass
@@ -60,6 +67,14 @@ func stage_2():
 	await wait_until_clear()
 	
 	await level_manager.next_level()
+	win_game()
+	
+func win_game():
+	print("Player won")
+	win_text.text = "You won!"
+	await get_tree().create_timer(4.0).timeout
+	get_tree().change_scene_to_file("res://scenes/node_2d.tscn")
+	
 	
 #BULLET PATTERN SECTION
 func bullet_pattern_line_horiz_basic(offset: float, dir: Vector2):
