@@ -7,11 +7,15 @@ var last_vector = Vector2(0, 0)
 
 #@onready var scene_bullet = preload("res://bullet.tscn")
 
+var enabled = true
 
 '''
 ITEMS:
 SpeedBoost: Boosts Movement speed by 10% (+10 per stack)
 BlinkExtend: Extends after-hit invincibility by 50% (+50 per stack)
+ShootSpeed: Boosts shooting speed by 50% (+50 per stack)
+AbilitySpeed: Boosts the charge rate of ability by +1% (+1 per stack) every time charge is gained.
+HpBoost: +1 maxHp per stack
 '''
 var items: Dictionary
 
@@ -56,6 +60,8 @@ func get_input(delta: float):
 		velocity = vector * (speed * (1 + items["SpeedBoost"]*0.1))
 	else:
 		velocity = vector * speed
+	if Input.is_action_pressed("ui_sneak") and velocity.length() > 100:
+		velocity = velocity.normalized() * 100
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
 	
@@ -92,5 +98,6 @@ func hit():
 
 
 func _physics_process(delta: float):
-	get_input(delta)
-	move_and_slide()
+	if enabled:
+		get_input(delta)
+		move_and_slide()

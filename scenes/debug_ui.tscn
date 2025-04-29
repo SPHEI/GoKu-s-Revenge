@@ -1,6 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://devmk4at6fcf0"]
+[gd_scene load_steps=5 format=3 uid="uid://devmk4at6fcf0"]
 
 [ext_resource type="Script" uid="uid://8mkjgu4rvcbl" path="res://scripts/label.gd" id="1_r5sbi"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_mogph"]
+font_size = 30
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_bth2w"]
+font_size = 25
+font_color = Color(1, 1, 0, 1)
+outline_size = 5
+outline_color = Color(0, 0.0588235, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_loc82"]
 font_size = 50
@@ -25,7 +36,19 @@ offset_bottom = 24.0
 text = "Fps: X"
 script = ExtResource("1_r5sbi")
 
+[node name="Loading" type="Label" parent="."]
+layout_mode = 0
+offset_left = 896.0
+offset_top = 608.0
+offset_right = 1152.0
+offset_bottom = 650.0
+text = "Loading..."
+label_settings = SubResource("LabelSettings_mogph")
+horizontal_alignment = 2
+vertical_alignment = 2
+
 [node name="Items" type="Label" parent="."]
+layout_mode = 0
 offset_top = 46.0
 offset_right = 122.0
 offset_bottom = 69.0
@@ -37,6 +60,16 @@ offset_top = 23.0
 offset_right = 122.0
 offset_bottom = 46.0
 text = "Current Level: 0"
+
+[node name="ItemDesc" type="Label" parent="."]
+layout_mode = 0
+offset_left = 818.0
+offset_top = 196.0
+offset_right = 1156.0
+offset_bottom = 453.0
+text = "According to all known laws of aviation, there is no way a be should be able to fly."
+label_settings = SubResource("LabelSettings_bth2w")
+autowrap_mode = 2
 
 [node name="WinText" type="Label" parent="."]
 layout_mode = 0
