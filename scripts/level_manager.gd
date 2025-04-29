@@ -17,6 +17,7 @@ var label: Label = null;
 var loading: Label = null;
 
 func _ready():
+	add_to_group("manager")
 	for l in ui.get_children():
 		if l.name == "CurrentLevel":
 			label = l;
@@ -47,6 +48,8 @@ func _physics_process(delta: float):
 			for i in range(3):
 				current_level_objects[i].position = Vector3(0,0,-scene_list[current_level_id][1] * i)
 
+func reset():
+	get_tree().call_deferred("change_scene_to_file", "res://scenes/node_2d.tscn")
 
 var updating = false
 func update_level():

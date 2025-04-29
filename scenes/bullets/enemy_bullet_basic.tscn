@@ -68,8 +68,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yqaqm"]
-radius = 3.0
-height = 6.0
+radius = 8.0
+height = 16.0
 
 [node name="EnemyBulletBasic" type="Area2D"]
 script = ExtResource("1_yqaqm")

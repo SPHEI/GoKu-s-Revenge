@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://mg2518fopc0w" path="res://assets/sprites/touhou-12-enemies.png" id="2_hwkds"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_613kf"]
+radius = 16.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d27o0"]
 atlas = ExtResource("2_hwkds")
