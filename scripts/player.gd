@@ -7,6 +7,14 @@ var last_vector = Vector2(0, 0)
 
 #@onready var scene_bullet = preload("res://bullet.tscn")
 
+
+'''
+ITEMS:
+SpeedBoost: Boosts Movement speed by 10% (+10 per stack)
+BlinkExtend: Extends after-hit invincibility by 50% (+50 per stack)
+'''
+var items: Dictionary
+
 var can_attack = true
 var screen_size # Size of the game window.
 
@@ -44,8 +52,10 @@ func get_input(delta: float):
 		vector.x *= 1/sqrt(2)
 		vector.y *= 1/sqrt(2)
 	
-	velocity = vector * speed
-	
+	if items.get("SpeedBoost") != null:
+		velocity = vector * (speed * (1 + items["SpeedBoost"]*0.1))
+	else:
+		velocity = vector * speed
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
 	
@@ -54,8 +64,16 @@ func get_input(delta: float):
 	#	can_attack = false
 	#	get_tree().create_timer(0.1).timeout.connect(func(): can_attack = true)
 
+var can_get_hit = true
 func hit():
-	print("Player got hit")
+	if can_get_hit:
+		print("Player got hit")
+		can_get_hit = false
+		if items.get("BlinkExtend") != null:
+			await get_tree().create_timer(0.5 * (1 + items["BlinkExtend"] * 0.5)).timeout
+		else:
+			await get_tree().create_timer(0.5).timeout
+		can_get_hit = true
 
 
 #func shoot():

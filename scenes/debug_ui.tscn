@@ -25,6 +25,12 @@ offset_bottom = 24.0
 text = "Fps: X"
 script = ExtResource("1_r5sbi")
 
+[node name="Items" type="Label" parent="."]
+offset_top = 46.0
+offset_right = 122.0
+offset_bottom = 69.0
+text = "Items: None"
+
 [node name="CurrentLevel" type="Label" parent="."]
 layout_mode = 0
 offset_top = 23.0

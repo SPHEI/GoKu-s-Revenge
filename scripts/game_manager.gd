@@ -12,14 +12,23 @@ var stuff_spawned = 0
 #Add new enemies here
 @onready var kamikaze = preload("res://scenes/enemies/kamikaze.tscn")
 
-@export var ui: Control = null;
+#Reference to UI
+@onready var ui: Control = $"Debug-UI"
 var win_text: Label = null;
+var items_text: Label = null;
+
+#Reference to player
+@onready var player: CharacterBody2D = $"Player"
 
 func _ready() -> void:
+	player.items.clear()
 	for l in ui.get_children():
 		if l.name == "WinText":
 			win_text = l;
 			win_text.text = ""
+		if l.name == "Items":
+			items_text = l
+			items_text.text = "Items: none"
 	stage_1()
 func _process(_delta: float) -> void:
 	pass
@@ -41,8 +50,47 @@ func wait_until_clear():
 	while stuff_spawned > 0:
 		await get_tree().create_timer(0.2).timeout
 		
+func pick_items():
+	#Generate 3 random items to pick from
+	win_text.text = "SELECT ITEM\n>SPEED\nFRAMES"
+	var item_selected = false
+	var selection = 0
+	while not item_selected:
+		if Input.is_action_just_pressed("ui_up"):
+			selection -= 1
+			if selection < 0:
+				selection = 1
+			update_item_visuals(selection)
+		if Input.is_action_just_pressed("ui_down"):
+			selection += 1
+			if selection > 1:
+				selection = 0
+			update_item_visuals(selection)
+		if Input.is_action_just_pressed("ui_shoot"):
+			if selection == 0:
+				if player.items.get("SpeedBoost") == null:
+					player.items["SpeedBoost"] = 0
+				player.items["SpeedBoost"] += 1
+			elif selection == 1:
+				if player.items.get("BlinkExtend") == null:
+					player.items["BlinkExtend"] = 0
+				player.items["BlinkExtend"] += 1
+			item_selected = true
+		await Engine.get_main_loop().process_frame
+	win_text.text = ""
+	items_text.text = "Items:\n"
+	for item in player.items.keys():
+		items_text.text += item + ": " + str(player.items[item]) + "\n"
+	
+func update_item_visuals(a: int):
+	if a == 0:
+		win_text.text = "SELECT ITEM\n>SPEED\nFRAMES"
+	elif a == 1:
+		win_text.text = "SELECT ITEM\nSPEED\n>FRAMES"
 #STAGES SECTION
 func stage_1():
+	await pick_items()
+	
 	await enemy_pattern_line_horiz_kamikaze(0)
 	await wait_until_clear()
 	
@@ -52,6 +100,7 @@ func stage_1():
 	await bullet_pattern_fan(1)
 	await wait_until_clear()
 	
+	await pick_items()
 	await level_manager.next_level()
 	stage_2()
 
@@ -66,6 +115,7 @@ func stage_2():
 	await bullet_pattern_fan(1)
 	await wait_until_clear()
 	
+	await pick_items()
 	await level_manager.next_level()
 	win_game()
 	
