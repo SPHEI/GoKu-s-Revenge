@@ -1,7 +1,7 @@
 extends Node3D
 
 var current_level_objects = [null,null,null]
-var current_level_id = 0
+var current_level_id = 1
 #speed up to check if scrolling is aligned properly
 @export var speed = 10.0
 #Add new levels here
@@ -17,7 +17,6 @@ var label: Label = null;
 var loading: Label = null;
 
 func _ready():
-	add_to_group("manager")
 	for l in ui.get_children():
 		if l.name == "CurrentLevel":
 			label = l;
@@ -47,9 +46,6 @@ func _physics_process(delta: float):
 		if current_level_objects[1].position.z > 0:
 			for i in range(3):
 				current_level_objects[i].position = Vector3(0,0,-scene_list[current_level_id][1] * i)
-
-func reset():
-	get_tree().call_deferred("change_scene_to_file", "res://scenes/node_2d.tscn")
 
 var updating = false
 func update_level():

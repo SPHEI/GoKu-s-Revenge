@@ -47,11 +47,17 @@ label_settings = SubResource("LabelSettings_mogph")
 horizontal_alignment = 2
 vertical_alignment = 2
 
+[node name="Hp" type="Label" parent="."]
+offset_top = 49.0
+offset_right = 122.0
+offset_bottom = 72.0
+text = "Hp: 3"
+
 [node name="Items" type="Label" parent="."]
 layout_mode = 0
-offset_top = 46.0
+offset_top = 119.0
 offset_right = 122.0
-offset_bottom = 69.0
+offset_bottom = 142.0
 text = "Items: None"
 
 [node name="CurrentLevel" type="Label" parent="."]

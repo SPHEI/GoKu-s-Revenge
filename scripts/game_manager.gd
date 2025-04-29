@@ -17,12 +17,13 @@ var stuff_spawned = 0
 var win_text: Label = null;
 var items_text: Label = null;
 var items_description: Label = null;
+var hp: Label = null;
 
 '''
 ITEMS:
 SpeedBoost: Boosts Movement speed by 10% (+10 per stack)
 BlinkExtend: Extends after-hit invincibility by 50% (+50 per stack)
-ShootSpeed: Boosts shooting speed by 50% (+50 per stack)
+ShootSpeed: Boosts shooting speed by 50% (+50% per stack)
 AbilitySpeed: Boosts the charge rate of ability by +1% (+1 per stack) every time charge is gained.
 HpBoost: +1 maxHp per stack
 '''
@@ -50,9 +51,11 @@ func _ready() -> void:
 		if l.name == "ItemDesc":
 			items_description = l
 			items_description.text = ""
+		if l.name == "Hp":
+			hp = l
 	stage_1()
 func _process(_delta: float) -> void:
-	pass
+	hp.text = "Hp: " + str(player.hp)
 	
 func spawn_enemy(type: Resource, pos: Vector2):
 	var b = type.instantiate()
@@ -111,7 +114,7 @@ func pick_items():
 	items_text.text = "Items:\n"
 	for item in player.items.keys():
 		items_text.text += item + ": " + str(player.items[item]) + "\n"
-		
+	player.reset_hp()
 	player.enabled = true
 	
 func update_item_visuals(a: int):
