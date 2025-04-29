@@ -1,9 +1,10 @@
 extends CharacterBody2D
 class_name PlayerControler
 
-@export var speed = 200
+@export var speed = 100
 var vector = Vector2(0, 0)
 var last_vector = Vector2(0, 0)
+var manager: Node
 
 #@onready var scene_bullet = preload("res://bullet.tscn")
 
@@ -12,6 +13,7 @@ var screen_size # Size of the game window.
 
 func _ready():
 	add_to_group("player")
+	manager = get_tree().get_nodes_in_group("manager")[0]
 	screen_size = get_viewport_rect().size
 
 func get_input(delta: float):
@@ -49,28 +51,37 @@ func get_input(delta: float):
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
 	
-	#if Input.is_action_pressed("ui_shoot") && can_attack:
-	#	shoot()
-	#	can_attack = false
-	#	get_tree().create_timer(0.1).timeout.connect(func(): can_attack = true)
+	if Input.is_action_pressed("ui_shoot") && can_attack:
+		shoot()
+		can_attack = false
+		get_tree().create_timer(0.1).timeout.connect(func(): can_attack = true)
 
 func hit():
 	print("Player got hit")
+	manager.reset()
 
+@onready var bullet_basic = preload("res://scenes/bullets/bullet.tscn")
+@onready var spawner_basic = preload("res://basic_enemy_spawner.tscn")
 
-#func shoot():
-#	var bullet_1 = scene_bullet.instantiate()
-#	bullet_1.position = $Spawn_1.global_position
-#	owner.add_child(bullet_1)
-#	
-#	var bullet_2 = scene_bullet.instantiate()
-#	bullet_2.position = $Spawn_2.global_position
-#	owner.add_child(bullet_2)
-#	
-#	get_node("/root/Main/Control/BulletsLabel").text = str(owner.get_child_count() - 1)
-#
-#	
-#	pass
+func shoot():
+	var marker_root = get_node("./Player_basic_spawner")  # Example path
+	for marker in marker_root.get_children():
+		if marker is Marker2D:
+			var bullet_1 = bullet_basic.instantiate()
+			bullet_1.position = marker.global_position
+			owner.add_child(bullet_1)
+	
+	
+	#var bullet_1 = bullet_basic.instantiate()
+	#bullet_1.position = spawner_basic.
+	
+	#owner.add_child(bullet_1)
+	
+	#var bullet_2 = bullet_basic.instantiate()
+	#bullet_2.position = $Player_basic_spawner/"spawner-2".global_position
+	#owner.add_child(bullet_2)
+	
+	#get_node("/root/Main/Control/BulletsLabel").text = str(owner.get_child_count() - 1)
 
 
 func _physics_process(delta: float):

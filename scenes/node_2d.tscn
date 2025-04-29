@@ -8,12 +8,6 @@
 [node name="Main" type="Node2D"]
 script = ExtResource("1_rdo7a")
 
-[node name="Player" parent="." instance=ExtResource("3_qidjt")]
-position = Vector2(550, 600)
-
-[node name="Debug-UI" parent="." instance=ExtResource("2_v53iu")]
-z_index = 4096
-
 [node name="3DEnviorment" type="Node3D" parent="." node_paths=PackedStringArray("ui")]
 script = ExtResource("4_4vge2")
 ui = NodePath("../Debug-UI")
@@ -24,3 +18,9 @@ current = true
 fov = 70.0
 size = 0.05
 near = 0.001
+
+[node name="Debug-UI" parent="." instance=ExtResource("2_v53iu")]
+z_index = 4096
+
+[node name="Player" parent="." instance=ExtResource("3_qidjt")]
+position = Vector2(550, 600)
