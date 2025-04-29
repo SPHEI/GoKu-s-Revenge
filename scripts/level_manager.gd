@@ -8,7 +8,8 @@ var current_level_id = 0
 var scene_list = [
 	#[Scene name, Scene length]
 	["res://scenes/levels/test_plane.tscn",200],
-	["res://scenes/levels/ocean.tscn", 255]
+	["res://scenes/levels/ocean.tscn", 255],
+	["res://scenes/levels/plains.tscn", 200]
 ]
 
 @export var ui: Control = null;
