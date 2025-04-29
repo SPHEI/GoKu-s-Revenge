@@ -69,24 +69,24 @@ _data = {
 script = ExtResource("1_yptnv")
 
 [node name="Sprite-character" type="Sprite2D" parent="."]
-position = Vector2(0, -22)
+position = Vector2(0, 1)
 texture = ExtResource("2_wn7uk")
 region_enabled = true
 region_rect = Rect2(0, 0, 32, 48)
 
 [node name="Sprite-focus" type="Sprite2D" parent="."]
-position = Vector2(0, -22)
+position = Vector2(0, 1)
 scale = Vector2(0.71875, 0.730159)
 texture = ExtResource("3_3uiw6")
 region_enabled = true
 region_rect = Rect2(257.278, 17.5491, 64.2967, 63.4106)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -22)
+position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_vknqm")
 
 [node name="Player_basic_spawner" parent="." instance=ExtResource("4_go2pc")]
-position = Vector2(0, -22)
+position = Vector2(0, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

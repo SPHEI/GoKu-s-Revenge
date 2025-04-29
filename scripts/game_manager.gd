@@ -11,6 +11,7 @@ var stuff_spawned = 0
 
 #Add new enemies here
 @onready var kamikaze = preload("res://scenes/enemies/kamikaze.tscn")
+@onready var wah = preload("res://scenes/enemies/basic_enemy.tscn")
 
 #Reference to UI
 @onready var ui: Control = $"Debug-UI"
@@ -129,6 +130,8 @@ func update_item_visuals(a: int):
 func stage_1():
 	await pick_items()
 	
+	await enemy_pattern_line_horiz_basic(0)
+	await wait_until_clear()
 	await enemy_pattern_line_horiz_kamikaze(0)
 	await wait_until_clear()
 	
@@ -186,3 +189,7 @@ func bullet_pattern_fan(repetitions: int):
 func enemy_pattern_line_horiz_kamikaze(offset: float):
 	for i in range(10):
 		spawn_enemy(kamikaze, Vector2(200.0 * i + offset,-4.0))
+		
+func enemy_pattern_line_horiz_basic(offset: float):
+	for i in range(10):
+		spawn_enemy(wah, Vector2(200.0 * i + offset,-4.0))	

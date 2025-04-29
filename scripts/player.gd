@@ -98,21 +98,14 @@ func hit():
 
 
 @onready var bullet_basic = preload("res://scenes/bullets/bullet.tscn")
-@onready var spawner_basic = preload("res://basic_enemy_spawner.tscn")
+
 func shoot():
-	var marker_root = get_node("./Player_basic_spawner")  # Example path
+	var marker_root = get_node("./Player_basic_spawner")
 	for marker in marker_root.get_children():
 		if marker is Marker2D:
 			var bullet_1 = bullet_basic.instantiate()
 			bullet_1.position = marker.global_position
 			owner.add_child(bullet_1)
-	#var bullet_1 = bullet_basic.instantiate()
-	#bullet_1.position = spawner_basic.
-	#owner.add_child(bullet_1)
-	#var bullet_2 = bullet_basic.instantiate()
-	#bullet_2.position = $Player_basic_spawner/"spawner-2".global_position
-	#owner.add_child(bullet_2)
-	#get_node("/root/Main/Control/BulletsLabel").text = str(owner.get_child_count() - 1)
 
 func _physics_process(delta: float):
 	if enabled:

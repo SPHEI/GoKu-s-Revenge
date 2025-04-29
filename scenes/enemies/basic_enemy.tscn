@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsh3tkhhidgoo"]
+
+[ext_resource type="Texture2D" uid="uid://mg2518fopc0w" path="res://assets/sprites/touhou-12-enemies.png" id="1_7jpia"]
+[ext_resource type="Script" uid="uid://by8d1w6mba3hu" path="res://scripts/basic_enemy_spawner.gd" id="1_8xi43"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7jpia"]
+radius = 16.0
+
+[node name="BasicEnemy" type="Area2D"]
+script = ExtResource("1_8xi43")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_7jpia")
+region_enabled = true
+region_rect = Rect2(-1.167, 290.667, 36.107, 31.333)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7jpia")
