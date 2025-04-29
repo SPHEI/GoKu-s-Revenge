@@ -1,25 +1,27 @@
 extends Node3D
 
 var current_level_objects = [null,null,null]
-var current_level_id = 0
+var current_level_id = 1
 #speed up to check if scrolling is aligned properly
 @export var speed = 10.0
 #Add new levels here
 var scene_list = [
 	#[Scene name, Scene length]
 	["res://scenes/levels/test_plane.tscn",200],
+	["res://scenes/levels/plains.tscn", 200],
 	["res://scenes/levels/ocean.tscn", 255],
-	["res://scenes/levels/plains.tscn", 200]
 ]
 
 @export var ui: Control = null;
 var label: Label = null;
+var loading: Label = null;
 
 func _ready():
-	add_to_group("manager")
 	for l in ui.get_children():
 		if l.name == "CurrentLevel":
 			label = l;
+		if l.name == "Loading":
+			loading = l;
 	#change number to change starting level
 	update_level()
 func _physics_process(delta: float):
@@ -45,11 +47,9 @@ func _physics_process(delta: float):
 			for i in range(3):
 				current_level_objects[i].position = Vector3(0,0,-scene_list[current_level_id][1] * i)
 
-func reset():
-	get_tree().call_deferred("change_scene_to_file", "res://scenes/node_2d.tscn")
-
 var updating = false
 func update_level():
+	loading.text = "Loading..."
 	updating = true
 	label.text = "Current Level: " + str(current_level_id)
 	ResourceLoader.load_threaded_request(scene_list[current_level_id][0])
@@ -68,6 +68,7 @@ func update_level():
 				if child is DirectionalLight3D or child is WorldEnvironment:
 					current_level_objects[i].remove_child(child)
 	updating = false
+	loading.text = ""
 
 func next_level():
 	current_level_id += 1

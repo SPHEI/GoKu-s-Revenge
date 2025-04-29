@@ -1,21 +1,44 @@
-[gd_scene load_steps=4 format=3 uid="uid://bvovy01s01pxi"]
+[gd_scene load_steps=7 format=3 uid="uid://bvovy01s01pxi"]
 
 [ext_resource type="Script" uid="uid://ick5snsqiwgl" path="res://scripts/basic_bullet.gd" id="1_lpbyx"]
-[ext_resource type="Texture2D" uid="uid://oe0hdjrbbkcl" path="res://icon.svg" id="2_mio5k"]
+[ext_resource type="Texture2D" uid="uid://bxl2x1g8bg0yc" path="res://assets/sprites/bullets.png" id="2_5f1na"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pwj4r"]
-size = Vector2(32, 32)
+[sub_resource type="CircleShape2D" id="CircleShape2D_lj7gv"]
+radius = 8.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tocqt"]
+atlas = ExtResource("2_5f1na")
+region = Rect2(241, 49, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0s0cy"]
+atlas = ExtResource("2_5f1na")
+region = Rect2(241, 33, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kd18i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tocqt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0s0cy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Basic_bullet" type="Area2D"]
 script = ExtResource("1_lpbyx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_pwj4r")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_mio5k")
+shape = SubResource("CircleShape2D_lj7gv")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_kd18i")
+autoplay = "default"
+frame_progress = 0.412219
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited" flags=6]

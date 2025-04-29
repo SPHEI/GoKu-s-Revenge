@@ -1,19 +1,29 @@
 extends CharacterBody2D
 class_name PlayerControler
 
-@export var speed = 100
+@export var speed = 200
 var vector = Vector2(0, 0)
 var last_vector = Vector2(0, 0)
-var manager: Node
 
 #@onready var scene_bullet = preload("res://bullet.tscn")
+
+var enabled = true
+
+'''
+ITEMS:
+SpeedBoost: Boosts Movement speed by 10% (+10 per stack)
+BlinkExtend: Extends after-hit invincibility by 50% (+50 per stack)
+ShootSpeed: Boosts shooting speed by 50% (+50% per stack)
+AbilitySpeed: Boosts the charge rate of ability by +1% (+1 per stack) every time charge is gained. TODO
+HpBoost: +1 maxHp per stack
+'''
+var items: Dictionary
 
 var can_attack = true
 var screen_size # Size of the game window.
 
 func _ready():
 	add_to_group("player")
-	manager = get_tree().get_nodes_in_group("manager")[0]
 	screen_size = get_viewport_rect().size
 
 func get_input(delta: float):
@@ -46,23 +56,49 @@ func get_input(delta: float):
 		vector.x *= 1/sqrt(2)
 		vector.y *= 1/sqrt(2)
 	
-	velocity = vector * speed
-	
+	if items.get("SpeedBoost") != null:
+		velocity = vector * (speed * (1 + items["SpeedBoost"]*0.1))
+	else:
+		velocity = vector * speed
+	if Input.is_action_pressed("ui_sneak") and velocity.length() > 100:
+		velocity = velocity.normalized() * 100
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
 	
 	if Input.is_action_pressed("ui_shoot") && can_attack:
 		shoot()
 		can_attack = false
-		get_tree().create_timer(0.1).timeout.connect(func(): can_attack = true)
+		if items.get("ShootSpeed") != null:
+			get_tree().create_timer(0.1 * (pow(.5,items["ShootSpeed"]))).timeout.connect(func(): can_attack = true)
+		else:
+			get_tree().create_timer(0.1).timeout.connect(func(): can_attack = true)
+
+var can_get_hit = true
+
+var maxHp = 3
+var hp = 3
+func reset_hp():
+	if items.get("HpBoost") != null:
+		hp = maxHp + (1 * items["HpBoost"])
+	else:
+		hp = maxHp
 
 func hit():
-	print("Player got hit")
-	manager.reset()
+	if can_get_hit:
+		print("Player got hit")
+		can_get_hit = false
+		hp -= 1
+		if hp <= 0:
+			get_tree().call_deferred("change_scene_to_file", "res://scenes/node_2d.tscn")
+		if items.get("BlinkExtend") != null:
+			await get_tree().create_timer(0.5 * (1 + items["BlinkExtend"] * 0.5)).timeout
+		else:
+			await get_tree().create_timer(0.5).timeout
+		can_get_hit = true
+
 
 @onready var bullet_basic = preload("res://scenes/bullets/bullet.tscn")
 @onready var spawner_basic = preload("res://basic_enemy_spawner.tscn")
-
 func shoot():
 	var marker_root = get_node("./Player_basic_spawner")  # Example path
 	for marker in marker_root.get_children():
@@ -70,20 +106,15 @@ func shoot():
 			var bullet_1 = bullet_basic.instantiate()
 			bullet_1.position = marker.global_position
 			owner.add_child(bullet_1)
-	
-	
 	#var bullet_1 = bullet_basic.instantiate()
 	#bullet_1.position = spawner_basic.
-	
 	#owner.add_child(bullet_1)
-	
 	#var bullet_2 = bullet_basic.instantiate()
 	#bullet_2.position = $Player_basic_spawner/"spawner-2".global_position
 	#owner.add_child(bullet_2)
-	
 	#get_node("/root/Main/Control/BulletsLabel").text = str(owner.get_child_count() - 1)
 
-
 func _physics_process(delta: float):
-	get_input(delta)
-	move_and_slide()
+	if enabled:
+		get_input(delta)
+		move_and_slide()
