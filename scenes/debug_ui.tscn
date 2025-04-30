@@ -30,12 +30,14 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Items3" type="Label" parent="."]
+layout_mode = 0
 offset_top = 186.0
 offset_right = 122.0
 offset_bottom = 223.0
 text = "Bullets"
 
 [node name="Items2" type="Label" parent="."]
+layout_mode = 0
 offset_top = 212.0
 offset_right = 122.0
 offset_bottom = 249.0

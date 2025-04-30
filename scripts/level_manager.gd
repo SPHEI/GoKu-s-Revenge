@@ -1,15 +1,15 @@
 extends Node3D
 
 var current_level_objects = [null,null,null]
-var current_level_id = 1
+var current_level_id = 0
 #speed up to check if scrolling is aligned properly
 @export var speed = 10.0
 #Add new levels here
 var scene_list = [
 	#[Scene name, Scene length]
-	["res://scenes/levels/test_plane.tscn",200],
 	["res://scenes/levels/plains.tscn", 200],
 	["res://scenes/levels/ocean.tscn", 255],
+	["res://scenes/levels/test_plane.tscn",200],
 ]
 
 @export var ui: Control = null;
@@ -25,21 +25,6 @@ func _ready():
 	#change number to change starting level
 	update_level()
 func _physics_process(delta: float):
-	if not updating:
-		#Ctrl + =
-		if Input.is_action_just_pressed("debug_nextScene"):
-			current_level_id += 1
-			if current_level_id >= scene_list.size():
-				current_level_id = 0
-			update_level()
-		#Ctrl + -
-		if Input.is_action_just_pressed("debug_previousScene"):
-			current_level_id -= 1
-			if current_level_id < 0:
-				current_level_id = scene_list.size() - 1
-			update_level()
-		
-	
 	if current_level_objects[0] != null and current_level_objects[1] != null and current_level_objects[2] != null:
 		for i in range(3):
 			current_level_objects[i].position += Vector3(0,0,speed) * delta
@@ -73,8 +58,6 @@ func update_level():
 			for child in current_level_objects[i].get_children():
 				if child is DirectionalLight3D or child is WorldEnvironment:
 					current_level_objects[i].remove_child(child)
-					
-
 	updating = false
 	loading.text = ""
 
@@ -82,4 +65,10 @@ func next_level():
 	current_level_id += 1
 	if current_level_id >= scene_list.size():
 		current_level_id = 0
+	await update_level()
+
+func previous_level():
+	current_level_id -= 1
+	if current_level_id < 0:
+		current_level_id = scene_list.size() - 1
 	await update_level()

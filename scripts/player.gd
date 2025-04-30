@@ -6,14 +6,6 @@ class_name PlayerControler
 
 var enabled = true
 
-'''
-ITEMS:
-SpeedBoost: Boosts Movement speed by 10% (+10 per stack)
-BlinkExtend: Extends after-hit invincibility by 50% (+50 per stack)
-ShootSpeed: Boosts shooting speed by 50% (+50% per stack)
-AbilitySpeed: Boosts the charge rate of ability by +1% (+1 per stack) every time charge is gained. TODO
-HpBoost: +1 maxHp per stack
-'''
 var items: Dictionary
 
 var screen_size # Size of the game window.
@@ -75,7 +67,7 @@ func get_input(delta: float):
 		get_node("Player_basic_spawner").spawn();
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_pressed("ui_sneak"):
 		get_node("./Sprite-focus").visible = true
 	else:

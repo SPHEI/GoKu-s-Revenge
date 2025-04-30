@@ -4,7 +4,7 @@ extends Marker2D
 
 var can_attack = true
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if can_attack == true:
 		spawn()
 		get_tree().create_timer(delay).timeout.connect(func(): can_attack = true)
