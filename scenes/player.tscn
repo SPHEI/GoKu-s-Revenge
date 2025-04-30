@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://buvga5rhpvcdy"]
 
-[ext_resource type="Script" uid="uid://conegcjn4wgw3" path="res://scripts/levels/player.gd" id="1_yptnv"]
+[ext_resource type="Script" uid="uid://conegcjn4wgw3" path="res://scripts/player.gd" id="1_yptnv"]
 [ext_resource type="Texture2D" uid="uid://cngdn7htkjn0j" path="res://assets/sprites/reimu.png" id="2_wn7uk"]
 [ext_resource type="Texture2D" uid="uid://bxl2x1g8bg0yc" path="res://assets/sprites/bullets.png" id="3_3uiw6"]
 [ext_resource type="PackedScene" uid="uid://bqd8fiu5m8b2j" path="res://scenes/bullet_spawner/basic_player_bullet_spawner.tscn" id="4_go2pc"]

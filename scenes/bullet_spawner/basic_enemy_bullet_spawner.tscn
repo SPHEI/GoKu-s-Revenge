@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cwt3xrgesh8bt"]
 
-[ext_resource type="Script" uid="uid://by8d1w6mba3hu" path="res://scripts/enemy_movement/basic.gd" id="1_k3iqu"]
+[ext_resource type="Script" uid="uid://by8d1w6mba3hu" path="res://scripts/basic_enemy_spawner.gd" id="1_k3iqu"]
 
 [node name="Marker2D" type="Marker2D"]
 script = ExtResource("1_k3iqu")

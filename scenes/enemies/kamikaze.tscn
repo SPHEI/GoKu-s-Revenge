@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://dhxxbdrvc046q"]
 
-[ext_resource type="Script" uid="uid://d17vuqlp1la2i" path="res://scripts/enemy_movement/kamikaze.gd" id="1_sba84"]
+[ext_resource type="Script" uid="uid://d17vuqlp1la2i" path="res://scripts/kamikaze.gd" id="1_sba84"]
 [ext_resource type="Texture2D" uid="uid://mg2518fopc0w" path="res://assets/sprites/touhou-12-enemies.png" id="2_hwkds"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_613kf"]
