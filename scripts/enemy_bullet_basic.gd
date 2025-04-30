@@ -6,7 +6,7 @@ var dir: Vector2 = Vector2(0.0,0.0)
 var screen_size # Size of the game window.
 
 func _ready():
-	add_to_group("bullets")
+	add_to_group("bullet")
 	body_entered.connect(_on_body_entered)
 	screen_size = get_viewport_rect().size
 	

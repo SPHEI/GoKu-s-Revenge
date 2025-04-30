@@ -19,6 +19,8 @@ var win_text: Label = null;
 var items_text: Label = null;
 var items_description: Label = null;
 var hp: Label = null;
+var enemies: Label = null;
+var bullets: Label = null;
 
 '''
 ITEMS:
@@ -54,9 +56,17 @@ func _ready() -> void:
 			items_description.text = ""
 		if l.name == "Hp":
 			hp = l
+		if l.name == "Items2":
+			enemies = l
+		if l.name == "Items3":
+			bullets = l
+		
+		print(l.name)
 	stage_1()
 func _process(_delta: float) -> void:
 	hp.text = "Hp: " + str(player.hp)
+	enemies.text = "Enemies: " + str(get_tree().get_node_count_in_group("enemies"))
+	bullets.text = "Bullets: " + str(get_tree().get_node_count_in_group("bullets"))
 	
 func spawn_enemy(type: Resource, pos: Vector2):
 	var b = type.instantiate()
@@ -72,7 +82,7 @@ func spawn_bullet(type: Resource, pos: Vector2, dir: Vector2):
 	stuff_spawned += 1
 
 func wait_until_clear():
-	while stuff_spawned > 0:
+	while get_tree().get_node_count_in_group("enemies") > 0 or get_tree().get_node_count_in_group("bullet") > 0:
 		await get_tree().create_timer(0.2).timeout
 
 var current_options = [-1,-1,-1]
@@ -164,7 +174,7 @@ func win_game():
 	print("Player won")
 	win_text.text = "You won!"
 	await get_tree().create_timer(4.0).timeout
-	get_tree().change_scene_to_file("res://scenes/node_2d.tscn")
+	get_tree().change_scene_to_file("res://scenes/main.tscn")
 	
 	
 #BULLET PATTERN SECTION

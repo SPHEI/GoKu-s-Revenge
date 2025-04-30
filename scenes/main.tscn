@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://ddiq5usw0sjtv"]
+
+[ext_resource type="Script" uid="uid://16pxynvlvl3k" path="res://scripts/game_manager.gd" id="1_jyhfs"]
+[ext_resource type="Script" uid="uid://ddjib2ynh56nl" path="res://scripts/level_manager.gd" id="2_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://devmk4at6fcf0" path="res://scenes/debug_ui.tscn" id="3_tefeu"]
+[ext_resource type="PackedScene" uid="uid://buvga5rhpvcdy" path="res://scenes/player.tscn" id="4_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://bv72s0ha81kqv" path="res://scenes/enemy_bullets_scene.tscn" id="5_tbgi4"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_jyhfs")
+
+[node name="3DEnviorment" type="Node3D" parent="." node_paths=PackedStringArray("ui")]
+script = ExtResource("2_tbgi4")
+ui = NodePath("../Debug-UI")
+
+[node name="Camera3D" type="Camera3D" parent="3DEnviorment"]
+transform = Transform3D(1, 0, 0, 0, 0.658821, 0.7523, 0, -0.7523, 0.658821, 0, 49.5978, 19.6099)
+current = true
+fov = 70.0
+size = 0.05
+near = 0.001
+
+[node name="Debug-UI" parent="." instance=ExtResource("3_tefeu")]
+z_index = 4096
+
+[node name="Player" parent="." instance=ExtResource("4_o6xl0")]
+position = Vector2(550, 600)
+
+[node name="EnemyBulletsScene" parent="." instance=ExtResource("5_tbgi4")]

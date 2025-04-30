@@ -49,6 +49,12 @@ func _physics_process(delta: float):
 
 var updating = false
 func update_level():
+	for node in get_tree().get_nodes_in_group("bullets"):
+		node.queue_free()
+	for node in get_tree().get_nodes_in_group("bullet"):
+		node.queue_free()
+	for node in get_tree().get_nodes_in_group("enemies"):
+		node.queue_free()
 	loading.text = "Loading..."
 	updating = true
 	label.text = "Current Level: " + str(current_level_id)
@@ -67,6 +73,8 @@ func update_level():
 			for child in current_level_objects[i].get_children():
 				if child is DirectionalLight3D or child is WorldEnvironment:
 					current_level_objects[i].remove_child(child)
+					
+
 	updating = false
 	loading.text = ""
 

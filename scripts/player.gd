@@ -27,41 +27,46 @@ func _ready():
 	screen_size = get_viewport_rect().size
 
 func get_input(delta: float):
-	#var input_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	if Input.is_action_pressed("ui_left") && Input.is_action_pressed("ui_right"):
-		vector.x = -last_vector.x
-	elif Input.is_action_pressed("ui_left"):
-		vector.x = -1
-		last_vector.x = -1
-	elif Input.is_action_pressed("ui_right"):
-		vector.x = 1
-		last_vector.x = 1
-	else:
+	if can_get_hit == false:
 		vector.x = 0
-		last_vector.x = 0
-	
-	if Input.is_action_pressed("ui_up") && Input.is_action_pressed("ui_down"):
-			vector.y = -last_vector.y
-	elif  Input.is_action_pressed("ui_up"):
 		vector.y = -1
-		last_vector.y = -1
-	elif Input.is_action_pressed("ui_down"):
-		vector.y = 1
-		last_vector.y = 1
+		if position.y < screen_size.y * 0.8:
+			can_get_hit = true
+	#var input_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	else:
-		vector.y = 0
-		last_vector.y = 0	
+		if Input.is_action_pressed("ui_left") && Input.is_action_pressed("ui_right"):
+			vector.x = -last_vector.x
+		elif Input.is_action_pressed("ui_left"):
+			vector.x = -1
+			last_vector.x = -1
+		elif Input.is_action_pressed("ui_right"):
+			vector.x = 1
+			last_vector.x = 1
+		else:
+			vector.x = 0
+			last_vector.x = 0
+	
+		if Input.is_action_pressed("ui_up") && Input.is_action_pressed("ui_down"):
+				vector.y = -last_vector.y
+		elif  Input.is_action_pressed("ui_up"):
+			vector.y = -1
+			last_vector.y = -1
+		elif Input.is_action_pressed("ui_down"):
+			vector.y = 1
+			last_vector.y = 1
+		else:
+			vector.y = 0
+			last_vector.y = 0	
 	
 	if vector.x != 0 && vector.y != 0:
 		vector.x *= 1/sqrt(2)
 		vector.y *= 1/sqrt(2)
 	
-	if items.get("SpeedBoost") != null:
-		velocity = vector * (speed * (1 + items["SpeedBoost"]*0.1))
-	else:
-		velocity = vector * speed
+	velocity = vector * speed
+	
 	if Input.is_action_pressed("ui_sneak") and velocity.length() > 100:
-		velocity = velocity.normalized() * 100
+		velocity *= 0.8
+	
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
 	
@@ -75,8 +80,8 @@ func get_input(delta: float):
 
 var can_get_hit = true
 
-var maxHp = 3
-var hp = 3
+var maxHp = 20
+var hp = 20
 func reset_hp():
 	if items.get("HpBoost") != null:
 		hp = maxHp + (1 * items["HpBoost"])
@@ -86,16 +91,26 @@ func reset_hp():
 func hit():
 	if can_get_hit:
 		print("Player got hit")
-		can_get_hit = false
+		respawn()
 		hp -= 1
 		if hp <= 0:
-			get_tree().call_deferred("change_scene_to_file", "res://scenes/node_2d.tscn")
-		if items.get("BlinkExtend") != null:
-			await get_tree().create_timer(0.5 * (1 + items["BlinkExtend"] * 0.5)).timeout
-		else:
-			await get_tree().create_timer(0.5).timeout
-		can_get_hit = true
+			get_tree().call_deferred("change_scene_to_file", "res://scenes/main.tscn")
+		#if items.get("BlinkExtend") != null:
+		#	await get_tree().create_timer(0.5 * (1 + items["BlinkExtend"] * 0.5)).timeout
+		#else:
+		#	await get_tree().create_timer(0.5).timeout
+		#can_get_hit = true
 
+func respawn():
+	can_get_hit = false
+	position.x = screen_size.x / 2
+	position.y = screen_size.y
+	for node in get_tree().get_nodes_in_group("bullets"):
+		node.queue_free()
+	for node in get_tree().get_nodes_in_group("bullet"):
+		node.queue_free()
+
+	
 
 @onready var bullet_basic = preload("res://scenes/bullets/bullet.tscn")
 
@@ -108,6 +123,7 @@ func shoot():
 			owner.add_child(bullet_1)
 
 func _physics_process(delta: float):
+	screen_size = get_viewport_rect().size
 	if enabled:
 		get_input(delta)
 		move_and_slide()

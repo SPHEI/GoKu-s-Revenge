@@ -3,7 +3,7 @@ extends Area2D
 var dir: Vector2 = Vector2(0.0,0.0)
 var plr: Node
 
-@export var speed = 600
+@export var speed = 100
 
 
 var screen_size # Size of the game window.
