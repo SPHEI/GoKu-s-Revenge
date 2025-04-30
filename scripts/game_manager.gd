@@ -61,7 +61,7 @@ func _ready() -> void:
 		if l.name == "Items3":
 			bullets = l
 		
-		print(l.name)
+		#print(l.name)
 	stage_1()
 func _process(_delta: float) -> void:
 	hp.text = "Hp: " + str(player.hp)
