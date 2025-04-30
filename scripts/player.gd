@@ -67,7 +67,7 @@ func get_input(delta: float):
 		get_node("Player_basic_spawner").spawn();
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_pressed("ui_sneak"):
 		get_node("./Sprite-focus").visible = true
 	else:

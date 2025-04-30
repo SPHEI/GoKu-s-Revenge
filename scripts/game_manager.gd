@@ -184,7 +184,10 @@ func run_stage(list):
 	player.reset_hp()
 	for action in list:
 		#print(action)
-		if action.left(5) == "wait-":
+		if action == "win_game":
+			call(action)
+			return
+		elif action.left(5) == "wait-":
 			#print(action.get_slice("-",1))
 			await get_tree().create_timer(action.get_slice("-",1).to_float()).timeout
 		else:
