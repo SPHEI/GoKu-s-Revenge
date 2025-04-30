@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://c7jpiwuhedngq"]
 
-[ext_resource type="Script" uid="uid://ddx12lg5o5v6c" path="res://scripts/enemy_bullet_basic.gd" id="1_yqaqm"]
+[ext_resource type="Script" uid="uid://ddx12lg5o5v6c" path="res://scripts/bullets/enemy/enemy_bullet_basic.gd" id="1_yqaqm"]
 [ext_resource type="Texture2D" uid="uid://mg2518fopc0w" path="res://assets/sprites/touhou-12-enemies.png" id="2_ljoiw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e1rre"]

@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://bsh3tkhhidgoo"]
 
 [ext_resource type="Texture2D" uid="uid://mg2518fopc0w" path="res://assets/sprites/touhou-12-enemies.png" id="1_7jpia"]
-[ext_resource type="Script" uid="uid://by8d1w6mba3hu" path="res://scripts/basic_enemy_spawner.gd" id="1_8xi43"]
-[ext_resource type="Script" uid="uid://ctw82qawh6g5o" path="res://scenes/enemies/marker_2d.gd" id="3_ibjif"]
+[ext_resource type="Script" uid="uid://by8d1w6mba3hu" path="res://scripts/enemy_movement/basic.gd" id="1_8xi43"]
+[ext_resource type="Script" uid="uid://ctw82qawh6g5o" path="res://scripts/bullet_spawner/enemy/basic.gd" id="3_ibjif"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7jpia"]
 radius = 16.0
