@@ -9,14 +9,6 @@ var last_vector = Vector2(0, 0)
 
 var enabled = true
 
-'''
-ITEMS:
-SpeedBoost: Boosts Movement speed by 10% (+10 per stack)
-BlinkExtend: Extends after-hit invincibility by 50% (+50 per stack)
-ShootSpeed: Boosts shooting speed by 50% (+50% per stack)
-AbilitySpeed: Boosts the charge rate of ability by +1% (+1 per stack) every time charge is gained. TODO
-HpBoost: +1 maxHp per stack
-'''
 var items: Dictionary
 
 var can_attack = true
