@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bqd8fiu5m8b2j" path="res://scenes/bullet_spawner/basic_player_bullet_spawner.tscn" id="4_go2pc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vknqm"]
-radius = 2.23607
+radius = 8.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
 atlas = ExtResource("2_wn7uk")
@@ -75,27 +75,19 @@ animations = [{
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_yptnv")
 
-[node name="Sprite-character" type="Sprite2D" parent="."]
-position = Vector2(0, 1)
-texture = ExtResource("2_wn7uk")
-region_enabled = true
-region_rect = Rect2(0, 0, 32, 48)
-
-[node name="Sprite-focus" type="Sprite2D" parent="."]
-position = Vector2(0, 1)
-scale = Vector2(0.71875, 0.730159)
-texture = ExtResource("3_3uiw6")
-region_enabled = true
-region_rect = Rect2(257.278, 17.5491, 64.2967, 63.4106)
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_vknqm")
 
 [node name="Player_basic_spawner" parent="." instance=ExtResource("4_go2pc")]
-position = Vector2(0, 1)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_3v2ag")
 autoplay = "default"
 frame_progress = 0.620722
+
+[node name="Sprite-focus" type="Sprite2D" parent="."]
+position = Vector2(-3.8147e-06, 3.8147e-06)
+scale = Vector2(1.5, 1.39683)
+texture = ExtResource("3_3uiw6")
+region_enabled = true
+region_rect = Rect2(257.278, 17.5491, 64.2967, 63.4106)

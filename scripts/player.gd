@@ -2,10 +2,7 @@ extends CharacterBody2D
 class_name PlayerControler
 
 @export var speed = 200
-var vector = Vector2(0, 0)
-var last_vector = Vector2(0, 0)
-
-#@onready var scene_bullet = preload("res://bullet.tscn")
+@export var focus = 0.7
 
 var enabled = true
 
@@ -19,12 +16,15 @@ HpBoost: +1 maxHp per stack
 '''
 var items: Dictionary
 
-var can_attack = true
 var screen_size # Size of the game window.
 
 func _ready():
+	get_node("./Sprite-focus").visible = false
 	add_to_group("player")
 	screen_size = get_viewport_rect().size
+
+var vector = Vector2(0, 0)
+var last_vector = Vector2(0, 0)
 
 func get_input(delta: float):
 	if can_get_hit == false:
@@ -64,19 +64,22 @@ func get_input(delta: float):
 	
 	velocity = vector * speed
 	
-	if Input.is_action_pressed("ui_sneak") and velocity.length() > 100:
-		velocity *= 0.8
+	if Input.is_action_pressed("ui_sneak"):
+		velocity *= focus
+
 	
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
 	
-	if Input.is_action_pressed("ui_shoot") && can_attack:
-		shoot()
-		can_attack = false
-		if items.get("ShootSpeed") != null:
-			get_tree().create_timer(0.1 * (pow(.5,items["ShootSpeed"]))).timeout.connect(func(): can_attack = true)
-		else:
-			get_tree().create_timer(0.1).timeout.connect(func(): can_attack = true)
+	if Input.is_action_pressed("ui_shoot"):
+		get_node("Player_basic_spawner").spawn();
+
+
+func _process(delta: float) -> void:
+	if Input.is_action_pressed("ui_sneak"):
+		get_node("./Sprite-focus").visible = true
+	else:
+		get_node("./Sprite-focus").visible = false
 
 var can_get_hit = true
 
@@ -109,18 +112,6 @@ func respawn():
 		node.queue_free()
 	for node in get_tree().get_nodes_in_group("bullet"):
 		node.queue_free()
-
-	
-
-@onready var bullet_basic = preload("res://scenes/bullets/bullet.tscn")
-
-func shoot():
-	var marker_root = get_node("./Player_basic_spawner")
-	for marker in marker_root.get_children():
-		if marker is Marker2D:
-			var bullet_1 = bullet_basic.instantiate()
-			bullet_1.position = marker.global_position
-			owner.add_child(bullet_1)
 
 func _physics_process(delta: float):
 	screen_size = get_viewport_rect().size
