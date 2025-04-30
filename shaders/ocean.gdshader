@@ -4,35 +4,39 @@ render_mode blend_mix, depth_prepass_alpha, cull_back;
 uniform vec4 albedo_color : source_color = vec4(0.0, 0.5, 1.0, 1);
 uniform float metallic : hint_range(0.0, 1.0) = 0.8;
 uniform float roughness : hint_range(0.0, 1.0) = 0.1;
-uniform sampler2D foam_texture : filter_nearest;
-uniform bool use_foam_texture;
 uniform bool foam;
-uniform int foamDetail: hint_range(0, 10) = 10;
 uniform float maxAmp: hint_range(0.0, 20.0) = 2.0;
 uniform float speedMult: hint_range(0.0, 20.0) = 1.0;
 
 varying vec3 local_pos;
 
-const float[] xDir = {0.5,-1.0,-1.0,2.0,0.4,-1.5,2.0,-1.0,3.0,1.0,0.5,-1.0,-1.0,2.0,0.4};
-const float[] yDir = {-1.0,-1.0,1.0,-1.0,1.0,-1.0,-1.0,1.0,-1.0,1.0,1.0,-1.0,-1.0,1.0,-1.0};
-const float[] speeds = {0.5,1.0, 0.78, 0.5, 0.5, 1.0, 2.0, 2.0, 3.0, 0.5,0.5,1.0, 0.78, 0.5, 0.5};
+const float[] xDir = {0.5,-1.0,-1.0,2.0,0.4,-1.5,2.0,-1.0,3.0,1.0};
+const float[] yDir = {-1.0,-1.0,1.0,-1.0,1.0,-1.0,-1.0,1.0,-1.0,1.0};
+const float[] speeds = {0.5,1.0,0.78,0.5,0.5,1.0,2.0,2.0,3.0,0.5};
+
+#define TWOPI 6.28318530718
 
 float wave(float base,float freq, float speed, float amp)
 {
-	return exp(sin((base / 255.0) * 2.0 * PI * freq + TIME * speed) * amp - 1.0);
+	return exp(sin((base / 255.0) * TWOPI * freq + TIME * speed) * amp - 1.0);
 }
 
 float derivative(float base, float freq, float speed, float amp, float t) {
-	return amp * speed * exp(sin((base / 255.0) * 2.0 * 3.141592653589* freq + t * speed) * amp - 1.0) * cos(speed * t + (base / 255.0) * 2.0 * 3.141592653589793238 * freq);
+	float phase = (base / 255.0) * TWOPI * freq + t * speed;
+	return amp * speed * exp(sin(phase) * amp - 1.0) * cos(phase);
 }
 
-float totalDerivative(float t) {
-	float result = 0.0;
+vec3 totalDerivative(float t) {
+	vec3 result = vec3(0.0,0.0,0.0);
 	float freq = 1.0;
 	float amp = maxAmp;
-	for(int a = 0; a < foamDetail; a++)
+	for(int a = 0; a < 10; a++)
 	{
-		result += derivative(xDir[a] * local_pos.x + yDir[a] * local_pos.z, freq, speeds[a] * speedMult, amp, t);
+		float base = xDir[a] * local_pos.x + yDir[a] * local_pos.z;
+		float s = speeds[a] * speedMult;
+		result.x += derivative(base, freq, s, amp, t);
+		result.y += derivative(base, freq, s, amp, t + 0.5);
+		result.z += derivative(base, freq, s, amp, t - 0.5);
 		freq *= 2.0;
 		amp *= 0.8;
 	}
@@ -56,21 +60,14 @@ void fragment() {
 	ALBEDO += (vec3(1.0,1.0,1.0) * (local_pos.y-1.0) * 0.025).rgb;
 	if(foam)
 	{
-		float d1 = totalDerivative(TIME);
-		float d2 = totalDerivative(TIME + 0.5);
-		float d3 = totalDerivative(TIME - 0.5);
-		if(use_foam_texture)
-		{
-			vec4 foamt = texture(foam_texture, vec2(local_pos.x/512.0,local_pos.z/256.0), 0.0);
-			ALBEDO = mix(ALBEDO, foamt.rgb, foamt.a * 0.5);
-		}
-		else if(abs(d1) < 0.5 && d3 > 0.0 && d2 < 0.0)
+		vec3 d = totalDerivative(TIME);
+		if(abs(d.x) < 0.5 && d.z > 0.0 && d.y < 0.0)
 		{
 			ALBEDO = vec3(1.0,1.0,1.0).rgb;
 		}
-		else if(d1 > -1.0 && d1 < 0.0 && d2 >= 0.0)
+		else if(d.x > -1.0 && d.x < 0.0 && d.y >= 0.0)
 		{
-			ALBEDO += vec3(1.0,1.0,1.0).rgb * (d1 + 1.0) * 0.1;
+			ALBEDO += vec3(1.0,1.0,1.0).rgb * (d.x + 1.0) * 0.1;
 		}
 	}
 	ALPHA = albedo_color.a;
