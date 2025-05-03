@@ -3,6 +3,11 @@ extends Boss
 #Needed to switch animations  
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 
+#Waits for 2 seconds
+func wait():
+	anim.animation = "idle"
+	await get_tree().create_timer(2).timeout
+	
 #Example movement function
 func move_around():
 	for i in range(360):
@@ -25,11 +30,6 @@ func move_around():
 		elif cos(angle) < 0:
 			anim.animation = "move_right"
 		await get_tree().create_timer(0.005).timeout
-
-#Waits for 2 seconds
-func wait():
-	anim.animation = "idle"
-	await get_tree().create_timer(2).timeout
 
 #Example shooting function
 @onready var bullet = preload("res://scenes/bullets/enemy_bullet_basic.tscn")

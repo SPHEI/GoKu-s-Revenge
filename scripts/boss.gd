@@ -12,10 +12,8 @@ var health_bar: ProgressBar
 #Death Explosion
 @onready var explosion = preload("res://scenes/effects/explosion_big.tscn")
 
-#Make sure all functions are here
-#If you want a function to occur more often in random just put it in more times
-#The order in array is the order of moves in sequence mode
-var moves: Array[String]
+#Leave empty for automatic detection
+@export var moves: Array[String]
 
 #Used to cancel boss logic on death
 var interrupt = false
@@ -32,11 +30,12 @@ var not_moves = [
 func _ready():
 	add_to_group("bosses")
 	
-	var a = get_script().get_script_method_list()
-	moves.clear()
-	for i in a:
-		if i.name not in not_moves:
-			moves.append(i.name)
+	if moves.is_empty():
+		var a = get_script().get_script_method_list()
+		moves.clear()
+		for i in a:
+			if i.name not in not_moves:
+				moves.append(i.name)
 	print(moves)
 	body_entered.connect(_on_body_entered)
 	

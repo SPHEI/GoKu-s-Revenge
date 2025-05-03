@@ -9,6 +9,7 @@ height = 62.0
 
 [node name="TestBoss" type="Area2D"]
 script = ExtResource("1_2ipu8")
+mode = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2, 2)
