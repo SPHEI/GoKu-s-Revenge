@@ -18,6 +18,8 @@ albedo_color = Color(0, 0, 0, 0.470588)
 [sub_resource type="QuadMesh" id="QuadMesh_tipki"]
 
 [node name="Main" type="Node2D"]
+texture_filter = 1
+texture_repeat = 1
 script = ExtResource("1_jyhfs")
 
 [node name="3DEnviorment" type="Node3D" parent="." node_paths=PackedStringArray("ui")]

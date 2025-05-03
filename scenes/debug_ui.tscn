@@ -52,10 +52,10 @@ script = ExtResource("1_r5sbi")
 
 [node name="Loading" type="Label" parent="."]
 layout_mode = 0
-offset_left = 896.0
-offset_top = 608.0
-offset_right = 1152.0
-offset_bottom = 650.0
+offset_left = 1664.0
+offset_top = 1038.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 text = "Loading..."
 label_settings = SubResource("LabelSettings_mogph")
 horizontal_alignment = 2
@@ -84,18 +84,18 @@ text = "Current Level: 0"
 
 [node name="ItemDesc" type="Label" parent="."]
 layout_mode = 0
-offset_left = 818.0
-offset_top = 196.0
-offset_right = 1156.0
-offset_bottom = 453.0
+offset_left = 1285.0
+offset_top = 436.0
+offset_right = 1623.0
+offset_bottom = 693.0
 text = "According to all known laws of aviation, there is no way a be should be able to fly."
 label_settings = SubResource("LabelSettings_bth2w")
 autowrap_mode = 2
 
 [node name="WinText" type="Label" parent="."]
 layout_mode = 0
-offset_right = 1156.0
-offset_bottom = 649.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 text = "You win!"
 label_settings = SubResource("LabelSettings_loc82")
 horizontal_alignment = 1
