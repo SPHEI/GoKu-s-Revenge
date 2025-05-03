@@ -2,9 +2,6 @@ extends Area2D
 
 class_name Boss
 
-
-#var plr
-
 #Self-explanatory
 @export var max_hp: float = 320.0
 var hp: float
@@ -18,14 +15,29 @@ var health_bar: ProgressBar
 #Make sure all functions are here
 #If you want a function to occur more often in random just put it in more times
 #The order in array is the order of moves in sequence mode
-@export var moves: Array[String]
+var moves: Array[String]
 
 #Used to cancel boss logic on death
 var interrupt = false
 
+#If you add any moves to base class add them here
+var not_moves = [
+	"_ready",
+	"logic",
+	"_on_body_entered",
+	"get_hit",
+	"spawn_explosions"
+]
+
 func _ready():
 	add_to_group("bosses")
-	#plr = get_tree().get_nodes_in_group("player")[0]
+	
+	var a = get_script().get_script_method_list()
+	moves.clear()
+	for i in a:
+		if i.name not in not_moves:
+			moves.append(i.name)
+	print(moves)
 	body_entered.connect(_on_body_entered)
 	
 	hp = max_hp
@@ -39,6 +51,9 @@ enum modes {SEQUENCE, RANDOM, TRUE_RANDOM}
 @export var mode = modes.RANDOM
 #Handles going through the list of options the boss has
 func logic():
+	if moves.is_empty():
+		print("BOSS LOGIC ERROR: Boss has no moves!")
+		return
 	match mode:
 		modes.SEQUENCE:
 			#Goes through all moves in order

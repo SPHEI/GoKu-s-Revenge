@@ -165,6 +165,8 @@ func update_item_visuals(a: int):
 @export var stages = [
 	[	#Stage 1
 		"pick_items",
+		"boss_test_spawn",
+		"wait_until_boss_dead",
 		"enemy_pattern_line_horiz_basic",
 		"wait_until_clear",
 		"enemy_pattern_line_horiz_kamikaze",
