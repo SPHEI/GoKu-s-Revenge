@@ -3,6 +3,8 @@ extends Area2D
 var dir = Vector2(0.0,0.0)
 var plr: Node
 
+@onready var explosion = preload("res://scenes/effects/explosion_small.tscn")
+
 func _ready():
 	add_to_group("enemies")
 	plr = get_tree().get_nodes_in_group("player")[0]
@@ -21,4 +23,7 @@ func _on_body_entered(body: Node2D):
 		
 #Call this from player bullet script
 func get_hit():
+	var e = explosion.instantiate()
+	e.position = position
+	get_tree().root.add_child(e)
 	queue_free()

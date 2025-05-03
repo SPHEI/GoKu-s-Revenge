@@ -14,6 +14,9 @@ var hp: float
 #Don't remove this
 var health_bar: ProgressBar
 
+#Death Explosion
+@onready var explosion = preload("res://scenes/effects/explosion_big.tscn")
+
 #Make sure all functions are here
 #If you want a function to occur more often in random just put it in more times
 #The order in array is the order of moves in sequence mode
@@ -72,20 +75,32 @@ func _on_body_entered(body: Node2D):
 
 #Call this from player bullet script
 func get_hit():
-	hp -= 1
-	if health_bar != null:
-		health_bar.value = hp/max_hp
-	if hp <= 0:
-		health_bar.value = 0
-		interrupt = true
-		queue_free()
+	if not interrupt:
+		hp -= 1
+		if health_bar != null:
+			health_bar.value = hp/max_hp
+		if hp <= 0:
+			health_bar.value = 0
+			interrupt = true
+			await spawn_explosions()
+			queue_free()
 		
+func spawn_explosions():
+	var rng = RandomNumberGenerator.new()
+	rng.seed = hash("Godot")
+	for i in range(10):
+		var e = explosion.instantiate()
+		e.position = Vector2(rng.randi_range(-50,50),rng.randi_range(-50,50))
+		add_child(e)
+		await await get_tree().create_timer(0.2 - i*0.01).timeout
 '''   COPY PASTE SECTION END  '''
 
 #Example movement function
 var save_pos
 func move_around():
 	for i in range(360):
+		if interrupt:
+			break
 		var angle = (i + 270) * TAU / 360
 		position = save_pos + Vector2(sin(angle), cos(angle)-1) * 50.0
 		if cos(angle) < 0:
@@ -94,6 +109,8 @@ func move_around():
 			anim.animation = "move_right"
 		await get_tree().create_timer(0.005).timeout
 	for i in range(360):
+		if interrupt:
+			break
 		var angle = (i + 270) * TAU / 360
 		position = save_pos + Vector2(-sin(angle), cos(angle)-1) * 50.0 - Vector2(100,0)
 		if cos(angle) > 0:
@@ -112,6 +129,8 @@ func wait():
 func shoot():
 	anim.animation = "cast"
 	for j in range(4):
+		if interrupt:
+			break
 		for i in range(32):
 			var b = bullet.instantiate()
 			b.position = position
