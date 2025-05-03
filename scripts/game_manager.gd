@@ -59,7 +59,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	hp.text = "Hp: " + str(player.hp)
 	enemies.text = "Enemies: " + str(get_tree().get_node_count_in_group("enemies") + get_tree().get_node_count_in_group("bosses"))
-	bullets.text = "Bullets: " + str(get_tree().get_node_count_in_group("bullets"))
+	bullets.text = "Bullets: " + str(get_tree().get_node_count_in_group("bullets") + get_tree().get_node_count_in_group("bullet"))
 	if not level_manager.updating:
 		if Input.is_action_just_pressed("debug_nextScene"):
 			cancel_stage = true
