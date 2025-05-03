@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://devmk4at6fcf0"]
+[gd_scene load_steps=7 format=3 uid="uid://devmk4at6fcf0"]
 
 [ext_resource type="Script" uid="uid://8mkjgu4rvcbl" path="res://scripts/label.gd" id="1_r5sbi"]
 
@@ -20,6 +20,12 @@ outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 6
 shadow_color = Color(0, 0, 0, 0.219608)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_loc82"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bth2w"]
+bg_color = Color(1, 0, 0, 1)
 
 [node name="Debug-UI" type="Control"]
 layout_mode = 3
@@ -100,3 +106,15 @@ text = "You win!"
 label_settings = SubResource("LabelSettings_loc82")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Boss Health Bar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_left = 376.0
+offset_top = 10.0
+offset_right = 1607.0
+offset_bottom = 37.0
+theme_override_styles/background = SubResource("StyleBoxFlat_loc82")
+theme_override_styles/fill = SubResource("StyleBoxFlat_bth2w")
+max_value = 1.0
+step = 0.001
+show_percentage = false

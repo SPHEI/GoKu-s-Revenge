@@ -16,7 +16,7 @@ func _process(delta: float) -> void:
 	position -= transform.y * speed * delta
 
 func _on_area_entered(area: Node2D):
-	if area.is_in_group("enemies"):
+	if area.is_in_group("enemies") or area.is_in_group("bosses"):
 		area.get_hit()
 		queue_free()
 

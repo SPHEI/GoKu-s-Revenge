@@ -43,7 +43,7 @@ mesh = SubResource("QuadMesh_tipki")
 z_index = 4096
 
 [node name="Player" parent="." instance=ExtResource("4_o6xl0")]
-position = Vector2(550, 600)
+position = Vector2(961, 888)
 
 [node name="EnemyBulletsScene" parent="." instance=ExtResource("5_tbgi4")]
 

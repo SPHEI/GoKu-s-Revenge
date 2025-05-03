@@ -40,6 +40,8 @@ func update_level():
 		node.queue_free()
 	for node in get_tree().get_nodes_in_group("enemies"):
 		node.queue_free()
+	for node in get_tree().get_nodes_in_group("bosses"):
+		node.queue_free()
 	loading.text = "Loading..."
 	updating = true
 	label.text = "Current Level: " + str(current_level_id)

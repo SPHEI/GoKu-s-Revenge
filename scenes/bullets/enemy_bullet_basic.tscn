@@ -83,3 +83,5 @@ frame_progress = 0.440664
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_yqaqm")
 debug_color = Color(0, 0.606448, 0.661204, 0.42)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

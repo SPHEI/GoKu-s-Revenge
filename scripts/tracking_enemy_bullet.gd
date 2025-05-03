@@ -14,7 +14,6 @@ func _ready():
 	plr = get_tree().get_nodes_in_group("player")[0]
 	screen_size = get_viewport_rect().size
 	dir = (plr.global_position - global_position).normalized()
-
 	
 	
 func  _physics_process(delta: float) -> void:

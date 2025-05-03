@@ -1,8 +1,5 @@
 extends Node2D
 
-#Counts how many objects are in the scene right now
-var stuff_spawned = 0
-
 #Reference to levelManager
 @onready var level_manager: Node3D = $"3DEnviorment"
 
@@ -13,6 +10,9 @@ var stuff_spawned = 0
 @onready var kamikaze = preload("res://scenes/enemies/kamikaze.tscn")
 @onready var wah = preload("res://scenes/enemies/basic_enemy.tscn")
 
+#Add new bosses here
+@onready var test_boss = preload("res://scenes/bosses/test_boss.tscn")
+
 #Reference to UI
 @onready var ui: Control = $"Debug-UI"
 var win_text: Label = null;
@@ -21,6 +21,7 @@ var items_description: Label = null;
 var hp: Label = null;
 var enemies: Label = null;
 var bullets: Label = null;
+var boss_health_bar: ProgressBar = null;
 
 var items = [
 	#[Code name, display name, description]
@@ -50,11 +51,14 @@ func _ready() -> void:
 			enemies = l
 		if l.name == "Items3":
 			bullets = l
+		if l.name == "Boss Health Bar":
+			boss_health_bar = l
+			l.visible = false
 		#print(l.name)
 	run_stage(stages[level_manager.current_level_id])
 func _process(_delta: float) -> void:
 	hp.text = "Hp: " + str(player.hp)
-	enemies.text = "Enemies: " + str(get_tree().get_node_count_in_group("enemies"))
+	enemies.text = "Enemies: " + str(get_tree().get_node_count_in_group("enemies") + get_tree().get_node_count_in_group("bosses"))
 	bullets.text = "Bullets: " + str(get_tree().get_node_count_in_group("bullets"))
 	if not level_manager.updating:
 		if Input.is_action_just_pressed("debug_nextScene"):
@@ -74,21 +78,32 @@ func spawn_enemy(type: Resource, pos: Vector2):
 	var b = type.instantiate()
 	b.position = pos
 	add_child(b)
-	stuff_spawned += 1
+
+func spawn_boss(type: Resource, pos: Vector2):
+	var b = type.instantiate()
+	b.position = pos
+	b.health_bar = boss_health_bar
+	boss_health_bar.visible = true
+	add_child(b)
 	
 func spawn_bullet(type: Resource, pos: Vector2, dir: Vector2):
 	var b = type.instantiate()
 	b.position = pos
 	b.dir = dir
 	add_child(b)
-	stuff_spawned += 1
 	
 func wait_until_clear():
 	while get_tree().get_node_count_in_group("enemies") > 0 or get_tree().get_node_count_in_group("bullet") > 0:
 		await get_tree().create_timer(0.2).timeout
 		if cancel_stage:
 			return
-
+func wait_until_boss_dead():
+	while get_tree().get_node_count_in_group("bosses") > 0:
+		await get_tree().create_timer(0.2).timeout
+		if cancel_stage:
+			return
+	boss_health_bar.visible = false
+	
 var current_options = [-1,-1,-1]
 func pick_items():
 	player.enabled = false
@@ -147,7 +162,7 @@ func update_item_visuals(a: int):
 	items_description.text = items[current_options[a]][2]
 	
 #STAGES SECTION
-var stages = [
+@export var stages = [
 	[	#Stage 1
 		"pick_items",
 		"enemy_pattern_line_horiz_basic",
@@ -160,6 +175,8 @@ var stages = [
 		"wait-2.0",
 		"bullet_pattern_fan",
 		"wait_until_clear",
+		"boss_test_spawn",
+		"wait_until_boss_dead",
 		"pick_items"
 	],
 	[	#Stage 2
@@ -234,3 +251,7 @@ func enemy_pattern_line_horiz_kamikaze():
 func enemy_pattern_line_horiz_basic():
 	for i in range(10):
 		spawn_enemy(wah, Vector2(200.0 * i,-4.0))	
+		
+#BOSS SECTION
+func boss_test_spawn():
+	spawn_boss(test_boss, Vector2(1000.0,250.0))
