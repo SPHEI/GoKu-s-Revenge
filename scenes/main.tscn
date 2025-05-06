@@ -34,7 +34,7 @@ fov = 70.0
 size = 0.05
 near = 0.001
 
-[node name="StupidWorkaround" type="MeshInstance3D" parent="3DEnviorment/Camera3D"]
+[node name="Screen Darkener" type="MeshInstance3D" parent="3DEnviorment/Camera3D"]
 transform = Transform3D(2, 0, 0, 0, 2, -5.96046e-08, 0, 5.96046e-08, 2, 0, -0.032, -0.393)
 material_override = SubResource("StandardMaterial3D_o6xl0")
 mesh = SubResource("QuadMesh_tipki")
