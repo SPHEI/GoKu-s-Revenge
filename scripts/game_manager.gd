@@ -26,7 +26,7 @@ var boss_health_bar: ProgressBar = null;
 var items = [
 	#[Code name, display name, description]
 	["ShootSpeed", "Focus Crystal", "Increases shooting speed by 50%."],
-	["AbilitySpeed", "Soul Sphere", "Increases the amount of ability charge you get by +1%."],
+	["AbilitySpeed", "Soul Sphere", "Increases the amount of ability charge you get by +1%. (not implemented yet)"],
 	["HpBoost", "Well-Done Steak", "Increases maximum health by 1."]
 ]
 

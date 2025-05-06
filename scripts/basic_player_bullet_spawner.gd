@@ -4,11 +4,11 @@ extends Node2D
 var can_attack = true
 
 
-func spawn():
+func spawn(speed):
 	if can_attack:
 		shoot()
 		can_attack = false
-		get_tree().create_timer(0.1).timeout.connect(func(): can_attack = true)
+		get_tree().create_timer(0.25 * pow(0.5, speed)).timeout.connect(func(): can_attack = true)
 
 func shoot():
 	var marker_root = get_node("/root/Main/PlayerBulletsScene")

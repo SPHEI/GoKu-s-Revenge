@@ -64,7 +64,10 @@ func get_input(delta: float):
 	position = position.clamp(Vector2.ZERO, screen_size)
 	
 	if Input.is_action_pressed("ui_shoot"):
-		get_node("Player_basic_spawner").spawn();
+		if items.get("ShootSpeed") != null:
+			get_node("Player_basic_spawner").spawn(items["ShootSpeed"]);
+		else:
+			get_node("Player_basic_spawner").spawn(0);
 
 
 func _process(_delta: float) -> void:
