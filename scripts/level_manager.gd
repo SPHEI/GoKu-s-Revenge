@@ -1,7 +1,7 @@
 extends Node3D
 
 var current_level_objects = [null,null,null]
-var current_level_id = 0
+var current_level_id = 2
 #speed up to check if scrolling is aligned properly
 @export var speed = 10.0
 #Add new levels here
@@ -9,6 +9,7 @@ var scene_list = [
 	#[Scene name, Scene length]
 	["res://scenes/levels/plains.tscn", 200],
 	["res://scenes/levels/ocean.tscn", 255],
+	["res://scenes/levels/glacier.tscn", 400],
 	["res://scenes/levels/test_plane.tscn",200],
 ]
 

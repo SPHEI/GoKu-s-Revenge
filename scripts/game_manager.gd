@@ -195,7 +195,12 @@ func update_item_visuals(a: int):
 	],
 	[	#Stage 3
 		"wait-5.0",
-	]
+		"pick_items"
+	],
+	[	#Stage 4
+		"wait-5.0",
+		"pick_items"
+	],
 ]
 
 var cancel_stage = false
