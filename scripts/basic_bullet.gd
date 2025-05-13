@@ -3,6 +3,7 @@ extends Area2D
 @export var speed = 750
 @export var velocity : Vector2
 
+@onready var hit_effect = preload("res://scenes/effects/bullet_hit.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -21,6 +22,9 @@ func _process(delta: float) -> void:
 func _on_area_entered(area: Node2D):
 	if area.is_in_group("enemies") or area.is_in_group("bosses"):
 		area.get_hit()
+		var a = hit_effect.instantiate()
+		a.position = position
+		get_tree().root.add_child(a)
 		queue_free()
 	
 var entered = false
