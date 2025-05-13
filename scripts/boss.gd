@@ -24,10 +24,16 @@ var not_moves = [
 	"logic",
 	"_on_body_entered",
 	"get_hit",
-	"spawn_explosions"
+	"spawn_explosions",
+	"flash"
 ]
 
+@onready var sprite: AnimatedSprite2D = $"AnimatedSprite2D"
+var shader_material: ShaderMaterial
+
 func _ready():
+	shader_material = sprite.material as ShaderMaterial
+	
 	add_to_group("bosses")
 	
 	if moves.is_empty():
@@ -92,6 +98,8 @@ func get_hit():
 			interrupt = true
 			await spawn_explosions()
 			queue_free()
+		elif not flashing:
+			flash()
 		
 func spawn_explosions():
 	var rng = RandomNumberGenerator.new()
@@ -101,3 +109,17 @@ func spawn_explosions():
 		e.position = Vector2(rng.randi_range(-50,50),rng.randi_range(-50,50))
 		add_child(e)
 		await await get_tree().create_timer(0.2 - i*0.01).timeout
+		
+var flashing = false
+func flash():
+	if shader_material:
+		flashing = true
+		var i = 1.0
+		shader_material.set_shader_parameter("level", i)
+		await get_tree().create_timer(0.1).timeout
+		for j in range(10):
+			shader_material.set_shader_parameter("level", i)
+			i *= 0.8
+			await get_tree().create_timer(0.01).timeout
+		shader_material.set_shader_parameter("level", 0)
+		flashing = false

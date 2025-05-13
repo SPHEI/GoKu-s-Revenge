@@ -77,12 +77,16 @@ func _process(_delta: float) -> void:
 func spawn_enemy(type: Resource, pos: Vector2):
 	var b = type.instantiate()
 	b.position = pos
+	var unique_material = preload("res://scenes/enemies/enemy_flash.tres").duplicate()
+	b.get_node("AnimatedSprite2D").material = unique_material
 	add_child(b)
 
 func spawn_boss(type: Resource, pos: Vector2):
 	var b = type.instantiate()
 	b.position = pos
 	b.health_bar = boss_health_bar
+	var unique_material = preload("res://scenes/enemies/enemy_flash.tres").duplicate()
+	b.get_node("AnimatedSprite2D").material = unique_material
 	boss_health_bar.visible = true
 	add_child(b)
 	
