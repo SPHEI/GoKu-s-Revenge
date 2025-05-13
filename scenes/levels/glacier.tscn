@@ -1,0 +1,1233 @@
+[gd_scene load_steps=37 format=3 uid="uid://ch8wdf4optmwi"]
+
+[ext_resource type="Texture2D" uid="uid://ca7lrysqbiajb" path="res://assets/textures/foam-texture-background.jpg" id="1_cf6uu"]
+[ext_resource type="Texture2D" uid="uid://bf5wfnk4js0k" path="res://assets/textures/snow.png" id="2_cf6uu"]
+[ext_resource type="ArrayMesh" uid="uid://b8nyn47te7qoh" path="res://assets/models/igloo.obj" id="3_g7dgp"]
+[ext_resource type="Texture2D" uid="uid://04h0wn7yyhbn" path="res://assets/textures/ice.png" id="4_j4qcv"]
+[ext_resource type="ArrayMesh" uid="uid://bobx7pw6hvd45" path="res://assets/models/mountain.obj" id="5_uf2dk"]
+[ext_resource type="ArrayMesh" uid="uid://dtjrnauaalx66" path="res://assets/models/polarbear.obj" id="6_wikdb"]
+[ext_resource type="Texture2D" uid="uid://iogap7r54eon" path="res://assets/textures/Sky.png" id="7_cf6uu"]
+[ext_resource type="Texture2D" uid="uid://dglxeymxxg850" path="res://assets/textures/—Pngtree—snowball material_6016071.png" id="8_g7dgp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g7dgp"]
+albedo_texture = ExtResource("1_cf6uu")
+metallic = 0.09
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_wwjle"]
+size = Vector2(200, 200)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0uim4"]
+albedo_texture = ExtResource("2_cf6uu")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6wuih"]
+albedo_texture = ExtResource("2_cf6uu")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2y1vq"]
+albedo_texture = ExtResource("2_cf6uu")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_scr4e"]
+albedo_texture = ExtResource("2_cf6uu")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2wp0n"]
+albedo_texture = ExtResource("2_cf6uu")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fuj8k"]
+albedo_texture = ExtResource("2_cf6uu")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cnp7m"]
+albedo_texture = ExtResource("2_cf6uu")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b7bjd"]
+albedo_texture = ExtResource("2_cf6uu")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fm87i"]
+albedo_texture = ExtResource("2_cf6uu")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_foygg"]
+albedo_texture = ExtResource("2_cf6uu")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2m7d3"]
+albedo_texture = ExtResource("2_cf6uu")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lcnmy"]
+albedo_texture = ExtResource("2_cf6uu")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4r3jo"]
+albedo_texture = ExtResource("4_j4qcv")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j4qcv"]
+albedo_texture = ExtResource("1_cf6uu")
+metallic = 0.09
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_g7dgp"]
+panorama = ExtResource("7_cf6uu")
+
+[sub_resource type="Sky" id="Sky_2yu4k"]
+sky_material = SubResource("PanoramaSkyMaterial_g7dgp")
+
+[sub_resource type="Environment" id="Environment_j4qcv"]
+background_mode = 2
+sky = SubResource("Sky_2yu4k")
+sky_rotation = Vector3(0, -1.69821, 0)
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.02
+volumetric_fog_albedo = Color(7.31587e-06, 0.781963, 0.972397, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uf2dk"]
+albedo_texture = ExtResource("1_cf6uu")
+metallic = 0.09
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wikdb"]
+albedo_texture = ExtResource("1_cf6uu")
+metallic = 0.09
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uer4t"]
+albedo_texture = ExtResource("1_cf6uu")
+metallic = 0.09
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wwjle"]
+albedo_texture = ExtResource("1_cf6uu")
+metallic = 0.09
+
+[sub_resource type="Curve" id="Curve_j4qcv"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 1, Vector2(0.129252, 1), 0.0, 0.0, 0, 0, Vector2(0.442177, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_uf2dk"]
+curve = SubResource("Curve_j4qcv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wikdb"]
+emission_shape = 3
+emission_box_extents = Vector3(100, 0, 150)
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 4.0
+initial_velocity_max = 4.0
+gravity = Vector3(0, -1, 0)
+scale_curve = SubResource("CurveTexture_uf2dk")
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7jc27"]
+transparency = 1
+albedo_texture = ExtResource("8_g7dgp")
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_f7gus"]
+material = SubResource("StandardMaterial3D_7jc27")
+size = Vector2(5, 5)
+
+[node name="Glacier" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_g7dgp")
+mesh = SubResource("PlaneMesh_wwjle")
+
+[node name="igloo" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1.5, 0, 0, 0, 0.0152625, 1.49992, 0, -1.49992, 0.0152625, -67.8123, -1.70392, -19.0318)
+material_override = SubResource("StandardMaterial3D_0uim4")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo2" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.672364, 1.3408, -0.0136433, 3.34954e-10, 0.0152625, 1.49992, 1.34087, -0.672329, 0.00684131, -57.3876, -1.70392, -32.7334)
+material_override = SubResource("StandardMaterial3D_6wuih")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo3" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(-0.38327, 1.45013, -0.0147559, 1.49844e-09, 0.0152625, 1.49992, 1.45021, 0.38325, -0.00389978, -38.4614, -1.70392, -35.4695)
+material_override = SubResource("StandardMaterial3D_2y1vq")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo4" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(-1.27163, -0.795548, 0.00809513, 2.27968e-09, 0.0152625, 1.49992, -0.795589, 1.27156, -0.0129388, -31.0686, -1.70392, -16.9119)
+material_override = SubResource("StandardMaterial3D_scr4e")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo5" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(-0.969965, -1.14413, 0.0116421, 2.87183e-09, 0.0152625, 1.49992, -1.14419, 0.969914, -0.00986939, -41.2267, -1.70392, -4.62718)
+material_override = SubResource("StandardMaterial3D_2wp0n")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo6" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.27976, -1.4736, 0.0149947, 2.70957e-09, 0.0152625, 1.49992, -1.47368, -0.279746, 0.00284657, -61.035, -1.70392, -4.62718)
+material_override = SubResource("StandardMaterial3D_fuj8k")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo25" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.237677, -1.48097, 0.0150697, 0, 0.0152625, 1.49992, -1.48105, -0.237664, 0.00241836, -52.5304, -1.70392, 70.9066)
+material_override = SubResource("StandardMaterial3D_0uim4")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo26" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1.43046, -0.451385, 0.00459308, 1.58553e-09, 0.0152625, 1.49992, -0.451408, -1.43039, 0.014555, -64.4071, -1.70392, 58.4426)
+material_override = SubResource("StandardMaterial3D_6wuih")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo27" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1.37116, 0.608184, -0.00618859, 8.03842e-10, 0.0152625, 1.49992, 0.608215, -1.37109, 0.0139515, -64.1098, -1.70392, 39.322)
+material_override = SubResource("StandardMaterial3D_2y1vq")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo28" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(-0.987029, 1.12944, -0.0114927, 2.87183e-09, 0.0152625, 1.49992, 1.1295, 0.986978, -0.010043, -44.6152, -1.70392, 34.963)
+material_override = SubResource("StandardMaterial3D_scr4e")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo29" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(-1.28343, 0.776372, -0.00790001, 2.70957e-09, 0.0152625, 1.49992, 0.776413, 1.28336, -0.0130589, -34.0952, -1.70392, 46.9393)
+material_override = SubResource("StandardMaterial3D_2wp0n")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo30" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(-1.41073, -0.509706, 0.00518654, 2.70957e-09, 0.0152625, 1.49992, -0.509732, 1.41066, -0.0143542, -37.2339, -1.70392, 66.4973)
+material_override = SubResource("StandardMaterial3D_fuj8k")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo13" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1.5, 0, 0, 0, 0.0152625, 1.49992, 0, -1.49992, 0.0152625, 40.3081, -1.70392, 30.214)
+material_override = SubResource("StandardMaterial3D_0uim4")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo14" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.672364, 1.3408, -0.0136433, 3.34954e-10, 0.0152625, 1.49992, 1.34087, -0.672329, 0.00684131, 50.7328, -1.70392, 16.5124)
+material_override = SubResource("StandardMaterial3D_6wuih")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo15" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(-0.38327, 1.45013, -0.0147559, 1.49844e-09, 0.0152625, 1.49992, 1.45021, 0.38325, -0.00389978, 69.6589, -1.70392, 13.7763)
+material_override = SubResource("StandardMaterial3D_2y1vq")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo16" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(-1.27163, -0.795548, 0.00809513, 2.27968e-09, 0.0152625, 1.49992, -0.795589, 1.27156, -0.0129388, 77.0518, -1.70392, 32.3339)
+material_override = SubResource("StandardMaterial3D_scr4e")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo17" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(-0.969965, -1.14413, 0.0116421, 2.87183e-09, 0.0152625, 1.49992, -1.14419, 0.969914, -0.00986939, 66.8936, -1.70392, 44.6186)
+material_override = SubResource("StandardMaterial3D_2wp0n")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo18" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.27976, -1.4736, 0.0149947, 2.70957e-09, 0.0152625, 1.49992, -1.47368, -0.279746, 0.00284657, 47.0854, -1.70392, 44.6186)
+material_override = SubResource("StandardMaterial3D_fuj8k")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo7" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(-0.775405, 1.28397, -0.0130651, 0, 0.0152625, 1.49992, 1.28404, 0.775365, -0.00788975, -51.6027, -1.70392, -85.8885)
+material_override = SubResource("StandardMaterial3D_cnp7m")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo8" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(-1.49538, -0.117578, 0.00119643, 1.58553e-09, 0.0152625, 1.49992, -0.117584, 1.49531, -0.0152155, -44.2486, -1.70392, -69.2694)
+material_override = SubResource("StandardMaterial3D_b7bjd")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo9" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(-1.04329, -1.0777, 0.0109662, 8.03842e-10, 0.0152625, 1.49992, -1.07775, 1.04323, -0.0106154, -54.0322, -1.70392, -53.0682)
+material_override = SubResource("StandardMaterial3D_fm87i")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo10" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1.33839, -0.677238, 0.00689126, 2.87183e-09, 0.0152625, 1.49992, -0.677274, -1.33832, 0.0136182, -76.3182, -1.70392, -57.89)
+material_override = SubResource("StandardMaterial3D_foygg")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo11" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1.48086, -0.238827, 0.00243019, 2.70957e-09, 0.0152625, 1.49992, -0.23884, -1.48079, 0.0150678, -81.5831, -1.70392, -72.936)
+material_override = SubResource("StandardMaterial3D_2m7d3")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo12" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1.11689, 1.00123, -0.010188, 2.70957e-09, 0.0152625, 1.49992, 1.00128, -1.11683, 0.0113643, -71.3435, -1.70392, -89.8923)
+material_override = SubResource("StandardMaterial3D_lcnmy")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo19" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(-1.35443, -0.644575, 0.0065589, 0, 0.0152625, 1.49992, -0.644609, 1.35436, -0.0137813, 78.2713, -1.70392, -61.3862)
+material_override = SubResource("StandardMaterial3D_cnp7m")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo20" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(-0.0308902, -1.4996, 0.0152593, 1.69504e-09, 0.0152625, 1.49992, -1.49968, 0.0308884, -0.000314307, 62.461, -1.70392, -52.4244)
+material_override = SubResource("StandardMaterial3D_b7bjd")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo21" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.969285, -1.1447, 0.011648, 1.79153e-09, 0.0152625, 1.49992, -1.14476, -0.969235, 0.00986249, 45.3716, -1.70392, -60.5577)
+material_override = SubResource("StandardMaterial3D_fm87i")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo22" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.806324, 1.26478, -0.0128698, 2.87183e-09, 0.0152625, 1.49992, 1.26485, -0.806282, 0.00820436, 47.9656, -1.70392, -83.2114)
+material_override = SubResource("StandardMaterial3D_foygg")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo23" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.38413, 1.4499, -0.0147536, 2.58722e-09, 0.0152625, 1.49992, 1.44998, -0.38411, 0.00390852, 62.4171, -1.70392, -89.9386)
+material_override = SubResource("StandardMaterial3D_2m7d3")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo24" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(-0.885908, 1.21038, -0.0123162, 3.22966e-09, 0.0152625, 1.49992, 1.21044, 0.885863, -0.00901413, 80.3031, -1.70392, -81.4262)
+material_override = SubResource("StandardMaterial3D_lcnmy")
+mesh = ExtResource("3_g7dgp")
+
+[node name="icymountain" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(-0.0793658, 0, 7.7996, 0, 20, 0, -7.7996, 0, -0.0793658, 23.0936, -1.63217, -26.7971)
+material_override = SubResource("StandardMaterial3D_4r3jo")
+transparency = 0.2
+mesh = ExtResource("5_uf2dk")
+
+[node name="bear" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(-1.62139, 0, 1.17093, 0, 2, 0, -1.17093, 0, -1.62139, 12.4454, 0, 55.9837)
+mesh = ExtResource("6_wikdb")
+
+[node name="bear2" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(-1.62139, 0, 1.17093, 0, 2, 0, -1.17093, 0, -1.62139, 7.38761, 0, 55.9837)
+mesh = ExtResource("6_wikdb")
+
+[node name="bear3" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(-1.21604, 0, 0.878201, 0, 1.5, 0, -0.878201, 0, -1.21604, 7.38761, 0, 67.1313)
+mesh = ExtResource("6_wikdb")
+
+[node name="bear4" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(-1.21604, 0, 0.878201, 0, 1.5, 0, -0.878201, 0, -1.21604, 4.55899, 0, 67.1313)
+mesh = ExtResource("6_wikdb")
+
+[node name="bear5" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(-1.21604, 0, 0.878201, 0, 1.5, 0, -0.878201, 0, -1.21604, 2.5292, 0, 76.1453)
+mesh = ExtResource("6_wikdb")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 4.13264e-07, 0, 1, 0, -4.13264e-07, 0, 1, 0, 0, 200)
+material_override = SubResource("StandardMaterial3D_j4qcv")
+mesh = SubResource("PlaneMesh_wwjle")
+
+[node name="igloo" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(1.5, 0, 0, 0, 0.0152625, 1.49992, 0, -1.49992, 0.0152625, -67.8123, -1.70392, -19.0318)
+material_override = SubResource("StandardMaterial3D_0uim4")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo2" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(0.672364, 1.3408, -0.0136433, 3.34954e-10, 0.0152625, 1.49992, 1.34087, -0.672329, 0.00684131, -57.3876, -1.70392, -32.7334)
+material_override = SubResource("StandardMaterial3D_6wuih")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo3" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(-0.38327, 1.45013, -0.0147559, 1.49844e-09, 0.0152625, 1.49992, 1.45021, 0.38325, -0.00389978, -38.4614, -1.70392, -35.4695)
+material_override = SubResource("StandardMaterial3D_2y1vq")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo4" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(-1.27163, -0.795548, 0.00809513, 2.27968e-09, 0.0152625, 1.49992, -0.795589, 1.27156, -0.0129388, -31.0686, -1.70392, -16.9119)
+material_override = SubResource("StandardMaterial3D_scr4e")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo5" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(-0.969965, -1.14413, 0.0116421, 2.87183e-09, 0.0152625, 1.49992, -1.14419, 0.969914, -0.00986939, -41.2267, -1.70392, -4.62718)
+material_override = SubResource("StandardMaterial3D_2wp0n")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo6" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(0.27976, -1.4736, 0.0149947, 2.70957e-09, 0.0152625, 1.49992, -1.47368, -0.279746, 0.00284657, -61.035, -1.70392, -4.62718)
+material_override = SubResource("StandardMaterial3D_fuj8k")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo25" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(0.237677, -1.48097, 0.0150697, 0, 0.0152625, 1.49992, -1.48105, -0.237664, 0.00241836, -52.5304, -1.70392, 70.9066)
+material_override = SubResource("StandardMaterial3D_0uim4")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo26" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(1.43046, -0.451385, 0.00459308, 1.58553e-09, 0.0152625, 1.49992, -0.451408, -1.43039, 0.014555, -64.4071, -1.70392, 58.4426)
+material_override = SubResource("StandardMaterial3D_6wuih")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo27" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(1.37116, 0.608184, -0.00618859, 8.03842e-10, 0.0152625, 1.49992, 0.608215, -1.37109, 0.0139515, -64.1098, -1.70392, 39.322)
+material_override = SubResource("StandardMaterial3D_2y1vq")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo28" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(-0.987029, 1.12944, -0.0114927, 2.87183e-09, 0.0152625, 1.49992, 1.1295, 0.986978, -0.010043, -44.6152, -1.70392, 34.963)
+material_override = SubResource("StandardMaterial3D_scr4e")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo29" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(-1.28343, 0.776372, -0.00790001, 2.70957e-09, 0.0152625, 1.49992, 0.776413, 1.28336, -0.0130589, -34.0952, -1.70392, 46.9393)
+material_override = SubResource("StandardMaterial3D_2wp0n")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo30" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(-1.41073, -0.509706, 0.00518654, 2.70957e-09, 0.0152625, 1.49992, -0.509732, 1.41066, -0.0143542, -37.2339, -1.70392, 66.4973)
+material_override = SubResource("StandardMaterial3D_fuj8k")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo13" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(1.5, 0, 0, 0, 0.0152625, 1.49992, 0, -1.49992, 0.0152625, 40.3081, -1.70392, 30.214)
+material_override = SubResource("StandardMaterial3D_0uim4")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo14" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(0.672364, 1.3408, -0.0136433, 3.34954e-10, 0.0152625, 1.49992, 1.34087, -0.672329, 0.00684131, 50.7328, -1.70392, 16.5124)
+material_override = SubResource("StandardMaterial3D_6wuih")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo15" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(-0.38327, 1.45013, -0.0147559, 1.49844e-09, 0.0152625, 1.49992, 1.45021, 0.38325, -0.00389978, 69.6589, -1.70392, 13.7763)
+material_override = SubResource("StandardMaterial3D_2y1vq")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo16" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(-1.27163, -0.795548, 0.00809513, 2.27968e-09, 0.0152625, 1.49992, -0.795589, 1.27156, -0.0129388, 77.0518, -1.70392, 32.3339)
+material_override = SubResource("StandardMaterial3D_scr4e")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo17" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(-0.969965, -1.14413, 0.0116421, 2.87183e-09, 0.0152625, 1.49992, -1.14419, 0.969914, -0.00986939, 66.8936, -1.70392, 44.6186)
+material_override = SubResource("StandardMaterial3D_2wp0n")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo18" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(0.27976, -1.4736, 0.0149947, 2.70957e-09, 0.0152625, 1.49992, -1.47368, -0.279746, 0.00284657, 47.0854, -1.70392, 44.6186)
+material_override = SubResource("StandardMaterial3D_fuj8k")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo7" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(-0.775405, 1.28397, -0.0130651, 0, 0.0152625, 1.49992, 1.28404, 0.775365, -0.00788975, -51.6027, -1.70392, -85.8885)
+material_override = SubResource("StandardMaterial3D_cnp7m")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo8" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(-1.49538, -0.117578, 0.00119643, 1.58553e-09, 0.0152625, 1.49992, -0.117584, 1.49531, -0.0152155, -44.2486, -1.70392, -69.2694)
+material_override = SubResource("StandardMaterial3D_b7bjd")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo9" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(-1.04329, -1.0777, 0.0109662, 8.03842e-10, 0.0152625, 1.49992, -1.07775, 1.04323, -0.0106154, -54.0322, -1.70392, -53.0682)
+material_override = SubResource("StandardMaterial3D_fm87i")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo10" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(1.33839, -0.677238, 0.00689126, 2.87183e-09, 0.0152625, 1.49992, -0.677274, -1.33832, 0.0136182, -76.3182, -1.70392, -57.89)
+material_override = SubResource("StandardMaterial3D_foygg")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo11" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(1.48086, -0.238827, 0.00243019, 2.70957e-09, 0.0152625, 1.49992, -0.23884, -1.48079, 0.0150678, -81.5831, -1.70392, -72.936)
+material_override = SubResource("StandardMaterial3D_2m7d3")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo12" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(1.11689, 1.00123, -0.010188, 2.70957e-09, 0.0152625, 1.49992, 1.00128, -1.11683, 0.0113643, -71.3435, -1.70392, -89.8923)
+material_override = SubResource("StandardMaterial3D_lcnmy")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo19" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(-1.35443, -0.644575, 0.0065589, 0, 0.0152625, 1.49992, -0.644609, 1.35436, -0.0137813, 78.2713, -1.70392, -61.3862)
+material_override = SubResource("StandardMaterial3D_cnp7m")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo20" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(-0.0308902, -1.4996, 0.0152593, 1.69504e-09, 0.0152625, 1.49992, -1.49968, 0.0308884, -0.000314307, 62.461, -1.70392, -52.4244)
+material_override = SubResource("StandardMaterial3D_b7bjd")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo21" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(0.969285, -1.1447, 0.011648, 1.79153e-09, 0.0152625, 1.49992, -1.14476, -0.969235, 0.00986249, 45.3716, -1.70392, -60.5577)
+material_override = SubResource("StandardMaterial3D_fm87i")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo22" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(0.806324, 1.26478, -0.0128698, 2.87183e-09, 0.0152625, 1.49992, 1.26485, -0.806282, 0.00820436, 47.9656, -1.70392, -83.2114)
+material_override = SubResource("StandardMaterial3D_foygg")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo23" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(0.38413, 1.4499, -0.0147536, 2.58722e-09, 0.0152625, 1.49992, 1.44998, -0.38411, 0.00390852, 62.4171, -1.70392, -89.9386)
+material_override = SubResource("StandardMaterial3D_2m7d3")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo24" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(-0.885908, 1.21038, -0.0123162, 3.22966e-09, 0.0152625, 1.49992, 1.21044, 0.885863, -0.00901413, 80.3031, -1.70392, -81.4262)
+material_override = SubResource("StandardMaterial3D_lcnmy")
+mesh = ExtResource("3_g7dgp")
+
+[node name="icymountain" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(-0.0793658, 0, 7.7996, 0, 20, 0, -7.7996, 0, -0.0793658, 23.0936, -1.63217, -26.7971)
+material_override = SubResource("StandardMaterial3D_4r3jo")
+transparency = 0.2
+mesh = ExtResource("5_uf2dk")
+
+[node name="bear" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(-1.62139, 0, 1.17093, 0, 2, 0, -1.17093, 0, -1.62139, 12.4454, 0, 55.9837)
+mesh = ExtResource("6_wikdb")
+
+[node name="bear2" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(-1.62139, 0, 1.17093, 0, 2, 0, -1.17093, 0, -1.62139, 7.38761, 0, 55.9837)
+mesh = ExtResource("6_wikdb")
+
+[node name="bear3" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(-1.21604, 0, 0.878201, 0, 1.5, 0, -0.878201, 0, -1.21604, 7.38761, 0, 67.1313)
+mesh = ExtResource("6_wikdb")
+
+[node name="bear4" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(-1.21604, 0, 0.878201, 0, 1.5, 0, -0.878201, 0, -1.21604, 4.55899, 0, 67.1313)
+mesh = ExtResource("6_wikdb")
+
+[node name="bear5" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(-1.21604, 0, 0.878201, 0, 1.5, 0, -0.878201, 0, -1.21604, 2.5292, 0, 76.1453)
+mesh = ExtResource("6_wikdb")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.980615, 0.0702209, -0.182931, 0, 0.93358, 0.358368, 0.195946, 0.351421, -0.915483, 0, 29.448, 81)
+light_color = Color(0.581265, 0.775138, 1, 1)
+light_energy = 3.0
+light_angular_distance = 1.0
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_j4qcv")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 0)
+material_override = SubResource("StandardMaterial3D_uf2dk")
+mesh = SubResource("PlaneMesh_wwjle")
+
+[node name="igloo" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(1.5, 0, 0, 0, 0.0152625, 1.49992, 0, -1.49992, 0.0152625, -67.8123, -1.70392, -19.0318)
+material_override = SubResource("StandardMaterial3D_0uim4")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo2" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(0.672364, 1.3408, -0.0136433, 3.34954e-10, 0.0152625, 1.49992, 1.34087, -0.672329, 0.00684131, -57.3876, -1.70392, -32.7334)
+material_override = SubResource("StandardMaterial3D_6wuih")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo3" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(-0.38327, 1.45013, -0.0147559, 1.49844e-09, 0.0152625, 1.49992, 1.45021, 0.38325, -0.00389978, -38.4614, -1.70392, -35.4695)
+material_override = SubResource("StandardMaterial3D_2y1vq")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo4" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(-1.27163, -0.795548, 0.00809513, 2.27968e-09, 0.0152625, 1.49992, -0.795589, 1.27156, -0.0129388, -31.0686, -1.70392, -16.9119)
+material_override = SubResource("StandardMaterial3D_scr4e")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo5" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(-0.969965, -1.14413, 0.0116421, 2.87183e-09, 0.0152625, 1.49992, -1.14419, 0.969914, -0.00986939, -41.2267, -1.70392, -4.62718)
+material_override = SubResource("StandardMaterial3D_2wp0n")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo6" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(0.27976, -1.4736, 0.0149947, 2.70957e-09, 0.0152625, 1.49992, -1.47368, -0.279746, 0.00284657, -61.035, -1.70392, -4.62718)
+material_override = SubResource("StandardMaterial3D_fuj8k")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo25" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(0.237677, -1.48097, 0.0150697, 0, 0.0152625, 1.49992, -1.48105, -0.237664, 0.00241836, -52.5304, -1.70392, 70.9066)
+material_override = SubResource("StandardMaterial3D_0uim4")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo26" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(1.43046, -0.451385, 0.00459308, 1.58553e-09, 0.0152625, 1.49992, -0.451408, -1.43039, 0.014555, -64.4071, -1.70392, 58.4426)
+material_override = SubResource("StandardMaterial3D_6wuih")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo27" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(1.37116, 0.608184, -0.00618859, 8.03842e-10, 0.0152625, 1.49992, 0.608215, -1.37109, 0.0139515, -64.1098, -1.70392, 39.322)
+material_override = SubResource("StandardMaterial3D_2y1vq")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo28" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(-0.987029, 1.12944, -0.0114927, 2.87183e-09, 0.0152625, 1.49992, 1.1295, 0.986978, -0.010043, -44.6152, -1.70392, 34.963)
+material_override = SubResource("StandardMaterial3D_scr4e")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo29" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(-1.28343, 0.776372, -0.00790001, 2.70957e-09, 0.0152625, 1.49992, 0.776413, 1.28336, -0.0130589, -34.0952, -1.70392, 46.9393)
+material_override = SubResource("StandardMaterial3D_2wp0n")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo30" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(-1.41073, -0.509706, 0.00518654, 2.70957e-09, 0.0152625, 1.49992, -0.509732, 1.41066, -0.0143542, -37.2339, -1.70392, 66.4973)
+material_override = SubResource("StandardMaterial3D_fuj8k")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo13" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(1.5, 0, 0, 0, 0.0152625, 1.49992, 0, -1.49992, 0.0152625, 40.3081, -1.70392, 30.214)
+material_override = SubResource("StandardMaterial3D_0uim4")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo14" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(0.672364, 1.3408, -0.0136433, 3.34954e-10, 0.0152625, 1.49992, 1.34087, -0.672329, 0.00684131, 50.7328, -1.70392, 16.5124)
+material_override = SubResource("StandardMaterial3D_6wuih")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo15" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(-0.38327, 1.45013, -0.0147559, 1.49844e-09, 0.0152625, 1.49992, 1.45021, 0.38325, -0.00389978, 69.6589, -1.70392, 13.7763)
+material_override = SubResource("StandardMaterial3D_2y1vq")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo16" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(-1.27163, -0.795548, 0.00809513, 2.27968e-09, 0.0152625, 1.49992, -0.795589, 1.27156, -0.0129388, 77.0518, -1.70392, 32.3339)
+material_override = SubResource("StandardMaterial3D_scr4e")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo17" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(-0.969965, -1.14413, 0.0116421, 2.87183e-09, 0.0152625, 1.49992, -1.14419, 0.969914, -0.00986939, 66.8936, -1.70392, 44.6186)
+material_override = SubResource("StandardMaterial3D_2wp0n")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo18" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(0.27976, -1.4736, 0.0149947, 2.70957e-09, 0.0152625, 1.49992, -1.47368, -0.279746, 0.00284657, 47.0854, -1.70392, 44.6186)
+material_override = SubResource("StandardMaterial3D_fuj8k")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo7" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(-0.775405, 1.28397, -0.0130651, 0, 0.0152625, 1.49992, 1.28404, 0.775365, -0.00788975, -51.6027, -1.70392, -85.8885)
+material_override = SubResource("StandardMaterial3D_cnp7m")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo8" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(-1.49538, -0.117578, 0.00119643, 1.58553e-09, 0.0152625, 1.49992, -0.117584, 1.49531, -0.0152155, -44.2486, -1.70392, -69.2694)
+material_override = SubResource("StandardMaterial3D_b7bjd")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo9" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(-1.04329, -1.0777, 0.0109662, 8.03842e-10, 0.0152625, 1.49992, -1.07775, 1.04323, -0.0106154, -54.0322, -1.70392, -53.0682)
+material_override = SubResource("StandardMaterial3D_fm87i")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo10" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(1.33839, -0.677238, 0.00689126, 2.87183e-09, 0.0152625, 1.49992, -0.677274, -1.33832, 0.0136182, -76.3182, -1.70392, -57.89)
+material_override = SubResource("StandardMaterial3D_foygg")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo11" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(1.48086, -0.238827, 0.00243019, 2.70957e-09, 0.0152625, 1.49992, -0.23884, -1.48079, 0.0150678, -81.5831, -1.70392, -72.936)
+material_override = SubResource("StandardMaterial3D_2m7d3")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo12" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(1.11689, 1.00123, -0.010188, 2.70957e-09, 0.0152625, 1.49992, 1.00128, -1.11683, 0.0113643, -71.3435, -1.70392, -89.8923)
+material_override = SubResource("StandardMaterial3D_lcnmy")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo19" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(-1.35443, -0.644575, 0.0065589, 0, 0.0152625, 1.49992, -0.644609, 1.35436, -0.0137813, 78.2713, -1.70392, -61.3862)
+material_override = SubResource("StandardMaterial3D_cnp7m")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo20" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(-0.0308902, -1.4996, 0.0152593, 1.69504e-09, 0.0152625, 1.49992, -1.49968, 0.0308884, -0.000314307, 62.461, -1.70392, -52.4244)
+material_override = SubResource("StandardMaterial3D_b7bjd")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo21" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(0.969285, -1.1447, 0.011648, 1.79153e-09, 0.0152625, 1.49992, -1.14476, -0.969235, 0.00986249, 45.3716, -1.70392, -60.5577)
+material_override = SubResource("StandardMaterial3D_fm87i")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo22" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(0.806324, 1.26478, -0.0128698, 2.87183e-09, 0.0152625, 1.49992, 1.26485, -0.806282, 0.00820436, 47.9656, -1.70392, -83.2114)
+material_override = SubResource("StandardMaterial3D_foygg")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo23" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(0.38413, 1.4499, -0.0147536, 2.58722e-09, 0.0152625, 1.49992, 1.44998, -0.38411, 0.00390852, 62.4171, -1.70392, -89.9386)
+material_override = SubResource("StandardMaterial3D_2m7d3")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo24" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(-0.885908, 1.21038, -0.0123162, 3.22966e-09, 0.0152625, 1.49992, 1.21044, 0.885863, -0.00901413, 80.3031, -1.70392, -81.4262)
+material_override = SubResource("StandardMaterial3D_lcnmy")
+mesh = ExtResource("3_g7dgp")
+
+[node name="icymountain" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(-0.0793658, 0, 7.7996, 0, 20, 0, -7.7996, 0, -0.0793658, 23.0936, -1.63217, -26.7971)
+material_override = SubResource("StandardMaterial3D_4r3jo")
+transparency = 0.2
+mesh = ExtResource("5_uf2dk")
+
+[node name="bear" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(-1.62139, 0, 1.17093, 0, 2, 0, -1.17093, 0, -1.62139, 12.4454, 0, 55.9837)
+mesh = ExtResource("6_wikdb")
+
+[node name="bear2" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(-1.62139, 0, 1.17093, 0, 2, 0, -1.17093, 0, -1.62139, 7.38761, 0, 55.9837)
+mesh = ExtResource("6_wikdb")
+
+[node name="bear3" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(-1.21604, 0, 0.878201, 0, 1.5, 0, -0.878201, 0, -1.21604, 7.38761, 0, 67.1313)
+mesh = ExtResource("6_wikdb")
+
+[node name="bear4" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(-1.21604, 0, 0.878201, 0, 1.5, 0, -0.878201, 0, -1.21604, 4.55899, 0, 67.1313)
+mesh = ExtResource("6_wikdb")
+
+[node name="bear5" type="MeshInstance3D" parent="MeshInstance3D3"]
+transform = Transform3D(-1.21604, 0, 0.878201, 0, 1.5, 0, -0.878201, 0, -1.21604, 2.5292, 0, 76.1453)
+mesh = ExtResource("6_wikdb")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 200, 0, 200)
+material_override = SubResource("StandardMaterial3D_wikdb")
+mesh = SubResource("PlaneMesh_wwjle")
+
+[node name="igloo" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(1.5, 0, 0, 0, 0.0152625, 1.49992, 0, -1.49992, 0.0152625, -67.8123, -1.70392, -19.0318)
+material_override = SubResource("StandardMaterial3D_0uim4")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo2" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(0.672364, 1.3408, -0.0136433, 3.34954e-10, 0.0152625, 1.49992, 1.34087, -0.672329, 0.00684131, -57.3876, -1.70392, -32.7334)
+material_override = SubResource("StandardMaterial3D_6wuih")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo3" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(-0.38327, 1.45013, -0.0147559, 1.49844e-09, 0.0152625, 1.49992, 1.45021, 0.38325, -0.00389978, -38.4614, -1.70392, -35.4695)
+material_override = SubResource("StandardMaterial3D_2y1vq")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo4" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(-1.27163, -0.795548, 0.00809513, 2.27968e-09, 0.0152625, 1.49992, -0.795589, 1.27156, -0.0129388, -31.0686, -1.70392, -16.9119)
+material_override = SubResource("StandardMaterial3D_scr4e")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo5" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(-0.969965, -1.14413, 0.0116421, 2.87183e-09, 0.0152625, 1.49992, -1.14419, 0.969914, -0.00986939, -41.2267, -1.70392, -4.62718)
+material_override = SubResource("StandardMaterial3D_2wp0n")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo6" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(0.27976, -1.4736, 0.0149947, 2.70957e-09, 0.0152625, 1.49992, -1.47368, -0.279746, 0.00284657, -61.035, -1.70392, -4.62718)
+material_override = SubResource("StandardMaterial3D_fuj8k")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo25" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(0.237677, -1.48097, 0.0150697, 0, 0.0152625, 1.49992, -1.48105, -0.237664, 0.00241836, -52.5304, -1.70392, 70.9066)
+material_override = SubResource("StandardMaterial3D_0uim4")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo26" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(1.43046, -0.451385, 0.00459308, 1.58553e-09, 0.0152625, 1.49992, -0.451408, -1.43039, 0.014555, -64.4071, -1.70392, 58.4426)
+material_override = SubResource("StandardMaterial3D_6wuih")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo27" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(1.37116, 0.608184, -0.00618859, 8.03842e-10, 0.0152625, 1.49992, 0.608215, -1.37109, 0.0139515, -64.1098, -1.70392, 39.322)
+material_override = SubResource("StandardMaterial3D_2y1vq")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo28" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(-0.987029, 1.12944, -0.0114927, 2.87183e-09, 0.0152625, 1.49992, 1.1295, 0.986978, -0.010043, -44.6152, -1.70392, 34.963)
+material_override = SubResource("StandardMaterial3D_scr4e")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo29" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(-1.28343, 0.776372, -0.00790001, 2.70957e-09, 0.0152625, 1.49992, 0.776413, 1.28336, -0.0130589, -34.0952, -1.70392, 46.9393)
+material_override = SubResource("StandardMaterial3D_2wp0n")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo30" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(-1.41073, -0.509706, 0.00518654, 2.70957e-09, 0.0152625, 1.49992, -0.509732, 1.41066, -0.0143542, -37.2339, -1.70392, 66.4973)
+material_override = SubResource("StandardMaterial3D_fuj8k")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo13" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(1.5, 0, 0, 0, 0.0152625, 1.49992, 0, -1.49992, 0.0152625, 40.3081, -1.70392, 30.214)
+material_override = SubResource("StandardMaterial3D_0uim4")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo14" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(0.672364, 1.3408, -0.0136433, 3.34954e-10, 0.0152625, 1.49992, 1.34087, -0.672329, 0.00684131, 50.7328, -1.70392, 16.5124)
+material_override = SubResource("StandardMaterial3D_6wuih")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo15" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(-0.38327, 1.45013, -0.0147559, 1.49844e-09, 0.0152625, 1.49992, 1.45021, 0.38325, -0.00389978, 69.6589, -1.70392, 13.7763)
+material_override = SubResource("StandardMaterial3D_2y1vq")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo16" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(-1.27163, -0.795548, 0.00809513, 2.27968e-09, 0.0152625, 1.49992, -0.795589, 1.27156, -0.0129388, 77.0518, -1.70392, 32.3339)
+material_override = SubResource("StandardMaterial3D_scr4e")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo17" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(-0.969965, -1.14413, 0.0116421, 2.87183e-09, 0.0152625, 1.49992, -1.14419, 0.969914, -0.00986939, 66.8936, -1.70392, 44.6186)
+material_override = SubResource("StandardMaterial3D_2wp0n")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo18" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(0.27976, -1.4736, 0.0149947, 2.70957e-09, 0.0152625, 1.49992, -1.47368, -0.279746, 0.00284657, 47.0854, -1.70392, 44.6186)
+material_override = SubResource("StandardMaterial3D_fuj8k")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo7" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(-0.775405, 1.28397, -0.0130651, 0, 0.0152625, 1.49992, 1.28404, 0.775365, -0.00788975, -51.6027, -1.70392, -85.8885)
+material_override = SubResource("StandardMaterial3D_cnp7m")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo8" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(-1.49538, -0.117578, 0.00119643, 1.58553e-09, 0.0152625, 1.49992, -0.117584, 1.49531, -0.0152155, -44.2486, -1.70392, -69.2694)
+material_override = SubResource("StandardMaterial3D_b7bjd")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo9" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(-1.04329, -1.0777, 0.0109662, 8.03842e-10, 0.0152625, 1.49992, -1.07775, 1.04323, -0.0106154, -54.0322, -1.70392, -53.0682)
+material_override = SubResource("StandardMaterial3D_fm87i")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo10" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(1.33839, -0.677238, 0.00689126, 2.87183e-09, 0.0152625, 1.49992, -0.677274, -1.33832, 0.0136182, -76.3182, -1.70392, -57.89)
+material_override = SubResource("StandardMaterial3D_foygg")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo11" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(1.48086, -0.238827, 0.00243019, 2.70957e-09, 0.0152625, 1.49992, -0.23884, -1.48079, 0.0150678, -81.5831, -1.70392, -72.936)
+material_override = SubResource("StandardMaterial3D_2m7d3")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo12" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(1.11689, 1.00123, -0.010188, 2.70957e-09, 0.0152625, 1.49992, 1.00128, -1.11683, 0.0113643, -71.3435, -1.70392, -89.8923)
+material_override = SubResource("StandardMaterial3D_lcnmy")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo19" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(-1.35443, -0.644575, 0.0065589, 0, 0.0152625, 1.49992, -0.644609, 1.35436, -0.0137813, 78.2713, -1.70392, -61.3862)
+material_override = SubResource("StandardMaterial3D_cnp7m")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo20" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(-0.0308902, -1.4996, 0.0152593, 1.69504e-09, 0.0152625, 1.49992, -1.49968, 0.0308884, -0.000314307, 62.461, -1.70392, -52.4244)
+material_override = SubResource("StandardMaterial3D_b7bjd")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo21" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(0.969285, -1.1447, 0.011648, 1.79153e-09, 0.0152625, 1.49992, -1.14476, -0.969235, 0.00986249, 45.3716, -1.70392, -60.5577)
+material_override = SubResource("StandardMaterial3D_fm87i")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo22" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(0.806324, 1.26478, -0.0128698, 2.87183e-09, 0.0152625, 1.49992, 1.26485, -0.806282, 0.00820436, 47.9656, -1.70392, -83.2114)
+material_override = SubResource("StandardMaterial3D_foygg")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo23" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(0.38413, 1.4499, -0.0147536, 2.58722e-09, 0.0152625, 1.49992, 1.44998, -0.38411, 0.00390852, 62.4171, -1.70392, -89.9386)
+material_override = SubResource("StandardMaterial3D_2m7d3")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo24" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(-0.885908, 1.21038, -0.0123162, 3.22966e-09, 0.0152625, 1.49992, 1.21044, 0.885863, -0.00901413, 80.3031, -1.70392, -81.4262)
+material_override = SubResource("StandardMaterial3D_lcnmy")
+mesh = ExtResource("3_g7dgp")
+
+[node name="icymountain" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(-0.0793658, 0, 7.7996, 0, 20, 0, -7.7996, 0, -0.0793658, 23.0936, -1.63217, -26.7971)
+material_override = SubResource("StandardMaterial3D_4r3jo")
+transparency = 0.2
+mesh = ExtResource("5_uf2dk")
+
+[node name="bear" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(-1.62139, 0, 1.17093, 0, 2, 0, -1.17093, 0, -1.62139, 12.4454, 0, 55.9837)
+mesh = ExtResource("6_wikdb")
+
+[node name="bear2" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(-1.62139, 0, 1.17093, 0, 2, 0, -1.17093, 0, -1.62139, 7.38761, 0, 55.9837)
+mesh = ExtResource("6_wikdb")
+
+[node name="bear3" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(-1.21604, 0, 0.878201, 0, 1.5, 0, -0.878201, 0, -1.21604, 7.38761, 0, 67.1313)
+mesh = ExtResource("6_wikdb")
+
+[node name="bear4" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(-1.21604, 0, 0.878201, 0, 1.5, 0, -0.878201, 0, -1.21604, 4.55899, 0, 67.1313)
+mesh = ExtResource("6_wikdb")
+
+[node name="bear5" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(-1.21604, 0, 0.878201, 0, 1.5, 0, -0.878201, 0, -1.21604, 2.5292, 0, 76.1453)
+mesh = ExtResource("6_wikdb")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -200, 0, 0)
+material_override = SubResource("StandardMaterial3D_uer4t")
+mesh = SubResource("PlaneMesh_wwjle")
+
+[node name="igloo" type="MeshInstance3D" parent="MeshInstance3D5"]
+transform = Transform3D(1.5, 0, 0, 0, 0.0152625, 1.49992, 0, -1.49992, 0.0152625, -67.8123, -1.70392, -19.0318)
+material_override = SubResource("StandardMaterial3D_0uim4")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo2" type="MeshInstance3D" parent="MeshInstance3D5"]
+transform = Transform3D(0.672364, 1.3408, -0.0136433, 3.34954e-10, 0.0152625, 1.49992, 1.34087, -0.672329, 0.00684131, -57.3876, -1.70392, -32.7334)
+material_override = SubResource("StandardMaterial3D_6wuih")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo3" type="MeshInstance3D" parent="MeshInstance3D5"]
+transform = Transform3D(-0.38327, 1.45013, -0.0147559, 1.49844e-09, 0.0152625, 1.49992, 1.45021, 0.38325, -0.00389978, -38.4614, -1.70392, -35.4695)
+material_override = SubResource("StandardMaterial3D_2y1vq")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo4" type="MeshInstance3D" parent="MeshInstance3D5"]
+transform = Transform3D(-1.27163, -0.795548, 0.00809513, 2.27968e-09, 0.0152625, 1.49992, -0.795589, 1.27156, -0.0129388, -31.0686, -1.70392, -16.9119)
+material_override = SubResource("StandardMaterial3D_scr4e")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo5" type="MeshInstance3D" parent="MeshInstance3D5"]
+transform = Transform3D(-0.969965, -1.14413, 0.0116421, 2.87183e-09, 0.0152625, 1.49992, -1.14419, 0.969914, -0.00986939, -41.2267, -1.70392, -4.62718)
+material_override = SubResource("StandardMaterial3D_2wp0n")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo6" type="MeshInstance3D" parent="MeshInstance3D5"]
+transform = Transform3D(0.27976, -1.4736, 0.0149947, 2.70957e-09, 0.0152625, 1.49992, -1.47368, -0.279746, 0.00284657, -61.035, -1.70392, -4.62718)
+material_override = SubResource("StandardMaterial3D_fuj8k")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo25" type="MeshInstance3D" parent="MeshInstance3D5"]
+transform = Transform3D(0.237677, -1.48097, 0.0150697, 0, 0.0152625, 1.49992, -1.48105, -0.237664, 0.00241836, -52.5304, -1.70392, 70.9066)
+material_override = SubResource("StandardMaterial3D_0uim4")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo26" type="MeshInstance3D" parent="MeshInstance3D5"]
+transform = Transform3D(1.43046, -0.451385, 0.00459308, 1.58553e-09, 0.0152625, 1.49992, -0.451408, -1.43039, 0.014555, -64.4071, -1.70392, 58.4426)
+material_override = SubResource("StandardMaterial3D_6wuih")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo27" type="MeshInstance3D" parent="MeshInstance3D5"]
+transform = Transform3D(1.37116, 0.608184, -0.00618859, 8.03842e-10, 0.0152625, 1.49992, 0.608215, -1.37109, 0.0139515, -64.1098, -1.70392, 39.322)
+material_override = SubResource("StandardMaterial3D_2y1vq")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo28" type="MeshInstance3D" parent="MeshInstance3D5"]
+transform = Transform3D(-0.987029, 1.12944, -0.0114927, 2.87183e-09, 0.0152625, 1.49992, 1.1295, 0.986978, -0.010043, -44.6152, -1.70392, 34.963)
+material_override = SubResource("StandardMaterial3D_scr4e")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo29" type="MeshInstance3D" parent="MeshInstance3D5"]
+transform = Transform3D(-1.28343, 0.776372, -0.00790001, 2.70957e-09, 0.0152625, 1.49992, 0.776413, 1.28336, -0.0130589, -34.0952, -1.70392, 46.9393)
+material_override = SubResource("StandardMaterial3D_2wp0n")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo30" type="MeshInstance3D" parent="MeshInstance3D5"]
+transform = Transform3D(-1.41073, -0.509706, 0.00518654, 2.70957e-09, 0.0152625, 1.49992, -0.509732, 1.41066, -0.0143542, -37.2339, -1.70392, 66.4973)
+material_override = SubResource("StandardMaterial3D_fuj8k")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo13" type="MeshInstance3D" parent="MeshInstance3D5"]
+transform = Transform3D(1.5, 0, 0, 0, 0.0152625, 1.49992, 0, -1.49992, 0.0152625, 40.3081, -1.70392, 30.214)
+material_override = SubResource("StandardMaterial3D_0uim4")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo14" type="MeshInstance3D" parent="MeshInstance3D5"]
+transform = Transform3D(0.672364, 1.3408, -0.0136433, 3.34954e-10, 0.0152625, 1.49992, 1.34087, -0.672329, 0.00684131, 50.7328, -1.70392, 16.5124)
+material_override = SubResource("StandardMaterial3D_6wuih")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo15" type="MeshInstance3D" parent="MeshInstance3D5"]
+transform = Transform3D(-0.38327, 1.45013, -0.0147559, 1.49844e-09, 0.0152625, 1.49992, 1.45021, 0.38325, -0.00389978, 69.6589, -1.70392, 13.7763)
+material_override = SubResource("StandardMaterial3D_2y1vq")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo16" type="MeshInstance3D" parent="MeshInstance3D5"]
+transform = Transform3D(-1.27163, -0.795548, 0.00809513, 2.27968e-09, 0.0152625, 1.49992, -0.795589, 1.27156, -0.0129388, 77.0518, -1.70392, 32.3339)
+material_override = SubResource("StandardMaterial3D_scr4e")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo17" type="MeshInstance3D" parent="MeshInstance3D5"]
+transform = Transform3D(-0.969965, -1.14413, 0.0116421, 2.87183e-09, 0.0152625, 1.49992, -1.14419, 0.969914, -0.00986939, 66.8936, -1.70392, 44.6186)
+material_override = SubResource("StandardMaterial3D_2wp0n")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo18" type="MeshInstance3D" parent="MeshInstance3D5"]
+transform = Transform3D(0.27976, -1.4736, 0.0149947, 2.70957e-09, 0.0152625, 1.49992, -1.47368, -0.279746, 0.00284657, 47.0854, -1.70392, 44.6186)
+material_override = SubResource("StandardMaterial3D_fuj8k")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo7" type="MeshInstance3D" parent="MeshInstance3D5"]
+transform = Transform3D(-0.775405, 1.28397, -0.0130651, 0, 0.0152625, 1.49992, 1.28404, 0.775365, -0.00788975, -51.6027, -1.70392, -85.8885)
+material_override = SubResource("StandardMaterial3D_cnp7m")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo8" type="MeshInstance3D" parent="MeshInstance3D5"]
+transform = Transform3D(-1.49538, -0.117578, 0.00119643, 1.58553e-09, 0.0152625, 1.49992, -0.117584, 1.49531, -0.0152155, -44.2486, -1.70392, -69.2694)
+material_override = SubResource("StandardMaterial3D_b7bjd")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo9" type="MeshInstance3D" parent="MeshInstance3D5"]
+transform = Transform3D(-1.04329, -1.0777, 0.0109662, 8.03842e-10, 0.0152625, 1.49992, -1.07775, 1.04323, -0.0106154, -54.0322, -1.70392, -53.0682)
+material_override = SubResource("StandardMaterial3D_fm87i")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo10" type="MeshInstance3D" parent="MeshInstance3D5"]
+transform = Transform3D(1.33839, -0.677238, 0.00689126, 2.87183e-09, 0.0152625, 1.49992, -0.677274, -1.33832, 0.0136182, -76.3182, -1.70392, -57.89)
+material_override = SubResource("StandardMaterial3D_foygg")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo11" type="MeshInstance3D" parent="MeshInstance3D5"]
+transform = Transform3D(1.48086, -0.238827, 0.00243019, 2.70957e-09, 0.0152625, 1.49992, -0.23884, -1.48079, 0.0150678, -81.5831, -1.70392, -72.936)
+material_override = SubResource("StandardMaterial3D_2m7d3")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo12" type="MeshInstance3D" parent="MeshInstance3D5"]
+transform = Transform3D(1.11689, 1.00123, -0.010188, 2.70957e-09, 0.0152625, 1.49992, 1.00128, -1.11683, 0.0113643, -71.3435, -1.70392, -89.8923)
+material_override = SubResource("StandardMaterial3D_lcnmy")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo19" type="MeshInstance3D" parent="MeshInstance3D5"]
+transform = Transform3D(-1.35443, -0.644575, 0.0065589, 0, 0.0152625, 1.49992, -0.644609, 1.35436, -0.0137813, 78.2713, -1.70392, -61.3862)
+material_override = SubResource("StandardMaterial3D_cnp7m")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo20" type="MeshInstance3D" parent="MeshInstance3D5"]
+transform = Transform3D(-0.0308902, -1.4996, 0.0152593, 1.69504e-09, 0.0152625, 1.49992, -1.49968, 0.0308884, -0.000314307, 62.461, -1.70392, -52.4244)
+material_override = SubResource("StandardMaterial3D_b7bjd")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo21" type="MeshInstance3D" parent="MeshInstance3D5"]
+transform = Transform3D(0.969285, -1.1447, 0.011648, 1.79153e-09, 0.0152625, 1.49992, -1.14476, -0.969235, 0.00986249, 45.3716, -1.70392, -60.5577)
+material_override = SubResource("StandardMaterial3D_fm87i")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo22" type="MeshInstance3D" parent="MeshInstance3D5"]
+transform = Transform3D(0.806324, 1.26478, -0.0128698, 2.87183e-09, 0.0152625, 1.49992, 1.26485, -0.806282, 0.00820436, 47.9656, -1.70392, -83.2114)
+material_override = SubResource("StandardMaterial3D_foygg")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo23" type="MeshInstance3D" parent="MeshInstance3D5"]
+transform = Transform3D(0.38413, 1.4499, -0.0147536, 2.58722e-09, 0.0152625, 1.49992, 1.44998, -0.38411, 0.00390852, 62.4171, -1.70392, -89.9386)
+material_override = SubResource("StandardMaterial3D_2m7d3")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo24" type="MeshInstance3D" parent="MeshInstance3D5"]
+transform = Transform3D(-0.885908, 1.21038, -0.0123162, 3.22966e-09, 0.0152625, 1.49992, 1.21044, 0.885863, -0.00901413, 80.3031, -1.70392, -81.4262)
+material_override = SubResource("StandardMaterial3D_lcnmy")
+mesh = ExtResource("3_g7dgp")
+
+[node name="icymountain" type="MeshInstance3D" parent="MeshInstance3D5"]
+transform = Transform3D(-0.0793658, 0, 7.7996, 0, 20, 0, -7.7996, 0, -0.0793658, 23.0936, -1.63217, -26.7971)
+material_override = SubResource("StandardMaterial3D_4r3jo")
+transparency = 0.2
+mesh = ExtResource("5_uf2dk")
+
+[node name="bear" type="MeshInstance3D" parent="MeshInstance3D5"]
+transform = Transform3D(-1.62139, 0, 1.17093, 0, 2, 0, -1.17093, 0, -1.62139, 12.4454, 0, 55.9837)
+mesh = ExtResource("6_wikdb")
+
+[node name="bear2" type="MeshInstance3D" parent="MeshInstance3D5"]
+transform = Transform3D(-1.62139, 0, 1.17093, 0, 2, 0, -1.17093, 0, -1.62139, 7.38761, 0, 55.9837)
+mesh = ExtResource("6_wikdb")
+
+[node name="bear3" type="MeshInstance3D" parent="MeshInstance3D5"]
+transform = Transform3D(-1.21604, 0, 0.878201, 0, 1.5, 0, -0.878201, 0, -1.21604, 7.38761, 0, 67.1313)
+mesh = ExtResource("6_wikdb")
+
+[node name="bear4" type="MeshInstance3D" parent="MeshInstance3D5"]
+transform = Transform3D(-1.21604, 0, 0.878201, 0, 1.5, 0, -0.878201, 0, -1.21604, 4.55899, 0, 67.1313)
+mesh = ExtResource("6_wikdb")
+
+[node name="bear5" type="MeshInstance3D" parent="MeshInstance3D5"]
+transform = Transform3D(-1.21604, 0, 0.878201, 0, 1.5, 0, -0.878201, 0, -1.21604, 2.5292, 0, 76.1453)
+mesh = ExtResource("6_wikdb")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -200, 0, 200)
+material_override = SubResource("StandardMaterial3D_wwjle")
+mesh = SubResource("PlaneMesh_wwjle")
+
+[node name="igloo" type="MeshInstance3D" parent="MeshInstance3D6"]
+transform = Transform3D(1.5, 0, 0, 0, 0.0152625, 1.49992, 0, -1.49992, 0.0152625, -67.8123, -1.70392, -19.0318)
+material_override = SubResource("StandardMaterial3D_0uim4")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo2" type="MeshInstance3D" parent="MeshInstance3D6"]
+transform = Transform3D(0.672364, 1.3408, -0.0136433, 3.34954e-10, 0.0152625, 1.49992, 1.34087, -0.672329, 0.00684131, -57.3876, -1.70392, -32.7334)
+material_override = SubResource("StandardMaterial3D_6wuih")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo3" type="MeshInstance3D" parent="MeshInstance3D6"]
+transform = Transform3D(-0.38327, 1.45013, -0.0147559, 1.49844e-09, 0.0152625, 1.49992, 1.45021, 0.38325, -0.00389978, -38.4614, -1.70392, -35.4695)
+material_override = SubResource("StandardMaterial3D_2y1vq")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo4" type="MeshInstance3D" parent="MeshInstance3D6"]
+transform = Transform3D(-1.27163, -0.795548, 0.00809513, 2.27968e-09, 0.0152625, 1.49992, -0.795589, 1.27156, -0.0129388, -31.0686, -1.70392, -16.9119)
+material_override = SubResource("StandardMaterial3D_scr4e")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo5" type="MeshInstance3D" parent="MeshInstance3D6"]
+transform = Transform3D(-0.969965, -1.14413, 0.0116421, 2.87183e-09, 0.0152625, 1.49992, -1.14419, 0.969914, -0.00986939, -41.2267, -1.70392, -4.62718)
+material_override = SubResource("StandardMaterial3D_2wp0n")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo6" type="MeshInstance3D" parent="MeshInstance3D6"]
+transform = Transform3D(0.27976, -1.4736, 0.0149947, 2.70957e-09, 0.0152625, 1.49992, -1.47368, -0.279746, 0.00284657, -61.035, -1.70392, -4.62718)
+material_override = SubResource("StandardMaterial3D_fuj8k")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo25" type="MeshInstance3D" parent="MeshInstance3D6"]
+transform = Transform3D(0.237677, -1.48097, 0.0150697, 0, 0.0152625, 1.49992, -1.48105, -0.237664, 0.00241836, -52.5304, -1.70392, 70.9066)
+material_override = SubResource("StandardMaterial3D_0uim4")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo26" type="MeshInstance3D" parent="MeshInstance3D6"]
+transform = Transform3D(1.43046, -0.451385, 0.00459308, 1.58553e-09, 0.0152625, 1.49992, -0.451408, -1.43039, 0.014555, -64.4071, -1.70392, 58.4426)
+material_override = SubResource("StandardMaterial3D_6wuih")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo27" type="MeshInstance3D" parent="MeshInstance3D6"]
+transform = Transform3D(1.37116, 0.608184, -0.00618859, 8.03842e-10, 0.0152625, 1.49992, 0.608215, -1.37109, 0.0139515, -64.1098, -1.70392, 39.322)
+material_override = SubResource("StandardMaterial3D_2y1vq")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo28" type="MeshInstance3D" parent="MeshInstance3D6"]
+transform = Transform3D(-0.987029, 1.12944, -0.0114927, 2.87183e-09, 0.0152625, 1.49992, 1.1295, 0.986978, -0.010043, -44.6152, -1.70392, 34.963)
+material_override = SubResource("StandardMaterial3D_scr4e")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo29" type="MeshInstance3D" parent="MeshInstance3D6"]
+transform = Transform3D(-1.28343, 0.776372, -0.00790001, 2.70957e-09, 0.0152625, 1.49992, 0.776413, 1.28336, -0.0130589, -34.0952, -1.70392, 46.9393)
+material_override = SubResource("StandardMaterial3D_2wp0n")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo30" type="MeshInstance3D" parent="MeshInstance3D6"]
+transform = Transform3D(-1.41073, -0.509706, 0.00518654, 2.70957e-09, 0.0152625, 1.49992, -0.509732, 1.41066, -0.0143542, -37.2339, -1.70392, 66.4973)
+material_override = SubResource("StandardMaterial3D_fuj8k")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo13" type="MeshInstance3D" parent="MeshInstance3D6"]
+transform = Transform3D(1.5, 0, 0, 0, 0.0152625, 1.49992, 0, -1.49992, 0.0152625, 40.3081, -1.70392, 30.214)
+material_override = SubResource("StandardMaterial3D_0uim4")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo14" type="MeshInstance3D" parent="MeshInstance3D6"]
+transform = Transform3D(0.672364, 1.3408, -0.0136433, 3.34954e-10, 0.0152625, 1.49992, 1.34087, -0.672329, 0.00684131, 50.7328, -1.70392, 16.5124)
+material_override = SubResource("StandardMaterial3D_6wuih")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo15" type="MeshInstance3D" parent="MeshInstance3D6"]
+transform = Transform3D(-0.38327, 1.45013, -0.0147559, 1.49844e-09, 0.0152625, 1.49992, 1.45021, 0.38325, -0.00389978, 69.6589, -1.70392, 13.7763)
+material_override = SubResource("StandardMaterial3D_2y1vq")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo16" type="MeshInstance3D" parent="MeshInstance3D6"]
+transform = Transform3D(-1.27163, -0.795548, 0.00809513, 2.27968e-09, 0.0152625, 1.49992, -0.795589, 1.27156, -0.0129388, 77.0518, -1.70392, 32.3339)
+material_override = SubResource("StandardMaterial3D_scr4e")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo17" type="MeshInstance3D" parent="MeshInstance3D6"]
+transform = Transform3D(-0.969965, -1.14413, 0.0116421, 2.87183e-09, 0.0152625, 1.49992, -1.14419, 0.969914, -0.00986939, 66.8936, -1.70392, 44.6186)
+material_override = SubResource("StandardMaterial3D_2wp0n")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo18" type="MeshInstance3D" parent="MeshInstance3D6"]
+transform = Transform3D(0.27976, -1.4736, 0.0149947, 2.70957e-09, 0.0152625, 1.49992, -1.47368, -0.279746, 0.00284657, 47.0854, -1.70392, 44.6186)
+material_override = SubResource("StandardMaterial3D_fuj8k")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo7" type="MeshInstance3D" parent="MeshInstance3D6"]
+transform = Transform3D(-0.775405, 1.28397, -0.0130651, 0, 0.0152625, 1.49992, 1.28404, 0.775365, -0.00788975, -51.6027, -1.70392, -85.8885)
+material_override = SubResource("StandardMaterial3D_cnp7m")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo8" type="MeshInstance3D" parent="MeshInstance3D6"]
+transform = Transform3D(-1.49538, -0.117578, 0.00119643, 1.58553e-09, 0.0152625, 1.49992, -0.117584, 1.49531, -0.0152155, -44.2486, -1.70392, -69.2694)
+material_override = SubResource("StandardMaterial3D_b7bjd")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo9" type="MeshInstance3D" parent="MeshInstance3D6"]
+transform = Transform3D(-1.04329, -1.0777, 0.0109662, 8.03842e-10, 0.0152625, 1.49992, -1.07775, 1.04323, -0.0106154, -54.0322, -1.70392, -53.0682)
+material_override = SubResource("StandardMaterial3D_fm87i")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo10" type="MeshInstance3D" parent="MeshInstance3D6"]
+transform = Transform3D(1.33839, -0.677238, 0.00689126, 2.87183e-09, 0.0152625, 1.49992, -0.677274, -1.33832, 0.0136182, -76.3182, -1.70392, -57.89)
+material_override = SubResource("StandardMaterial3D_foygg")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo11" type="MeshInstance3D" parent="MeshInstance3D6"]
+transform = Transform3D(1.48086, -0.238827, 0.00243019, 2.70957e-09, 0.0152625, 1.49992, -0.23884, -1.48079, 0.0150678, -81.5831, -1.70392, -72.936)
+material_override = SubResource("StandardMaterial3D_2m7d3")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo12" type="MeshInstance3D" parent="MeshInstance3D6"]
+transform = Transform3D(1.11689, 1.00123, -0.010188, 2.70957e-09, 0.0152625, 1.49992, 1.00128, -1.11683, 0.0113643, -71.3435, -1.70392, -89.8923)
+material_override = SubResource("StandardMaterial3D_lcnmy")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo19" type="MeshInstance3D" parent="MeshInstance3D6"]
+transform = Transform3D(-1.35443, -0.644575, 0.0065589, 0, 0.0152625, 1.49992, -0.644609, 1.35436, -0.0137813, 78.2713, -1.70392, -61.3862)
+material_override = SubResource("StandardMaterial3D_cnp7m")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo20" type="MeshInstance3D" parent="MeshInstance3D6"]
+transform = Transform3D(-0.0308902, -1.4996, 0.0152593, 1.69504e-09, 0.0152625, 1.49992, -1.49968, 0.0308884, -0.000314307, 62.461, -1.70392, -52.4244)
+material_override = SubResource("StandardMaterial3D_b7bjd")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo21" type="MeshInstance3D" parent="MeshInstance3D6"]
+transform = Transform3D(0.969285, -1.1447, 0.011648, 1.79153e-09, 0.0152625, 1.49992, -1.14476, -0.969235, 0.00986249, 45.3716, -1.70392, -60.5577)
+material_override = SubResource("StandardMaterial3D_fm87i")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo22" type="MeshInstance3D" parent="MeshInstance3D6"]
+transform = Transform3D(0.806324, 1.26478, -0.0128698, 2.87183e-09, 0.0152625, 1.49992, 1.26485, -0.806282, 0.00820436, 47.9656, -1.70392, -83.2114)
+material_override = SubResource("StandardMaterial3D_foygg")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo23" type="MeshInstance3D" parent="MeshInstance3D6"]
+transform = Transform3D(0.38413, 1.4499, -0.0147536, 2.58722e-09, 0.0152625, 1.49992, 1.44998, -0.38411, 0.00390852, 62.4171, -1.70392, -89.9386)
+material_override = SubResource("StandardMaterial3D_2m7d3")
+mesh = ExtResource("3_g7dgp")
+
+[node name="igloo24" type="MeshInstance3D" parent="MeshInstance3D6"]
+transform = Transform3D(-0.885908, 1.21038, -0.0123162, 3.22966e-09, 0.0152625, 1.49992, 1.21044, 0.885863, -0.00901413, 80.3031, -1.70392, -81.4262)
+material_override = SubResource("StandardMaterial3D_lcnmy")
+mesh = ExtResource("3_g7dgp")
+
+[node name="icymountain" type="MeshInstance3D" parent="MeshInstance3D6"]
+transform = Transform3D(-0.0793658, 0, 7.7996, 0, 20, 0, -7.7996, 0, -0.0793658, 23.0936, -1.63217, -26.7971)
+material_override = SubResource("StandardMaterial3D_4r3jo")
+transparency = 0.2
+mesh = ExtResource("5_uf2dk")
+
+[node name="bear" type="MeshInstance3D" parent="MeshInstance3D6"]
+transform = Transform3D(-1.62139, 0, 1.17093, 0, 2, 0, -1.17093, 0, -1.62139, 12.4454, 0, 55.9837)
+mesh = ExtResource("6_wikdb")
+
+[node name="bear2" type="MeshInstance3D" parent="MeshInstance3D6"]
+transform = Transform3D(-1.62139, 0, 1.17093, 0, 2, 0, -1.17093, 0, -1.62139, 7.38761, 0, 55.9837)
+mesh = ExtResource("6_wikdb")
+
+[node name="bear3" type="MeshInstance3D" parent="MeshInstance3D6"]
+transform = Transform3D(-1.21604, 0, 0.878201, 0, 1.5, 0, -0.878201, 0, -1.21604, 7.38761, 0, 67.1313)
+mesh = ExtResource("6_wikdb")
+
+[node name="bear4" type="MeshInstance3D" parent="MeshInstance3D6"]
+transform = Transform3D(-1.21604, 0, 0.878201, 0, 1.5, 0, -0.878201, 0, -1.21604, 4.55899, 0, 67.1313)
+mesh = ExtResource("6_wikdb")
+
+[node name="bear5" type="MeshInstance3D" parent="MeshInstance3D6"]
+transform = Transform3D(-1.21604, 0, 0.878201, 0, 1.5, 0, -0.878201, 0, -1.21604, 2.5292, 0, 76.1453)
+mesh = ExtResource("6_wikdb")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 116, 11, 91)
+amount = 700
+lifetime = 5.0
+randomness = 0.5
+process_material = SubResource("ParticleProcessMaterial_wikdb")
+draw_pass_1 = SubResource("QuadMesh_f7gus")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -136, 19, 81)
+amount = 700
+lifetime = 5.0
+randomness = 0.5
+process_material = SubResource("ParticleProcessMaterial_wikdb")
+draw_pass_1 = SubResource("QuadMesh_f7gus")
