@@ -4,15 +4,29 @@ class_name PlayerControler
 @export var speed = 200
 @export var focus = 0.7
 
+
+var ability = "ult_clear_screen"
+
+var ability_charge = 100
+
 var enabled = true
 
 var items: Dictionary
 
 var screen_size # Size of the game window.
 
+@export var ui: Control
+var ability_label: Label
+
+var can_gain_ability = true
+
+
 func _ready():
 	get_node("./Sprite-focus").visible = false
 	add_to_group("player")
+	for l in ui.get_children():
+		if l.name == "Ult":
+			ability_label = l
 	screen_size = get_viewport_rect().size
 
 var vector = Vector2(0, 0)
@@ -63,6 +77,15 @@ func get_input(delta: float):
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
 	
+	if can_gain_ability:
+		can_gain_ability = false
+		inc_ability()
+		get_tree().create_timer(2).timeout.connect(func(): can_gain_ability = true)
+	
+	if Input.is_action_just_pressed("ui_ability") and ability_charge == 100:
+		ability_charge = 0
+		call(ability)
+	
 	if Input.is_action_pressed("ui_shoot"):
 		if items.get("ShootSpeed") != null:
 			get_node("Player_basic_spawner").spawn(items["ShootSpeed"]);
@@ -99,8 +122,35 @@ func hit():
 		#	await get_tree().create_timer(0.5).timeout
 		#can_get_hit = true
 
+func inc_ability():
+	if items.get("AbilitySpeed") != null:
+		ability_charge += 1 + items["AbilitySpeed"]
+	else:
+		ability_charge += 1
+		
+	if ability_charge > 100:
+		ability_charge = 100
+		
+		
+@onready var bfe = preload("res://scenes/effects/ult_clear.tscn")
+func ult_clear_screen():
+	var e = bfe.instantiate()
+	get_tree().root.add_child(e)
+	for node in get_tree().get_nodes_in_group("bullets"):
+		node.queue_free()
+	for node in get_tree().get_nodes_in_group("bullet"):
+		node.queue_free()
+	for node in get_tree().get_nodes_in_group("enemies"):
+		node.queue_free()
+	for node in get_tree().get_nodes_in_group("bosses"):
+		node.hp -= 49
+		node.get_hit()
+		
 func respawn():
 	can_get_hit = false
+	ability_charge -= 50
+	if ability_charge < 0:
+		ability_charge = 0
 	position.x = screen_size.x / 2
 	position.y = screen_size.y
 	for node in get_tree().get_nodes_in_group("bullets"):
@@ -109,6 +159,7 @@ func respawn():
 		node.queue_free()
 
 func _physics_process(delta: float):
+	ability_label.text = "Ability: " + str(ability_charge)
 	screen_size = get_viewport_rect().size
 	if enabled:
 		get_input(delta)

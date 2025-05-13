@@ -87,6 +87,7 @@ func get_hit():
 		if health_bar != null:
 			health_bar.value = hp/max_hp
 		if hp <= 0:
+			get_tree().get_nodes_in_group("player")[0].ability_charge = 100
 			health_bar.value = 0
 			interrupt = true
 			await spawn_explosions()

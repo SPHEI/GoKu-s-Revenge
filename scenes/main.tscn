@@ -42,8 +42,9 @@ mesh = SubResource("QuadMesh_tipki")
 [node name="Debug-UI" parent="." instance=ExtResource("3_tefeu")]
 z_index = 4096
 
-[node name="Player" parent="." instance=ExtResource("4_o6xl0")]
+[node name="Player" parent="." node_paths=PackedStringArray("ui") instance=ExtResource("4_o6xl0")]
 position = Vector2(961, 888)
+ui = NodePath("../Debug-UI")
 
 [node name="EnemyBulletsScene" parent="." instance=ExtResource("5_tbgi4")]
 

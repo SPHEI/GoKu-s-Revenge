@@ -67,6 +67,12 @@ label_settings = SubResource("LabelSettings_mogph")
 horizontal_alignment = 2
 vertical_alignment = 2
 
+[node name="Ult" type="Label" parent="."]
+offset_top = 76.0
+offset_right = 122.0
+offset_bottom = 102.0
+text = "Ability: 0"
+
 [node name="Hp" type="Label" parent="."]
 layout_mode = 0
 offset_top = 49.0
