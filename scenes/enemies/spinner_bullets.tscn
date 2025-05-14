@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://7o4njuam7cyj"]
+
+[ext_resource type="Script" uid="uid://ndk4tox8p65" path="res://scripts/spinner_bullets.gd" id="1_en0mp"]
+[ext_resource type="Texture2D" uid="uid://mg2518fopc0w" path="res://assets/sprites/touhou-12-enemies.png" id="2_pm6hk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fegej"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c6j5p"]
+atlas = ExtResource("2_pm6hk")
+region = Rect2(2, 194, 30, 30)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kgek7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c6j5p")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="SpinnerBullets" type="Area2D"]
+script = ExtResource("1_en0mp")
+hp = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_fegej")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_kgek7")
+frame_progress = 0.0759136

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ceypr3pa5n1e5"]
+
+[ext_resource type="Script" uid="uid://ciq4d6t315j7q" path="res://scripts/ult_clear.gd" id="1_uxirw"]
+
+[node name="UltClear" type="Node2D"]
+script = ExtResource("1_uxirw")

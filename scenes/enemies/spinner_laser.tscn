@@ -1,0 +1,116 @@
+[gd_scene load_steps=13 format=3 uid="uid://ybugokl0ttun"]
+
+[ext_resource type="Script" uid="uid://c6g5xtvcubc7d" path="res://scripts/spinner_laser.gd" id="1_pdbae"]
+[ext_resource type="Texture2D" uid="uid://e6hg22l6tpe0" path="res://assets/sprites/abomination.png" id="2_pdbae"]
+[ext_resource type="Script" uid="uid://dboc60me4o8ja" path="res://scripts/laser.gd" id="3_tyhnb"]
+[ext_resource type="Texture2D" uid="uid://bxl2x1g8bg0yc" path="res://assets/sprites/bullets.png" id="4_jh32g"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wb2k1"]
+radius = 17.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yfvrh"]
+atlas = ExtResource("2_pdbae")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tyhnb"]
+atlas = ExtResource("2_pdbae")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jh32g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yfvrh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tyhnb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4wqj4"]
+atlas = ExtResource("4_jh32g")
+region = Rect2(193, 2, 16, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pec5t"]
+atlas = ExtResource("4_jh32g")
+region = Rect2(209, 2, 16, 14)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x1m7v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4wqj4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pec5t")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lqlj1"]
+size = Vector2(16, 14)
+
+[node name="SpinnerLaser" type="Area2D"]
+script = ExtResource("1_pdbae")
+hp = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wb2k1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_jh32g")
+autoplay = "default"
+frame = 1
+frame_progress = 0.00915503
+
+[node name="l3" type="Area2D" parent="."]
+visible = false
+position = Vector2(6062, -3500)
+rotation = 4.18879
+scale = Vector2(2, 1000)
+script = ExtResource("3_tyhnb")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="l3"]
+z_index = -1
+sprite_frames = SubResource("SpriteFrames_x1m7v")
+autoplay = "default"
+frame_progress = 0.0742079
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="l3"]
+shape = SubResource("RectangleShape2D_lqlj1")
+
+[node name="l2" type="Area2D" parent="."]
+visible = false
+position = Vector2(-6062, -3500)
+rotation = 2.0944
+scale = Vector2(2, 1000)
+script = ExtResource("3_tyhnb")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="l2"]
+z_index = -1
+sprite_frames = SubResource("SpriteFrames_x1m7v")
+autoplay = "default"
+frame_progress = 0.0742079
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="l2"]
+shape = SubResource("RectangleShape2D_lqlj1")
+
+[node name="l" type="Area2D" parent="."]
+visible = false
+position = Vector2(1, 7000)
+scale = Vector2(2, 1000)
+script = ExtResource("3_tyhnb")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="l"]
+z_index = -1
+sprite_frames = SubResource("SpriteFrames_x1m7v")
+autoplay = "default"
+frame_progress = 0.0742079
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="l"]
+shape = SubResource("RectangleShape2D_lqlj1")

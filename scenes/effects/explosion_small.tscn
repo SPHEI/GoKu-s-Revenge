@@ -516,10 +516,14 @@ animations = [{
 }]
 
 [node name="ExplosionSmall" type="Node2D"]
+show_behind_parent = true
+z_index = -1
 script = ExtResource("1_ttv4w")
 time = 0.56
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+show_behind_parent = true
+z_index = -1
 sprite_frames = SubResource("SpriteFrames_jlqi0")
 autoplay = "default"
 frame_progress = 0.218692

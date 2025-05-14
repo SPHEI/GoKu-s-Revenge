@@ -6,10 +6,16 @@ extends Node2D
 #Add new bullets here
 @onready var bullet_basic = preload("res://scenes/bullets/enemy_bullet_basic.tscn")
 
+@onready var point_spawner = preload("res://scenes/point_spawner.tscn")
 #Add new enemies here
 @onready var kamikaze = preload("res://scenes/enemies/kamikaze.tscn")
 @onready var wah = preload("res://scenes/enemies/basic_enemy.tscn")
-
+@onready var wah_tri = preload("res://scenes/enemies/basic_enemy_tri.tscn")
+@onready var wah_side = preload("res://scenes/enemies/basic_enemy_side.tscn")
+@onready var wah_side_tri = preload("res://scenes/enemies/basic_enemy_side_tri.tscn")
+@onready var laser = preload("res://scenes/enemies/laser.tscn")
+@onready var spinner_bullets = preload("res://scenes/enemies/spinner_bullets.tscn")
+@onready var spinner_laser = preload("res://scenes/enemies/spinner_laser.tscn")
 #Add new bosses here
 @onready var test_boss = preload("res://scenes/bosses/test_boss.tscn")
 
@@ -26,8 +32,9 @@ var boss_health_bar: ProgressBar = null;
 var items = [
 	#[Code name, display name, description]
 	["ShootSpeed", "Focus Crystal", "Increases shooting speed by 50%."],
-	["AbilitySpeed", "Soul Sphere", "Increases the amount of ability charge you get by +1%. (not implemented yet)"],
-	["HpBoost", "Well-Done Steak", "Increases maximum health by 1."]
+	["AbilitySpeed", "Soul Sphere", "Increases the amount of ability charge you get by +1%."],
+	["HpBoost", "Well-Done Steak", "Increases maximum health by 1."],
+	["DamageBoost", "Demondrug", "Increases damage dealt by 1."]
 ]
 
 #Reference to player
@@ -63,12 +70,14 @@ func _process(_delta: float) -> void:
 	if not level_manager.updating:
 		if Input.is_action_just_pressed("debug_nextScene"):
 			cancel_stage = true
+			boss_health_bar.visible = false
 			while cancel_stage:
 				await get_tree().create_timer(0.2).timeout
 			await level_manager.next_level()
 			run_stage(stages[level_manager.current_level_id])
 		if Input.is_action_just_pressed("debug_previousScene"):
 			cancel_stage = true
+			boss_health_bar.visible = false
 			while cancel_stage:
 				await get_tree().create_timer(0.2).timeout
 			await level_manager.previous_level()
@@ -77,13 +86,31 @@ func _process(_delta: float) -> void:
 func spawn_enemy(type: Resource, pos: Vector2):
 	var b = type.instantiate()
 	b.position = pos
+	var unique_material = preload("res://scenes/enemies/enemy_flash.tres").duplicate()
+	b.get_node("AnimatedSprite2D").material = unique_material
 	add_child(b)
 
 func spawn_boss(type: Resource, pos: Vector2):
 	var b = type.instantiate()
 	b.position = pos
 	b.health_bar = boss_health_bar
+	var unique_material = preload("res://scenes/enemies/enemy_flash.tres").duplicate()
+	b.get_node("AnimatedSprite2D").material = unique_material
 	boss_health_bar.visible = true
+	add_child(b)
+	
+func point_spawn_enemy(type: Resource, pos: Vector2):
+	var b = point_spawner.instantiate()
+	b.to_spawn = type
+	b.position = pos
+	add_child(b)
+	
+func point_spawn_boss(type: Resource, pos: Vector2):
+	var b = point_spawner.instantiate()
+	b.to_spawn = type
+	b.boss = true
+	b.health_bar = boss_health_bar
+	b.position = pos
 	add_child(b)
 	
 func spawn_bullet(type: Resource, pos: Vector2, dir: Vector2):
@@ -91,14 +118,13 @@ func spawn_bullet(type: Resource, pos: Vector2, dir: Vector2):
 	b.position = pos
 	b.dir = dir
 	add_child(b)
-	
 func wait_until_clear():
-	while get_tree().get_node_count_in_group("enemies") > 0 or get_tree().get_node_count_in_group("bullet") > 0:
+	while get_tree().get_node_count_in_group("point spawners") > 0 or get_tree().get_node_count_in_group("enemies") > 0 or get_tree().get_node_count_in_group("bullet") > 0:
 		await get_tree().create_timer(0.2).timeout
 		if cancel_stage:
 			return
 func wait_until_boss_dead():
-	while get_tree().get_node_count_in_group("bosses") > 0:
+	while get_tree().get_node_count_in_group("point spawners") > 0 or get_tree().get_node_count_in_group("bosses") > 0:
 		await get_tree().create_timer(0.2).timeout
 		if cancel_stage:
 			return
@@ -165,16 +191,14 @@ func update_item_visuals(a: int):
 @export var stages = [
 	[	#Stage 1
 		"pick_items",
-		"boss_test_spawn",
-		"wait_until_boss_dead",
-		"enemy_pattern_line_horiz_basic",
+		"enemy_pattern_line_vert_basic_side_tri_left",
+		"wait_until_clear",
+		"enemy_pattern_line_vert_basic_side_tri_both",
+		"wait_until_clear",
+		"enemy_pattern_line_horiz_basic_tri",
 		"wait_until_clear",
 		"enemy_pattern_line_horiz_kamikaze",
 		"wait_until_clear",
-		"bullet_pattern_back_and_foth",
-		"bullet_pattern_back_and_foth",
-		"bullet_pattern_back_and_foth",
-		"wait-2.0",
 		"bullet_pattern_fan",
 		"wait_until_clear",
 		"boss_test_spawn",
@@ -198,7 +222,36 @@ func update_item_visuals(a: int):
 		"pick_items"
 	],
 	[	#Stage 4
-		"wait-5.0",
+		"enemy_center_spinner_laser",
+		"wait_until_clear",
+		"enemy_pattern_line_horiz_laser",
+		"wait_until_clear",
+		"bullet_pattern_back_and_foth",
+		"wait_until_clear",
+		"bullet_pattern_fan",
+		"wait_until_clear",
+		"enemy_pattern_line_horiz_kamikaze",
+		"wait_until_clear",
+		"enemy_pattern_line_horiz_basic",
+		"wait_until_clear",
+		"enemy_pattern_line_horiz_basic_tri",
+		"wait_until_clear",
+		"enemy_pattern_line_vert_basic_side_left",
+		"wait_until_clear",
+		"enemy_pattern_line_vert_basic_side_right",
+		"wait_until_clear",
+		"enemy_pattern_line_vert_basic_side_both",
+		"wait_until_clear",
+		"enemy_pattern_line_vert_basic_side_tri_left",
+		"wait_until_clear",
+		"enemy_pattern_line_vert_basic_side_tri_right",
+		"wait_until_clear",
+		"enemy_pattern_line_vert_basic_side_tri_both",
+		"wait_until_clear",
+		"enemy_pattern_around_spinner_bullets",
+		"wait_until_clear",
+		"boss_test_spawn",
+		"wait_until_boss_dead",
 		"pick_items"
 	],
 ]
@@ -258,7 +311,41 @@ func enemy_pattern_line_horiz_kamikaze():
 func enemy_pattern_line_horiz_basic():
 	for i in range(10):
 		spawn_enemy(wah, Vector2(200.0 * i,-4.0))	
+
+func enemy_pattern_line_horiz_basic_tri():
+	for i in range(10):
+		spawn_enemy(wah_tri, Vector2(200.0 * i,-4.0))	
 		
+func enemy_pattern_line_horiz_laser():
+	for i in range(5):
+		spawn_enemy(laser, Vector2(100.0 + 400.0 * i,-100.0))	
+		
+func enemy_pattern_line_vert_basic_side_left():
+	for i in range(5):
+		spawn_enemy(wah_side, Vector2(-100.0, 100.0 * i + 100.0))
+func enemy_pattern_line_vert_basic_side_right():
+	for i in range(5):
+		spawn_enemy(wah_side, Vector2(2000.0, 100.0 * i + 100.0))
+func enemy_pattern_line_vert_basic_side_both():
+	enemy_pattern_line_vert_basic_side_left()
+	enemy_pattern_line_vert_basic_side_right()
+	
+func enemy_pattern_line_vert_basic_side_tri_left():
+	for i in range(5):
+		spawn_enemy(wah_side_tri, Vector2(-100.0, 100.0 * i + 100.0))
+func enemy_pattern_line_vert_basic_side_tri_right():
+	for i in range(5):
+		spawn_enemy(wah_side_tri, Vector2(2000.0, 100.0 * i + 100.0))
+func enemy_pattern_line_vert_basic_side_tri_both():
+	enemy_pattern_line_vert_basic_side_tri_left()
+	enemy_pattern_line_vert_basic_side_tri_right()
+func enemy_pattern_around_spinner_bullets():
+	for i in range(5):
+		var angle = i * TAU / 5
+		point_spawn_enemy(spinner_bullets,Vector2(950,500) + Vector2(sin(angle) * 1.5, cos(angle)*-1) * 400.0)
+		await get_tree().create_timer(0.05).timeout
+func enemy_center_spinner_laser():
+	point_spawn_enemy(spinner_laser,Vector2(950,500))
 #BOSS SECTION
 func boss_test_spawn():
-	spawn_boss(test_boss, Vector2(1000.0,250.0))
+	point_spawn_boss(test_boss, Vector2(1000.0,250.0))

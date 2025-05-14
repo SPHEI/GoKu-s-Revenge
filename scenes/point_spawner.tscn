@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1ak7npvow84p"]
+
+[ext_resource type="Texture2D" uid="uid://mg2518fopc0w" path="res://assets/sprites/touhou-12-enemies.png" id="1_6csx7"]
+[ext_resource type="Script" uid="uid://qxsgn53mxumj" path="res://scripts/point_spawner.gd" id="1_q5ghj"]
+[ext_resource type="Script" uid="uid://c4c84ew51eelw" path="res://scripts/spin.gd" id="2_uurpr"]
+
+[node name="PointSpawner" type="Node2D"]
+script = ExtResource("1_q5ghj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_6csx7")
+region_enabled = true
+region_rect = Rect2(1, 129, 64, 63)
+script = ExtResource("2_uurpr")

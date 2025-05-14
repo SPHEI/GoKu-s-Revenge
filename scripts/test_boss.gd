@@ -32,7 +32,7 @@ func move_around():
 		await get_tree().create_timer(0.005).timeout
 
 #Example shooting function
-@onready var bullet = preload("res://scenes/bullets/enemy_bullet_basic.tscn")
+@onready var bullet = preload("res://scenes/bullets/enemy_bullet_basic_shoot.tscn")
 func shoot():
 	anim.animation = "cast"
 	for j in range(4):

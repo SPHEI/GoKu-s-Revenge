@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://djm7hcsxpl38x"]
+
+[ext_resource type="Shader" uid="uid://dvj2jaoinl20n" path="res://shaders/sprite_white.gdshader" id="1_jqywg"]
+
+[resource]
+shader = ExtResource("1_jqywg")
+shader_parameter/level = 0.0

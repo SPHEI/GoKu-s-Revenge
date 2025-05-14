@@ -1,7 +1,7 @@
 extends Node3D
 
 var current_level_objects = [null,null,null]
-var current_level_id = 2
+var current_level_id = 0
 #speed up to check if scrolling is aligned properly
 @export var speed = 10.0
 #Add new levels here
@@ -42,6 +42,8 @@ func update_level():
 	for node in get_tree().get_nodes_in_group("enemies"):
 		node.queue_free()
 	for node in get_tree().get_nodes_in_group("bosses"):
+		node.queue_free()
+	for node in get_tree().get_nodes_in_group("point spawners"):
 		node.queue_free()
 	loading.text = "Loading..."
 	updating = true

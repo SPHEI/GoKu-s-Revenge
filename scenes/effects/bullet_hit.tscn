@@ -1,0 +1,67 @@
+[gd_scene load_steps=11 format=3 uid="uid://dq4xu5ykb5lnr"]
+
+[ext_resource type="Script" uid="uid://b3okodyk7e636" path="res://scripts/delete_after_delay.gd" id="1_b82f2"]
+[ext_resource type="Texture2D" uid="uid://rdccytwasdhq" path="res://assets/sprites/bullet-hit.png" id="2_wliox"]
+[ext_resource type="Script" uid="uid://ro1xyjkvp86v" path="res://scripts/rotate_random.gd" id="3_wliox"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yhigu"]
+atlas = ExtResource("2_wliox")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c00ae"]
+atlas = ExtResource("2_wliox")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bv34h"]
+atlas = ExtResource("2_wliox")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yl8a2"]
+atlas = ExtResource("2_wliox")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6d24y"]
+atlas = ExtResource("2_wliox")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_206uk"]
+atlas = ExtResource("2_wliox")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v1eaa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yhigu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c00ae")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bv34h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yl8a2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6d24y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_206uk")
+}, {
+"duration": 10.0,
+"texture": null
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[node name="BulletHit" type="Node2D"]
+script = ExtResource("1_b82f2")
+time = 1.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_v1eaa")
+autoplay = "default"
+script = ExtResource("3_wliox")

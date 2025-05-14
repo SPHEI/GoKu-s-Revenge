@@ -1,0 +1,32 @@
+extends Marker2D
+
+@export var delay = 0.9
+
+var can_attack = true
+
+func _process(_delta: float) -> void:
+	if can_attack == true:
+		spawn()
+		get_tree().create_timer(delay).timeout.connect(func(): can_attack = true)
+		can_attack = false
+
+@onready var bullet_basic = preload("res://scenes/bullets/tracking_enemy_bullet.tscn")
+		
+func spawn():
+	var marker_root = get_node("/root/Main/EnemyBulletsScene")
+	var bullet_1 = bullet_basic.instantiate()
+	bullet_1.global_position = global_position
+	marker_root.add_child(bullet_1)
+	
+	var bullet_2 = bullet_basic.instantiate()
+	bullet_2.global_position = global_position
+	bullet_2.deviation = 15
+	marker_root.add_child(bullet_2)
+	
+	
+	var bullet_3 = bullet_basic.instantiate()
+	bullet_3.global_position = global_position
+	bullet_3.deviation = -15
+	marker_root.add_child(bullet_3)
+	
+	pass

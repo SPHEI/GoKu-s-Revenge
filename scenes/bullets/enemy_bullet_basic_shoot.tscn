@@ -1,46 +1,43 @@
-[gd_scene load_steps=13 format=3 uid="uid://c7jpiwuhedngq"]
+[gd_scene load_steps=13 format=3 uid="uid://dwxdpveg0vyxy"]
 
-[ext_resource type="Script" uid="uid://ddx12lg5o5v6c" path="res://scripts/enemy_bullet_basic.gd" id="1_yqaqm"]
-[ext_resource type="Texture2D" uid="uid://mg2518fopc0w" path="res://assets/sprites/touhou-12-enemies.png" id="2_ljoiw"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ljoiw"]
-atlas = ExtResource("2_ljoiw")
-region = Rect2(517, 96, 30, 32)
+[ext_resource type="Script" uid="uid://cjajwuhg5poct" path="res://scripts/enemy_bullet_basic_shoot.gd" id="1_bc8ok"]
+[ext_resource type="Texture2D" uid="uid://mg2518fopc0w" path="res://assets/sprites/touhou-12-enemies.png" id="2_cesc3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e1rre"]
-atlas = ExtResource("2_ljoiw")
-region = Rect2(549, 96, 30, 32)
+atlas = ExtResource("2_cesc3")
+region = Rect2(512, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_14dk2"]
-atlas = ExtResource("2_ljoiw")
-region = Rect2(581, 96, 30, 32)
+atlas = ExtResource("2_cesc3")
+region = Rect2(544, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7b0ih"]
-atlas = ExtResource("2_ljoiw")
-region = Rect2(613, 96, 30, 32)
+atlas = ExtResource("2_cesc3")
+region = Rect2(576, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f2iib"]
-atlas = ExtResource("2_ljoiw")
-region = Rect2(645, 96, 30, 32)
+atlas = ExtResource("2_cesc3")
+region = Rect2(608, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rgkdp"]
-atlas = ExtResource("2_ljoiw")
-region = Rect2(677, 96, 30, 32)
+atlas = ExtResource("2_cesc3")
+region = Rect2(640, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gmiji"]
-atlas = ExtResource("2_ljoiw")
-region = Rect2(709, 96, 30, 32)
+atlas = ExtResource("2_cesc3")
+region = Rect2(672, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nwojc"]
-atlas = ExtResource("2_ljoiw")
-region = Rect2(741, 96, 30, 32)
+atlas = ExtResource("2_cesc3")
+region = Rect2(704, 0, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_ge1i6"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ge1i6"]
+atlas = ExtResource("2_cesc3")
+region = Rect2(736, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fsx3j"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ljoiw")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_e1rre")
 }, {
@@ -61,9 +58,12 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_nwojc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ge1i6")
 }],
 "loop": true,
-"name": &"default",
+"name": &"bullet_anim",
 "speed": 12.0
 }]
 
@@ -72,13 +72,12 @@ radius = 8.0
 height = 16.0
 
 [node name="EnemyBulletBasic" type="Area2D"]
-script = ExtResource("1_yqaqm")
+script = ExtResource("1_bc8ok")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(3.405, 0)
-sprite_frames = SubResource("SpriteFrames_ge1i6")
-autoplay = "default"
-frame_progress = 0.30316
+sprite_frames = SubResource("SpriteFrames_fsx3j")
+animation = &"bullet_anim"
+frame_progress = 0.469209
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_yqaqm")

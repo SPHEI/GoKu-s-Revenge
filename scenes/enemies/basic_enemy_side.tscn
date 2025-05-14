@@ -1,0 +1,66 @@
+[gd_scene load_steps=11 format=3 uid="uid://re03514wnc0o"]
+
+[ext_resource type="Script" uid="uid://bdnsgghxfgixw" path="res://scripts/basic_enemy_side.gd" id="1_rpotd"]
+[ext_resource type="Texture2D" uid="uid://mg2518fopc0w" path="res://assets/sprites/touhou-12-enemies.png" id="2_8l1q0"]
+[ext_resource type="Script" uid="uid://ctw82qawh6g5o" path="res://scripts/marker_2d.gd" id="3_28t0t"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7jpia"]
+radius = 16.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rpotd"]
+atlas = ExtResource("2_8l1q0")
+region = Rect2(224, 320, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8l1q0"]
+atlas = ExtResource("2_8l1q0")
+region = Rect2(256, 320, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_28t0t"]
+atlas = ExtResource("2_8l1q0")
+region = Rect2(288, 320, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u4bla"]
+atlas = ExtResource("2_8l1q0")
+region = Rect2(320, 320, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_774kc"]
+atlas = ExtResource("2_8l1q0")
+region = Rect2(352, 320, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8cupo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rpotd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8l1q0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_28t0t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u4bla")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_774kc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="BasicEnemySide" type="Area2D"]
+script = ExtResource("1_rpotd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7jpia")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_8cupo")
+autoplay = "default"
+frame = 4
+frame_progress = 0.72758
+
+[node name="Marker2D" type="Marker2D" parent="."]
+script = ExtResource("3_28t0t")

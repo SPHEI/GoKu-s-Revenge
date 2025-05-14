@@ -1,21 +1,11 @@
 extends Area2D
 
 var dir: Vector2 = Vector2(0.0,0.0)
-var plr: Node
-
-@export var speed = 100
-
-var deviation = 0
-
-var screen_size # Size of the game window.
+@export var speed = 1
 
 func _ready():
 	add_to_group("bullets")
 	body_entered.connect(_on_body_entered)
-	plr = get_tree().get_nodes_in_group("player")[0]
-	screen_size = get_viewport_rect().size
-	dir = (plr.global_position - global_position).normalized()
-	dir = dir.rotated(deg_to_rad(deviation))
 	await get_tree().create_timer(10).timeout
 	if not entered:
 		queue_free()
