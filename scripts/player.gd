@@ -88,9 +88,15 @@ func get_input(delta: float):
 	
 	if Input.is_action_pressed("ui_shoot"):
 		if items.get("ShootSpeed") != null:
-			get_node("Player_basic_spawner").spawn(items["ShootSpeed"]);
+			if items.get("DamageBoost") != null:
+				get_node("Player_basic_spawner").spawn(items["ShootSpeed"], 1 + items["DamageBoost"]);
+			else:
+				get_node("Player_basic_spawner").spawn(items["ShootSpeed"], 1);
 		else:
-			get_node("Player_basic_spawner").spawn(0);
+			if items.get("DamageBoost") != null:
+				get_node("Player_basic_spawner").spawn(0, 1 + items["DamageBoost"]);
+			else:
+				get_node("Player_basic_spawner").spawn(0, 1);
 
 
 func _process(_delta: float) -> void:
@@ -143,8 +149,7 @@ func ult_clear_screen():
 	for node in get_tree().get_nodes_in_group("enemies"):
 		node.queue_free()
 	for node in get_tree().get_nodes_in_group("bosses"):
-		node.hp -= 49
-		node.get_hit()
+		node.get_hit(50)
 		
 func respawn():
 	can_get_hit = false

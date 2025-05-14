@@ -87,9 +87,9 @@ func _on_body_entered(body: Node2D):
 		body.hit()
 
 #Call this from player bullet script
-func get_hit():
+func get_hit(damage):
 	if not interrupt:
-		hp -= 1
+		hp -= damage
 		if health_bar != null:
 			health_bar.value = hp/max_hp
 		if hp <= 0:

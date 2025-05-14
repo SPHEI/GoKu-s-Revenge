@@ -7,8 +7,8 @@ class_name Enemy
 @onready var sprite: AnimatedSprite2D = $"AnimatedSprite2D"
 @export var hp = 1
 #Call this from player bullet script
-func get_hit():
-	hp -= 1
+func get_hit(damage):
+	hp -= damage
 	if hp <= 0:
 		var e = explosion.instantiate()
 		e.position = position

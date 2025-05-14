@@ -1,0 +1,67 @@
+[gd_scene load_steps=11 format=3 uid="uid://x1ilevimosjk"]
+
+[ext_resource type="Script" uid="uid://bdnsgghxfgixw" path="res://scripts/basic_enemy_side.gd" id="1_4t0o6"]
+[ext_resource type="Texture2D" uid="uid://mg2518fopc0w" path="res://assets/sprites/touhou-12-enemies.png" id="2_kc7w8"]
+[ext_resource type="Script" uid="uid://6elov0eiqmjo" path="res://scripts/marker_2d_tri.gd" id="3_4t0o6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7jpia"]
+radius = 16.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kc7w8"]
+atlas = ExtResource("2_kc7w8")
+region = Rect2(224, 352, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hb4i1"]
+atlas = ExtResource("2_kc7w8")
+region = Rect2(256, 352, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i7eht"]
+atlas = ExtResource("2_kc7w8")
+region = Rect2(288, 352, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e1kgt"]
+atlas = ExtResource("2_kc7w8")
+region = Rect2(320, 352, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rgdpi"]
+atlas = ExtResource("2_kc7w8")
+region = Rect2(352, 352, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1rhi0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kc7w8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hb4i1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i7eht")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e1kgt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rgdpi")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="BasicEnemySide" type="Area2D"]
+script = ExtResource("1_4t0o6")
+hp = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7jpia")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_1rhi0")
+autoplay = "default"
+frame = 3
+frame_progress = 0.207628
+
+[node name="Marker2D" type="Marker2D" parent="."]
+script = ExtResource("3_4t0o6")

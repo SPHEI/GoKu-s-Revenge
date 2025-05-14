@@ -1,0 +1,81 @@
+[gd_scene load_steps=13 format=3 uid="uid://b0mhna6hx4drd"]
+
+[ext_resource type="Script" uid="uid://dghmooswtag4b" path="res://scripts/enemy_laser.gd" id="1_l5c32"]
+[ext_resource type="Texture2D" uid="uid://mg2518fopc0w" path="res://assets/sprites/touhou-12-enemies.png" id="2_0h3w5"]
+[ext_resource type="Script" uid="uid://dboc60me4o8ja" path="res://scripts/laser.gd" id="3_r4pcl"]
+[ext_resource type="Texture2D" uid="uid://bxl2x1g8bg0yc" path="res://assets/sprites/bullets.png" id="4_pak8g"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wb2k1"]
+radius = 17.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4vsbc"]
+atlas = ExtResource("2_0h3w5")
+region = Rect2(0, 448, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ffwum"]
+atlas = ExtResource("2_0h3w5")
+region = Rect2(64, 448, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5mmrc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4vsbc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ffwum")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4wqj4"]
+atlas = ExtResource("4_pak8g")
+region = Rect2(193, 2, 16, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pec5t"]
+atlas = ExtResource("4_pak8g")
+region = Rect2(209, 2, 16, 14)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x1m7v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4wqj4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pec5t")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lqlj1"]
+size = Vector2(16, 14)
+
+[node name="Laser" type="Area2D"]
+script = ExtResource("1_l5c32")
+hp = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wb2k1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_5mmrc")
+autoplay = "default"
+
+[node name="l" type="Area2D" parent="."]
+position = Vector2(0, 7000)
+scale = Vector2(2, 1000)
+script = ExtResource("3_r4pcl")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="l"]
+z_index = -1
+sprite_frames = SubResource("SpriteFrames_x1m7v")
+autoplay = "default"
+frame_progress = 0.299677
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="l"]
+shape = SubResource("RectangleShape2D_lqlj1")
