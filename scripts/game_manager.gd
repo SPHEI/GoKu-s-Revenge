@@ -15,6 +15,7 @@ extends Node2D
 @onready var wah_side_tri = preload("res://scenes/enemies/basic_enemy_side_tri.tscn")
 @onready var laser = preload("res://scenes/enemies/laser.tscn")
 @onready var spinner_bullets = preload("res://scenes/enemies/spinner_bullets.tscn")
+@onready var spinner_laser = preload("res://scenes/enemies/spinner_laser.tscn")
 #Add new bosses here
 @onready var test_boss = preload("res://scenes/bosses/test_boss.tscn")
 
@@ -221,6 +222,10 @@ func update_item_visuals(a: int):
 		"pick_items"
 	],
 	[	#Stage 4
+		"enemy_center_spinner_laser",
+		"wait_until_clear",
+		"enemy_pattern_line_horiz_laser",
+		"wait_until_clear",
 		"bullet_pattern_back_and_foth",
 		"wait_until_clear",
 		"bullet_pattern_fan",
@@ -230,8 +235,6 @@ func update_item_visuals(a: int):
 		"enemy_pattern_line_horiz_basic",
 		"wait_until_clear",
 		"enemy_pattern_line_horiz_basic_tri",
-		"wait_until_clear",
-		"enemy_pattern_line_horiz_laser",
 		"wait_until_clear",
 		"enemy_pattern_line_vert_basic_side_left",
 		"wait_until_clear",
@@ -341,6 +344,8 @@ func enemy_pattern_around_spinner_bullets():
 		var angle = i * TAU / 5
 		point_spawn_enemy(spinner_bullets,Vector2(950,500) + Vector2(sin(angle) * 1.5, cos(angle)*-1) * 400.0)
 		await get_tree().create_timer(0.05).timeout
+func enemy_center_spinner_laser():
+	point_spawn_enemy(spinner_laser,Vector2(950,500))
 #BOSS SECTION
 func boss_test_spawn():
 	point_spawn_boss(test_boss, Vector2(1000.0,250.0))
