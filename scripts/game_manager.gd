@@ -222,6 +222,10 @@ func update_item_visuals(a: int):
 		"pick_items"
 	],
 	[	#Stage 4
+		"wait-5.0",
+		"pick_items"
+	],
+	[	#Test stage
 		"enemy_center_spinner_laser",
 		"wait_until_clear",
 		"enemy_pattern_line_horiz_laser",

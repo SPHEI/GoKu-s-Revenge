@@ -1,0 +1,278 @@
+[gd_scene load_steps=23 format=3 uid="uid://dhgip6a15v3q0"]
+
+[ext_resource type="Shader" uid="uid://51u2c83akubc" path="res://shaders/ocean.gdshader" id="1_m665o"]
+[ext_resource type="ArrayMesh" uid="uid://bvr6w2oipwpo5" path="res://scenes/levels/ocean.tres" id="2_56431"]
+[ext_resource type="Script" uid="uid://boi0khglse556" path="res://scripts/ocean.gd" id="3_0vd3p"]
+[ext_resource type="Texture2D" uid="uid://dwpsohevhhoyb" path="res://assets/textures/dayfair.png" id="4_sqcj4"]
+[ext_resource type="Shader" uid="uid://do1dwla21xgvp" path="res://shaders/lightning.gdshader" id="6_0vd3p"]
+[ext_resource type="QuadMesh" uid="uid://np6instjvj1t" path="res://scenes/levels/storm.tres" id="6_sqcj4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m665o"]
+render_priority = 0
+shader = ExtResource("1_m665o")
+shader_parameter/albedo_color = Color(0.160784, 0.25098, 1, 1)
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/foam = true
+shader_parameter/maxAmp = 3.0
+shader_parameter/speedMult = 1.2
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_a1ohp"]
+panorama = ExtResource("4_sqcj4")
+
+[sub_resource type="Sky" id="Sky_ogne1"]
+sky_material = SubResource("PanoramaSkyMaterial_a1ohp")
+
+[sub_resource type="Environment" id="Environment_vjho5"]
+background_mode = 2
+sky = SubResource("Sky_ogne1")
+sky_rotation = Vector3(0, -1.91114, 0)
+ambient_light_sky_contribution = 0.0
+ambient_light_energy = 0.0
+glow_enabled = true
+glow_hdr_scale = 2.35
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+volumetric_fog_albedo = Color(0.362829, 0.362829, 0.362829, 1)
+volumetric_fog_length = 128.0
+
+[sub_resource type="Gradient" id="Gradient_m665o"]
+offsets = PackedFloat32Array(0, 0.121469, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.217514, 0.217514, 0.217514, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_56431"]
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_0vd3p"]
+color_ramp = SubResource("Gradient_m665o")
+noise = SubResource("FastNoiseLite_56431")
+
+[sub_resource type="FogMaterial" id="FogMaterial_0vd3p"]
+density = 0.2
+emission = Color(0.289324, 0.282121, 0.388692, 1)
+density_texture = SubResource("NoiseTexture3D_0vd3p")
+
+[sub_resource type="FogMaterial" id="FogMaterial_m665o"]
+density = 0.4
+edge_fade = 1e-05
+density_texture = SubResource("NoiseTexture3D_0vd3p")
+
+[sub_resource type="Curve" id="Curve_0vd3p"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.287791, 0.201493), -1.0532, -1.0532, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_sqcj4"]
+curve = SubResource("Curve_0vd3p")
+
+[sub_resource type="Curve" id="Curve_7m36m"]
+_limits = [0.0, 1024.0, 0.0, 1.0]
+_data = [Vector2(0, 1024), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_slu4e"]
+curve = SubResource("Curve_7m36m")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_aph2x"]
+emission_shape_scale = Vector3(4, 1, 2)
+emission_shape = 1
+emission_sphere_radius = 1.0
+inherit_velocity_ratio = 1.0
+direction = Vector3(0, 0, 1)
+spread = 0.0
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_sqcj4")
+emission_curve = SubResource("CurveTexture_slu4e")
+hue_variation_min = -0.04
+hue_variation_max = 0.08
+turbulence_noise_strength = 2.0
+turbulence_noise_scale = 10.0
+turbulence_influence_min = 0.238
+turbulence_influence_max = 0.669
+turbulence_initial_displacement_min = -29.0
+turbulence_initial_displacement_max = 14.7
+
+[sub_resource type="Skin" id="Skin_t3xin"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sqcj4"]
+shader = ExtResource("6_0vd3p")
+
+[node name="Storm" type="Node3D"]
+
+[node name="OceanMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 255, 0, 128)
+material_override = SubResource("ShaderMaterial_m665o")
+mesh = ExtResource("2_56431")
+script = ExtResource("3_0vd3p")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.87462, -0.0708224, 0.479609, 0, 0.989272, 0.146083, -0.48481, 0.127767, -0.865237, 0, 0, 0)
+light_volumetric_fog_energy = 0.0
+light_angular_distance = 1.0
+shadow_enabled = true
+shadow_opacity = 0.4
+directional_shadow_mode = 0
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 145.2
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vjho5")
+
+[node name="Dont on this one" type="FogVolume" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.8395, 19.7107, -13.6837)
+size = Vector3(587.688, 20.5981, 354.515)
+material = SubResource("FogMaterial_0vd3p")
+
+[node name="FogVolume3" type="FogVolume" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8026, 33.9456, -4.69771)
+size = Vector3(39.7381, 5, 21.5972)
+shape = 0
+material = SubResource("FogMaterial_m665o")
+
+[node name="FogVolume3" type="FogVolume" parent="FogVolume3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.6386, 1.50092, -3.01847)
+size = Vector3(31.9286, 10.6943, 15.3752)
+shape = 0
+material = SubResource("FogMaterial_m665o")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="FogVolume3"]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 1, -4.38255, 0, 3.66284)
+amount = 4
+amount_ratio = 0.5
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_aph2x")
+draw_pass_1 = ExtResource("6_sqcj4")
+draw_skin = SubResource("Skin_t3xin")
+
+[node name="FogVolume2" type="FogVolume" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.9767, 39.4213, -19.5122)
+size = Vector3(9.41772, 5, 14.1572)
+shape = 0
+material = SubResource("FogMaterial_m665o")
+
+[node name="FogVolume2" type="FogVolume" parent="FogVolume2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.16483, -0.284004, -4.59171)
+size = Vector3(11.7704, 5, 14.1572)
+shape = 0
+material = SubResource("FogMaterial_m665o")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="FogVolume2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+amount = 4
+amount_ratio = 0.5
+fixed_fps = 60
+process_material = SubResource("ShaderMaterial_sqcj4")
+draw_pass_1 = ExtResource("6_sqcj4")
+draw_skin = SubResource("Skin_t3xin")
+
+[node name="FogVolume4" type="FogVolume" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.853989, 39.4213, -49.4661)
+size = Vector3(15.1865, 5, 32.3505)
+shape = 0
+material = SubResource("FogMaterial_m665o")
+
+[node name="FogVolume5" type="FogVolume" parent="FogVolume4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.39729, 0.1931, -19.7857)
+size = Vector3(87.8446, 5, 33.3687)
+shape = 0
+material = SubResource("FogMaterial_m665o")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="FogVolume4"]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, -19.3781)
+amount_ratio = 0.5
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_aph2x")
+draw_pass_1 = ExtResource("6_sqcj4")
+draw_skin = SubResource("Skin_t3xin")
+
+[node name="FogVolume6" type="FogVolume" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.85579, 39.4213, 42.7925)
+size = Vector3(15.6595, 5, 29.6899)
+shape = 0
+material = SubResource("FogMaterial_m665o")
+
+[node name="FogVolume7" type="FogVolume" parent="FogVolume6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.4784, -4.65468, 7.25247)
+size = Vector3(37.4369, 11.9985, 14.277)
+shape = 0
+material = SubResource("FogMaterial_m665o")
+
+[node name="FogVolume6" type="FogVolume" parent="FogVolume6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.85579, -2.32734, -7.75655)
+size = Vector3(15.6595, 11.9985, 18.8625)
+shape = 0
+material = SubResource("FogMaterial_m665o")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="FogVolume6"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 13.9711, -3.41484, 6.81404)
+amount = 4
+amount_ratio = 0.5
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_aph2x")
+draw_pass_1 = ExtResource("6_sqcj4")
+draw_skin = SubResource("Skin_t3xin")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="FogVolume6/GPUParticles3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -9.72127, 2.06985, -4.02453)
+amount = 4
+amount_ratio = 0.5
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_aph2x")
+draw_pass_1 = ExtResource("6_sqcj4")
+draw_skin = SubResource("Skin_t3xin")
+
+[node name="FogVolume7" type="FogVolume" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.1202, 39.4213, 66.4667)
+size = Vector3(9.41772, 5, 14.1572)
+shape = 0
+material = SubResource("FogMaterial_m665o")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="FogVolume7"]
+amount = 4
+amount_ratio = 0.5
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_aph2x")
+draw_pass_1 = ExtResource("6_sqcj4")
+draw_skin = SubResource("Skin_t3xin")
+
+[node name="FogVolume8" type="FogVolume" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.7334, 39.4213, 101.617)
+size = Vector3(13.9042, 5, 57.34)
+shape = 0
+material = SubResource("FogMaterial_m665o")
+
+[node name="FogVolume9" type="FogVolume" parent="FogVolume8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.07311, 1.40701, 11.475)
+size = Vector3(10.291, 5, 16.9823)
+shape = 0
+material = SubResource("FogMaterial_m665o")
+
+[node name="FogVolume8" type="FogVolume" parent="FogVolume8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.17843, -4.01507, 8.11681)
+size = Vector3(15.1787, 5, 24.9254)
+shape = 0
+material = SubResource("FogMaterial_m665o")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="FogVolume8"]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 3, 0, -2.84878, 0)
+amount = 4
+amount_ratio = 0.5
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_aph2x")
+draw_pass_1 = ExtResource("6_sqcj4")
+draw_skin = SubResource("Skin_t3xin")
+
+[node name="FogVolume9" type="FogVolume" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.4368, 39.4213, 95.3946)
+size = Vector3(23.0976, 5, 32.8865)
+shape = 0
+material = SubResource("FogMaterial_m665o")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="FogVolume9"]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 0)
+amount = 4
+amount_ratio = 0.5
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_aph2x")
+draw_pass_1 = ExtResource("6_sqcj4")
+draw_skin = SubResource("Skin_t3xin")
