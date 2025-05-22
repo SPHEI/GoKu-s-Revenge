@@ -10,3 +10,4 @@ albedo_texture = ExtResource("1_5yjw2")
 
 [resource]
 material = SubResource("StandardMaterial3D_5yjw2")
+size = Vector2(4, 2)

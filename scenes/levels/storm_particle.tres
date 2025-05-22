@@ -1,0 +1,37 @@
+[gd_resource type="ParticleProcessMaterial" load_steps=5 format=3 uid="uid://bedkkb2bwfqh1"]
+
+[sub_resource type="Curve" id="Curve_0vd3p"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.287791, 0.201493), -1.0532, -1.0532, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_sqcj4"]
+curve = SubResource("Curve_0vd3p")
+
+[sub_resource type="Curve" id="Curve_7m36m"]
+_limits = [0.0, 1024.0, 0.0, 1.0]
+_data = [Vector2(0, 1024), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_slu4e"]
+curve = SubResource("Curve_7m36m")
+
+[resource]
+emission_shape_scale = Vector3(4, 1, 2)
+emission_shape = 1
+emission_sphere_radius = 1.0
+inherit_velocity_ratio = 1.0
+direction = Vector3(0, 0, 1)
+spread = 0.0
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_sqcj4")
+emission_curve = SubResource("CurveTexture_slu4e")
+hue_variation_min = -0.04
+hue_variation_max = 0.08
+turbulence_noise_strength = 2.0
+turbulence_noise_scale = 10.0
+turbulence_influence_min = 0.238
+turbulence_influence_max = 0.669
+turbulence_initial_displacement_min = -29.0
+turbulence_initial_displacement_max = 14.7

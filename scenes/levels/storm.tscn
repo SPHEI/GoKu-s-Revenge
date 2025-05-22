@@ -1,11 +1,12 @@
-[gd_scene load_steps=23 format=3 uid="uid://dhgip6a15v3q0"]
+[gd_scene load_steps=18 format=3 uid="uid://dhgip6a15v3q0"]
 
 [ext_resource type="Shader" uid="uid://51u2c83akubc" path="res://shaders/ocean.gdshader" id="1_m665o"]
 [ext_resource type="ArrayMesh" uid="uid://bvr6w2oipwpo5" path="res://scenes/levels/ocean.tres" id="2_56431"]
 [ext_resource type="Script" uid="uid://boi0khglse556" path="res://scripts/ocean.gd" id="3_0vd3p"]
 [ext_resource type="Texture2D" uid="uid://dwpsohevhhoyb" path="res://assets/textures/dayfair.png" id="4_sqcj4"]
-[ext_resource type="Shader" uid="uid://do1dwla21xgvp" path="res://shaders/lightning.gdshader" id="6_0vd3p"]
+[ext_resource type="Material" uid="uid://bedkkb2bwfqh1" path="res://scenes/levels/storm_particle.tres" id="5_0vd3p"]
 [ext_resource type="QuadMesh" uid="uid://np6instjvj1t" path="res://scenes/levels/storm.tres" id="6_sqcj4"]
+[ext_resource type="QuadMesh" uid="uid://vyubxed6kgoe" path="res://scenes/levels/storm_2.tres" id="7_sqcj4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m665o"]
 render_priority = 0
@@ -56,46 +57,7 @@ density = 0.4
 edge_fade = 1e-05
 density_texture = SubResource("NoiseTexture3D_0vd3p")
 
-[sub_resource type="Curve" id="Curve_0vd3p"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.287791, 0.201493), -1.0532, -1.0532, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_sqcj4"]
-curve = SubResource("Curve_0vd3p")
-
-[sub_resource type="Curve" id="Curve_7m36m"]
-_limits = [0.0, 1024.0, 0.0, 1.0]
-_data = [Vector2(0, 1024), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_slu4e"]
-curve = SubResource("Curve_7m36m")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_aph2x"]
-emission_shape_scale = Vector3(4, 1, 2)
-emission_shape = 1
-emission_sphere_radius = 1.0
-inherit_velocity_ratio = 1.0
-direction = Vector3(0, 0, 1)
-spread = 0.0
-initial_velocity_min = 10.0
-initial_velocity_max = 10.0
-gravity = Vector3(0, 0, 0)
-alpha_curve = SubResource("CurveTexture_sqcj4")
-emission_curve = SubResource("CurveTexture_slu4e")
-hue_variation_min = -0.04
-hue_variation_max = 0.08
-turbulence_noise_strength = 2.0
-turbulence_noise_scale = 10.0
-turbulence_influence_min = 0.238
-turbulence_influence_max = 0.669
-turbulence_initial_displacement_min = -29.0
-turbulence_initial_displacement_max = 14.7
-
 [sub_resource type="Skin" id="Skin_t3xin"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_sqcj4"]
-shader = ExtResource("6_0vd3p")
 
 [node name="Storm" type="Node3D"]
 
@@ -137,10 +99,10 @@ material = SubResource("FogMaterial_m665o")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="FogVolume3"]
 transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 1, -4.38255, 0, 3.66284)
-amount = 4
+amount = 2
 amount_ratio = 0.5
 fixed_fps = 60
-process_material = SubResource("ParticleProcessMaterial_aph2x")
+process_material = ExtResource("5_0vd3p")
 draw_pass_1 = ExtResource("6_sqcj4")
 draw_skin = SubResource("Skin_t3xin")
 
@@ -158,11 +120,11 @@ material = SubResource("FogMaterial_m665o")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="FogVolume2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
-amount = 4
+amount = 2
 amount_ratio = 0.5
 fixed_fps = 60
-process_material = SubResource("ShaderMaterial_sqcj4")
-draw_pass_1 = ExtResource("6_sqcj4")
+process_material = ExtResource("5_0vd3p")
+draw_pass_1 = ExtResource("7_sqcj4")
 draw_skin = SubResource("Skin_t3xin")
 
 [node name="FogVolume4" type="FogVolume" parent="."]
@@ -179,11 +141,11 @@ material = SubResource("FogMaterial_m665o")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="FogVolume4"]
 transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, -19.3781)
+amount = 4
 amount_ratio = 0.5
 fixed_fps = 60
-process_material = SubResource("ParticleProcessMaterial_aph2x")
+process_material = ExtResource("5_0vd3p")
 draw_pass_1 = ExtResource("6_sqcj4")
-draw_skin = SubResource("Skin_t3xin")
 
 [node name="FogVolume6" type="FogVolume" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.85579, 39.4213, 42.7925)
@@ -205,20 +167,20 @@ material = SubResource("FogMaterial_m665o")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="FogVolume6"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 13.9711, -3.41484, 6.81404)
-amount = 4
+amount = 2
 amount_ratio = 0.5
 fixed_fps = 60
-process_material = SubResource("ParticleProcessMaterial_aph2x")
+process_material = ExtResource("5_0vd3p")
 draw_pass_1 = ExtResource("6_sqcj4")
 draw_skin = SubResource("Skin_t3xin")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="FogVolume6/GPUParticles3D"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -9.72127, 2.06985, -4.02453)
-amount = 4
+amount = 2
 amount_ratio = 0.5
 fixed_fps = 60
-process_material = SubResource("ParticleProcessMaterial_aph2x")
-draw_pass_1 = ExtResource("6_sqcj4")
+process_material = ExtResource("5_0vd3p")
+draw_pass_1 = ExtResource("7_sqcj4")
 draw_skin = SubResource("Skin_t3xin")
 
 [node name="FogVolume7" type="FogVolume" parent="."]
@@ -228,10 +190,10 @@ shape = 0
 material = SubResource("FogMaterial_m665o")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="FogVolume7"]
-amount = 4
+amount = 2
 amount_ratio = 0.5
 fixed_fps = 60
-process_material = SubResource("ParticleProcessMaterial_aph2x")
+process_material = ExtResource("5_0vd3p")
 draw_pass_1 = ExtResource("6_sqcj4")
 draw_skin = SubResource("Skin_t3xin")
 
@@ -255,11 +217,11 @@ material = SubResource("FogMaterial_m665o")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="FogVolume8"]
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 3, 0, -2.84878, 0)
-amount = 4
+amount = 2
 amount_ratio = 0.5
 fixed_fps = 60
-process_material = SubResource("ParticleProcessMaterial_aph2x")
-draw_pass_1 = ExtResource("6_sqcj4")
+process_material = ExtResource("5_0vd3p")
+draw_pass_1 = ExtResource("7_sqcj4")
 draw_skin = SubResource("Skin_t3xin")
 
 [node name="FogVolume9" type="FogVolume" parent="."]
@@ -270,9 +232,9 @@ material = SubResource("FogMaterial_m665o")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="FogVolume9"]
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 0)
-amount = 4
+amount = 2
 amount_ratio = 0.5
 fixed_fps = 60
-process_material = SubResource("ParticleProcessMaterial_aph2x")
+process_material = ExtResource("5_0vd3p")
 draw_pass_1 = ExtResource("6_sqcj4")
 draw_skin = SubResource("Skin_t3xin")
