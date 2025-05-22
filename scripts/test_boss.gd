@@ -14,7 +14,7 @@ func move_around():
 		if interrupt:
 			break
 		var angle = (i + 270) * TAU / 360
-		position = Vector2(1000,250) + Vector2(sin(angle), cos(angle)-1) * 50.0
+		position = Vector2(640,250) + Vector2(sin(angle), cos(angle)-1) * 50.0
 		if cos(angle) < 0:
 			anim.animation = "move_left"
 		elif cos(angle) > 0:
@@ -24,7 +24,7 @@ func move_around():
 		if interrupt:
 			break
 		var angle = (i + 270) * TAU / 360
-		position = Vector2(1000,250) + Vector2(-sin(angle), cos(angle)-1) * 50.0 - Vector2(100,0)
+		position = Vector2(640,250) + Vector2(-sin(angle), cos(angle)-1) * 50.0 - Vector2(100,0)
 		if cos(angle) > 0:
 			anim.animation = "move_left"
 		elif cos(angle) < 0:
@@ -43,5 +43,5 @@ func shoot():
 			b.position = position
 			var angle = i * TAU / 32
 			b.dir = Vector2(sin(angle), cos(angle)) * 200.0
-			get_tree().root.add_child(b)
+			get_node("/root/Main/SubViewportContainer/Main_Viewport").add_child(b)
 		await get_tree().create_timer(0.5).timeout

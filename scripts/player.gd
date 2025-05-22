@@ -15,7 +15,6 @@ var items: Dictionary
 
 var screen_size # Size of the game window.
 
-@export var ui: Control
 var ability_label: Label
 
 var can_gain_ability = true
@@ -24,9 +23,6 @@ var can_gain_ability = true
 func _ready():
 	get_node("./Sprite-focus").visible = false
 	add_to_group("player")
-	for l in ui.get_children():
-		if l.name == "Ult":
-			ability_label = l
 	screen_size = get_viewport_rect().size
 
 var vector = Vector2(0, 0)
@@ -107,13 +103,13 @@ func _process(_delta: float) -> void:
 
 var can_get_hit = true
 
-var maxHp = 20
+var max_hp = 20
 var hp = 20
 func reset_hp():
 	if items.get("HpBoost") != null:
-		hp = maxHp + (1 * items["HpBoost"])
+		hp = max_hp + (1 * items["HpBoost"])
 	else:
-		hp = maxHp
+		hp = max_hp
 
 func hit():
 	if can_get_hit:
@@ -141,7 +137,7 @@ func inc_ability():
 @onready var bfe = preload("res://scenes/effects/ult_clear.tscn")
 func ult_clear_screen():
 	var e = bfe.instantiate()
-	get_tree().root.add_child(e)
+	get_node("/root/Main/SubViewportContainer/Main_Viewport").add_child(e)
 	for node in get_tree().get_nodes_in_group("bullets"):
 		node.queue_free()
 	for node in get_tree().get_nodes_in_group("bullet"):
@@ -164,7 +160,6 @@ func respawn():
 		node.queue_free()
 
 func _physics_process(delta: float):
-	ability_label.text = "Ability: " + str(ability_charge)
 	screen_size = get_viewport_rect().size
 	if enabled:
 		get_input(delta)

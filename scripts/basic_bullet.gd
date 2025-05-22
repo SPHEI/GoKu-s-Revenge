@@ -26,7 +26,7 @@ func _on_area_entered(area: Node2D):
 		area.get_hit(damage)
 		var a = hit_effect.instantiate()
 		a.position = position
-		get_tree().root.add_child(a)
+		get_node("/root/Main/SubViewportContainer/Main_Viewport/PlayerBulletsScene").add_child(a)
 		queue_free()
 	
 var entered = false

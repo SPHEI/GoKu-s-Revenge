@@ -1,7 +1,7 @@
 extends Node3D
 
 var current_level_objects = [null,null,null]
-var current_level_id = 0
+var current_level_id = 4
 #speed up to check if scrolling is aligned properly
 @export var speed = 10.0
 #Add new levels here
@@ -10,6 +10,7 @@ var scene_list = [
 	["res://scenes/levels/plains.tscn", 200],
 	["res://scenes/levels/ocean.tscn", 255],
 	["res://scenes/levels/glacier.tscn", 400],
+	["res://scenes/levels/storm.tscn", 255],
 	["res://scenes/levels/test_plane.tscn",200],
 ]
 
@@ -19,8 +20,6 @@ var loading: Label = null;
 
 func _ready():
 	for l in ui.get_children():
-		if l.name == "CurrentLevel":
-			label = l;
 		if l.name == "Loading":
 			loading = l;
 	#change number to change starting level
@@ -47,7 +46,7 @@ func update_level():
 		node.queue_free()
 	loading.text = "Loading..."
 	updating = true
-	label.text = "Current Level: " + str(current_level_id)
+	ui.level = current_level_id
 	ResourceLoader.load_threaded_request(scene_list[current_level_id][0])
 	for i in range(3):
 		if current_level_objects[i] != null:

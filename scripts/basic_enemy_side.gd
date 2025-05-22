@@ -4,7 +4,7 @@ extends Enemy
 
 func _ready():
 	add_to_group("enemies")
-	if position.x > 1000.0:
+	if position.x > 500.0:
 		speed *= -1.0
 		scale = Vector2(-1,1)
 	
