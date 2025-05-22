@@ -228,6 +228,14 @@ func update_item_visuals(a: int):
 		"pick_items"
 	],
 	[	#Test stage
+		"bullet_pattern_fan",
+		"wait_until_clear",
+		"enemy_pattern_line_horiz_kamikaze",
+		"wait_until_clear",
+		"enemy_pattern_line_horiz_basic",
+		"wait_until_clear",
+		"enemy_pattern_line_horiz_basic_tri",
+		"wait_until_clear",
 		"enemy_pattern_line_vert_basic_side_left",
 		"wait_until_clear",
 		"enemy_pattern_line_vert_basic_side_right",
@@ -246,17 +254,9 @@ func update_item_visuals(a: int):
 		"wait_until_clear",
 		"enemy_pattern_line_horiz_laser",
 		"wait_until_clear",
+		"boss_test_spawn",
 		"bullet_pattern_back_and_foth",
 		"wait_until_clear",
-		"bullet_pattern_fan",
-		"wait_until_clear",
-		"enemy_pattern_line_horiz_kamikaze",
-		"wait_until_clear",
-		"enemy_pattern_line_horiz_basic",
-		"wait_until_clear",
-		"enemy_pattern_line_horiz_basic_tri",
-		"wait_until_clear",
-		"boss_test_spawn",
 		"wait_until_boss_dead",
 		"pick_items"
 	],
@@ -287,17 +287,19 @@ func win_game():
 	await get_tree().create_timer(4.0).timeout
 	get_tree().change_scene_to_file("res://scenes/main.tscn")
 	
+	
+#640 is the middle of the screen
 #BULLET PATTERN SECTION
 func bullet_pattern_line_horiz_basic(offset: float, dir: Vector2):
-	for i in range(10):
+	for i in range(15):
 		spawn_bullet(bullet_basic, Vector2(100.0 * i + offset,-4.0), dir)
 func bullet_pattern_back_and_foth():
-	for i in range(5):
+	for i in range(10):
 		bullet_pattern_line_horiz_basic(20.0 * i, Vector2(0.0,100.0))
 		await get_tree().create_timer(0.2).timeout
 		if cancel_stage:
 			return
-	for i in range(5):
+	for i in range(10):
 		bullet_pattern_line_horiz_basic(200.0 - 20.0 * i, Vector2(0.0,100.0))
 		await get_tree().create_timer(0.2).timeout
 		if cancel_stage:
@@ -311,47 +313,46 @@ func bullet_pattern_fan():
 
 #ENEMY PATTERN SECTION
 func enemy_pattern_line_horiz_kamikaze():
-	for i in range(5):
-		spawn_enemy(kamikaze, Vector2(200.0 * i,-4.0))
+	for i in range(10):
+		spawn_enemy(kamikaze, Vector2(100.0 + 130.0 * i,-4.0))
 		
 func enemy_pattern_line_horiz_basic():
 	for i in range(5):
-		spawn_enemy(wah, Vector2(200.0 * i,-4.0))	
+		spawn_enemy(wah, Vector2(100.0 + 260.0 * i,-4.0))	
 
 func enemy_pattern_line_horiz_basic_tri():
 	for i in range(5):
-		spawn_enemy(wah_tri, Vector2(200.0 * i,-4.0))	
+		spawn_enemy(wah_tri, Vector2(100.0 + 260.0 * i,-4.0))	
 		
 func enemy_pattern_line_horiz_laser():
-	for i in range(4):
-		spawn_enemy(laser, Vector2(100.0 + 300.0 * i,-100.0))	
+	for i in range(5):
+		spawn_enemy(laser, Vector2(100.0 + 260.0 * i,-100.0))	
 		
 func enemy_pattern_line_vert_basic_side_left():
 	for i in range(5):
 		spawn_enemy(wah_side, Vector2(-100.0, 100.0 * i + 100.0))
 func enemy_pattern_line_vert_basic_side_right():
 	for i in range(5):
-		spawn_enemy(wah_side, Vector2(1000.0, 100.0 * i + 100.0))
+		spawn_enemy(wah_side, Vector2(1350.0, 100.0 * i + 100.0))
 func enemy_pattern_line_vert_basic_side_both():
 	enemy_pattern_line_vert_basic_side_left()
 	enemy_pattern_line_vert_basic_side_right()
-	
 func enemy_pattern_line_vert_basic_side_tri_left():
 	for i in range(5):
 		spawn_enemy(wah_side_tri, Vector2(-100.0, 100.0 * i + 100.0))
 func enemy_pattern_line_vert_basic_side_tri_right():
 	for i in range(5):
-		spawn_enemy(wah_side_tri, Vector2(1000.0, 100.0 * i + 100.0))
+		spawn_enemy(wah_side_tri, Vector2(1350.0, 100.0 * i + 100.0))
 func enemy_pattern_line_vert_basic_side_tri_both():
 	enemy_pattern_line_vert_basic_side_tri_left()
 	enemy_pattern_line_vert_basic_side_tri_right()
 func enemy_pattern_around_spinner_bullets():
 	for i in range(5):
 		var angle = i * TAU / 5
-		point_spawn_enemy(spinner_bullets,Vector2(550,500) + Vector2(sin(angle) * 1.5, cos(angle)*-1) * 400.0)
+		point_spawn_enemy(spinner_bullets,Vector2(640,500) + Vector2(sin(angle) * 1.25, cos(angle)*-1) * 400.0)
 		await get_tree().create_timer(0.05).timeout
 func enemy_center_spinner_laser():
-	point_spawn_enemy(spinner_laser,Vector2(950,500))
+	point_spawn_enemy(spinner_laser,Vector2(640,500))
 #BOSS SECTION
 func boss_test_spawn():
-	point_spawn_boss(test_boss, Vector2(1000.0,250.0))
+	point_spawn_boss(test_boss, Vector2(640.0,250.0))

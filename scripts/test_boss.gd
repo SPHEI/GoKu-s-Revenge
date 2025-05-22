@@ -14,7 +14,7 @@ func move_around():
 		if interrupt:
 			break
 		var angle = (i + 270) * TAU / 360
-		position = Vector2(1000,250) + Vector2(sin(angle), cos(angle)-1) * 50.0
+		position = Vector2(640,250) + Vector2(sin(angle), cos(angle)-1) * 50.0
 		if cos(angle) < 0:
 			anim.animation = "move_left"
 		elif cos(angle) > 0:
@@ -24,7 +24,7 @@ func move_around():
 		if interrupt:
 			break
 		var angle = (i + 270) * TAU / 360
-		position = Vector2(1000,250) + Vector2(-sin(angle), cos(angle)-1) * 50.0 - Vector2(100,0)
+		position = Vector2(640,250) + Vector2(-sin(angle), cos(angle)-1) * 50.0 - Vector2(100,0)
 		if cos(angle) > 0:
 			anim.animation = "move_left"
 		elif cos(angle) < 0:
