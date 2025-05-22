@@ -24,9 +24,7 @@ extends Node2D
 #Reference to UI
 @onready var ui: Control = $"Debug-UI"
 var win_text: Label = null;
-var items_text: Label = null;
 var items_description: Label = null;
-var hp: Label = null;
 var enemies: Label = null;
 var bullets: Label = null;
 var boss_health_bar: ProgressBar = null;
@@ -48,14 +46,9 @@ func _ready() -> void:
 		if l.name == "WinText":
 			win_text = l;
 			win_text.text = ""
-		if l.name == "Items":
-			items_text = l
-			items_text.text = "Items: none"
 		if l.name == "ItemDesc":
 			items_description = l
 			items_description.text = ""
-		if l.name == "Hp":
-			hp = l
 		if l.name == "Items2":
 			enemies = l
 		if l.name == "Items3":
@@ -63,10 +56,8 @@ func _ready() -> void:
 		if l.name == "Boss Health Bar":
 			boss_health_bar = l
 			l.visible = false
-		#print(l.name)
 	run_stage(stages[level_manager.current_level_id])
 func _process(_delta: float) -> void:
-	hp.text = "Hp: " + str(player.hp)
 	enemies.text = "Enemies: " + str(get_tree().get_node_count_in_group("enemies") + get_tree().get_node_count_in_group("bosses"))
 	bullets.text = "Bullets: " + str(get_tree().get_node_count_in_group("bullets") + get_tree().get_node_count_in_group("bullet"))
 	if not level_manager.updating:
@@ -175,9 +166,6 @@ func pick_items():
 		
 	win_text.text = ""
 	items_description.text = ""
-	items_text.text = "Items:\n"
-	for item in player.items.keys():
-		items_text.text += item + ": " + str(player.items[item]) + "\n"
 	player.reset_hp()
 	player.enabled = true
 	

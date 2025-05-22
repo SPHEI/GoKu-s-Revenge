@@ -20,8 +20,6 @@ var loading: Label = null;
 
 func _ready():
 	for l in ui.get_children():
-		if l.name == "CurrentLevel":
-			label = l;
 		if l.name == "Loading":
 			loading = l;
 	#change number to change starting level
@@ -48,7 +46,7 @@ func update_level():
 		node.queue_free()
 	loading.text = "Loading..."
 	updating = true
-	label.text = "Current Level: " + str(current_level_id)
+	ui.level = current_level_id
 	ResourceLoader.load_threaded_request(scene_list[current_level_id][0])
 	for i in range(3):
 		if current_level_objects[i] != null:
