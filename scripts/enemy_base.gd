@@ -12,7 +12,7 @@ func get_hit(damage):
 	if hp <= 0:
 		var e = explosion.instantiate()
 		e.position = position
-		get_tree().root.add_child(e)
+		get_node("/root/Main/SubViewportContainer/Main_Viewport").add_child(e)
 		get_tree().get_nodes_in_group("player")[0].inc_ability()
 		queue_free()
 	elif not flashing:

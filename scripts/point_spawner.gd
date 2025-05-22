@@ -18,7 +18,7 @@ func _ready():
 		health_bar.visible = true
 	var unique_material = preload("res://scenes/enemies/enemy_flash.tres").duplicate()
 	a.get_node("AnimatedSprite2D").material = unique_material
-	get_tree().root.add_child(a)
+	get_node("/root/Main/SubViewportContainer/Main_Viewport/PlayerBulletsScene").add_child(a)
 	a.flash()
 	sprite.expand = true
 	await get_tree().create_timer(0.5).timeout

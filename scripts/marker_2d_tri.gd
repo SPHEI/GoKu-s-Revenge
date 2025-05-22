@@ -13,7 +13,7 @@ func _process(_delta: float) -> void:
 @onready var bullet_basic = preload("res://scenes/bullets/tracking_enemy_bullet.tscn")
 		
 func spawn():
-	var marker_root = get_node("/root/Main/EnemyBulletsScene")
+	var marker_root = get_node("/root/Main/SubViewportContainer/Main_Viewport/EnemyBulletsScene")
 	var bullet_1 = bullet_basic.instantiate()
 	bullet_1.global_position = global_position
 	marker_root.add_child(bullet_1)

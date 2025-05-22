@@ -43,5 +43,5 @@ func shoot():
 			b.position = position
 			var angle = i * TAU / 32
 			b.dir = Vector2(sin(angle), cos(angle)) * 200.0
-			get_tree().root.add_child(b)
+			get_node("/root/Main/SubViewportContainer/Main_Viewport").add_child(b)
 		await get_tree().create_timer(0.5).timeout

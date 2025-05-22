@@ -141,7 +141,7 @@ func inc_ability():
 @onready var bfe = preload("res://scenes/effects/ult_clear.tscn")
 func ult_clear_screen():
 	var e = bfe.instantiate()
-	get_tree().root.add_child(e)
+	get_node("/root/Main/SubViewportContainer/Main_Viewport").add_child(e)
 	for node in get_tree().get_nodes_in_group("bullets"):
 		node.queue_free()
 	for node in get_tree().get_nodes_in_group("bullet"):

@@ -1,7 +1,7 @@
 extends Node3D
 
 var current_level_objects = [null,null,null]
-var current_level_id = 3
+var current_level_id = 4
 #speed up to check if scrolling is aligned properly
 @export var speed = 10.0
 #Add new levels here

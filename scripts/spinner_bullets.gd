@@ -17,5 +17,5 @@ func _process(delta):
 			b.dir = b.dir.rotated(rotation)
 			b.dir = b.dir.rotated(deg_to_rad(120 * i))
 			b.speed = 100
-			get_tree().root.add_child(b)
+			get_node("/root/Main/SubViewportContainer/Main_Viewport").add_child(b)
 		

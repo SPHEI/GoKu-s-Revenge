@@ -19,6 +19,6 @@ func _on_body_entered(body: Node2D):
 		body.hit()
 		var e = explosion.instantiate()
 		e.position = position
-		get_tree().root.add_child(e)
+		get_node("/root/Main/SubViewportContainer/Main_Viewport").add_child(e)
 		queue_free()
 		
