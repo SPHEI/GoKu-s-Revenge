@@ -16,6 +16,7 @@ func shoot(damage):
 	for marker in get_children():
 		if marker is Marker2D:
 			var bullet_1 = bullet_basic.instantiate()
+			get_node("/root/Main/Debug-UI").bullets += 1
 			bullet_1.global_position = marker.global_position
 			bullet_1.damage = damage
 			marker_root.add_child(bullet_1)

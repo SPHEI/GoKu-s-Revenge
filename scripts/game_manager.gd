@@ -167,6 +167,7 @@ func pick_items():
 	win_text.text = ""
 	items_description.text = ""
 	player.reset_hp()
+	ui.update_items()
 	player.enabled = true
 	
 func update_item_visuals(a: int):

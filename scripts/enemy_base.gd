@@ -14,6 +14,7 @@ func get_hit(damage):
 		e.position = position
 		get_node("/root/Main/SubViewportContainer/Main_Viewport").add_child(e)
 		get_tree().get_nodes_in_group("player")[0].inc_ability()
+		get_node("/root/Main/Debug-UI").enemies += 1
 		queue_free()
 	elif not flashing:
 		flash()
