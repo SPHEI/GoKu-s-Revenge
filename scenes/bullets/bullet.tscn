@@ -32,11 +32,13 @@ animations = [{
 script = ExtResource("1_lpbyx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.75, 1.75)
 shape = SubResource("CircleShape2D_lj7gv")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.75, 1.75)
 sprite_frames = SubResource("SpriteFrames_kd18i")
 autoplay = "default"
 frame_progress = 0.412219

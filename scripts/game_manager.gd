@@ -208,6 +208,10 @@ func update_item_visuals(a: int):
 		"win_game"
 	],
 	[	#Stage 3
+		"enemy_center_spinner_laser",
+		"wait_until_clear",
+		"enemy_pattern_line_horiz_laser",
+		"wait_until_clear",
 		"wait-5.0",
 		"pick_items"
 	],
@@ -216,6 +220,10 @@ func update_item_visuals(a: int):
 		"pick_items"
 	],
 	[	#Test stage
+		"enemy_center_spinner_laser",
+		"wait_until_clear",
+		"enemy_pattern_line_horiz_laser",
+		"wait_until_clear",
 		"bullet_pattern_fan",
 		"wait_until_clear",
 		"enemy_pattern_line_horiz_kamikaze",
@@ -237,10 +245,6 @@ func update_item_visuals(a: int):
 		"enemy_pattern_line_vert_basic_side_tri_both",
 		"wait_until_clear",
 		"enemy_pattern_around_spinner_bullets",
-		"wait_until_clear",
-		"enemy_center_spinner_laser",
-		"wait_until_clear",
-		"enemy_pattern_line_horiz_laser",
 		"wait_until_clear",
 		"boss_test_spawn",
 		"bullet_pattern_back_and_foth",

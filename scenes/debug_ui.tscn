@@ -88,6 +88,7 @@ step = 0.001
 show_percentage = false
 
 [node name="Items3" type="Label" parent="."]
+layout_mode = 0
 offset_top = 116.0
 offset_right = 66.0
 offset_bottom = 139.0

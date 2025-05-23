@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://mg2518fopc0w" path="res://assets/sprites/touhou-12-enemies.png" id="2_pm6hk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fegej"]
+radius = 14.5
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c6j5p"]
 atlas = ExtResource("2_pm6hk")
@@ -25,8 +26,10 @@ script = ExtResource("1_en0mp")
 hp = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_fegej")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_kgek7")
 frame_progress = 0.0759136
