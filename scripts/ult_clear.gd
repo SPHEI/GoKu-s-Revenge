@@ -27,6 +27,6 @@ func _ready() -> void:
 	spawn(Vector2(1750,900))
 func spawn(pos):
 	var a = e.instantiate()
-	a.scale = Vector2(20,20)
+	a.scale = Vector2(10,10)
 	a.position = pos
 	add_child(a)

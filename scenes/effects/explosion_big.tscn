@@ -121,7 +121,7 @@ script = ExtResource("1_l80fh")
 time = 0.59
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(2, 2)
+scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_a6yia")
 autoplay = "default"
 frame = 5
