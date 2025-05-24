@@ -282,7 +282,7 @@ material_override = SubResource("StandardMaterial3D_o6xl0")
 mesh = SubResource("QuadMesh_tipki")
 
 [node name="Player" parent="SubViewportContainer/Main_Viewport" instance=ExtResource("4_o6xl0")]
-position = Vector2(606, 882)
+position = Vector2(640, 920)
 
 [node name="EnemyBulletsScene" parent="SubViewportContainer/Main_Viewport" instance=ExtResource("5_tbgi4")]
 

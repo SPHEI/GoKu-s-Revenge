@@ -202,6 +202,7 @@ func update_item_visuals(a: int):
 #STAGES SECTION
 @export var stages = [
 	[	#Stage 1
+		"wait-1.0",
 		"pick_items",
 		"enemy_pattern_line_vert_basic_side_tri_left",
 		"wait_until_clear",

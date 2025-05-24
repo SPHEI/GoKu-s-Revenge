@@ -25,6 +25,8 @@ func _ready():
 	get_node("./Sprite-focus").visible = false
 	add_to_group("player")
 	screen_size = get_viewport_rect().size
+	position.x = screen_size.x / 2
+	position.y = screen_size.y
 
 var vector = Vector2(0, 0)
 var last_vector = Vector2(0, 0)
@@ -102,7 +104,7 @@ func _process(_delta: float) -> void:
 	else:
 		get_node("./Sprite-focus").visible = false
 
-var can_get_hit = true
+var can_get_hit = false
 
 var max_hp = 3
 var hp = 3

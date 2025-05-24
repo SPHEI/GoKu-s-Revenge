@@ -329,6 +329,7 @@ vertical_alignment = 1
 
 [node name="Game Over" type="Label" parent="."]
 visible = false
+layout_mode = 0
 offset_right = 1280.0
 offset_bottom = 1080.0
 text = "GAME OVER"
