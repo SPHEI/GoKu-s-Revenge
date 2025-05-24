@@ -524,6 +524,7 @@ time = 0.56
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 show_behind_parent = true
 z_index = -1
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_jlqi0")
 autoplay = "default"
 frame_progress = 0.218692

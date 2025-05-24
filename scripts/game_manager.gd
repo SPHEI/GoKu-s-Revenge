@@ -21,6 +21,8 @@ extends Node2D
 #Add new bosses here
 @onready var test_boss = preload("res://scenes/bosses/test_boss.tscn")
 
+
+@onready var transition = $"SubViewportContainer/Main_Viewport/Transition"
 #Reference to UI
 @onready var ui: Control = $"Debug-UI"
 var win_text: Label = null;
@@ -28,6 +30,7 @@ var items_description: Label = null;
 var enemies: Label = null;
 var bullets: Label = null;
 var boss_health_bar: ProgressBar = null;
+var item_bg_panel: Panel = null;
 
 var items = [
 	#[Code name, display name, description]
@@ -56,6 +59,8 @@ func _ready() -> void:
 		if l.name == "Boss Health Bar":
 			boss_health_bar = l
 			l.visible = false
+		if l.name == "Bg-Panel":
+			item_bg_panel = l
 	run_stage(stages[level_manager.current_level_id])
 func _process(_delta: float) -> void:
 	enemies.text = "Enemies: " + str(get_tree().get_node_count_in_group("enemies") + get_tree().get_node_count_in_group("bosses"))
@@ -66,14 +71,26 @@ func _process(_delta: float) -> void:
 			boss_health_bar.visible = false
 			while cancel_stage:
 				await get_tree().create_timer(0.2).timeout
+			transition.state = 0
+			await get_tree().create_timer(0.1).timeout
+			transition.state = 1
+			await get_tree().create_timer(0.5).timeout
 			await level_manager.next_level()
+			transition.state = 2
+			await get_tree().create_timer(0.5).timeout
 			run_stage(stages[level_manager.current_level_id])
 		if Input.is_action_just_pressed("debug_previousScene"):
 			cancel_stage = true
 			boss_health_bar.visible = false
 			while cancel_stage:
 				await get_tree().create_timer(0.2).timeout
+			transition.state = 0
+			await get_tree().create_timer(0.1).timeout
+			transition.state = 1
+			await get_tree().create_timer(0.5).timeout
 			await level_manager.previous_level()
+			transition.state = 2
+			await get_tree().create_timer(0.5).timeout
 			run_stage(stages[level_manager.current_level_id])
 	
 func spawn_enemy(type: Resource, pos: Vector2):
@@ -126,6 +143,8 @@ func wait_until_boss_dead():
 var current_options = [-1,-1,-1]
 func pick_items():
 	player.enabled = false
+	item_bg_panel.go = true
+	await get_tree().create_timer(0.5).timeout
 	#Generate 3 random options to pick from
 	var rng = RandomNumberGenerator.new()
 	rng.seed = hash("Godot")
@@ -167,6 +186,9 @@ func pick_items():
 	win_text.text = ""
 	items_description.text = ""
 	player.reset_hp()
+	ui.update_items()
+	item_bg_panel.go = false
+	await get_tree().create_timer(0.5).timeout
 	player.enabled = true
 	
 func update_item_visuals(a: int):
@@ -180,6 +202,7 @@ func update_item_visuals(a: int):
 #STAGES SECTION
 @export var stages = [
 	[	#Stage 1
+		"wait-1.0",
 		"pick_items",
 		"enemy_pattern_line_vert_basic_side_tri_left",
 		"wait_until_clear",
@@ -208,6 +231,10 @@ func update_item_visuals(a: int):
 		"win_game"
 	],
 	[	#Stage 3
+		"enemy_center_spinner_laser",
+		"wait_until_clear",
+		"enemy_pattern_line_horiz_laser",
+		"wait_until_clear",
 		"wait-5.0",
 		"pick_items"
 	],
@@ -216,6 +243,10 @@ func update_item_visuals(a: int):
 		"pick_items"
 	],
 	[	#Test stage
+		"enemy_center_spinner_laser",
+		"wait_until_clear",
+		"enemy_pattern_line_horiz_laser",
+		"wait_until_clear",
 		"bullet_pattern_fan",
 		"wait_until_clear",
 		"enemy_pattern_line_horiz_kamikaze",
@@ -237,10 +268,6 @@ func update_item_visuals(a: int):
 		"enemy_pattern_line_vert_basic_side_tri_both",
 		"wait_until_clear",
 		"enemy_pattern_around_spinner_bullets",
-		"wait_until_clear",
-		"enemy_center_spinner_laser",
-		"wait_until_clear",
-		"enemy_pattern_line_horiz_laser",
 		"wait_until_clear",
 		"boss_test_spawn",
 		"bullet_pattern_back_and_foth",
@@ -267,7 +294,13 @@ func run_stage(list):
 		if cancel_stage:
 			cancel_stage = false
 			return
+	transition.state = 0
+	await get_tree().create_timer(0.1).timeout
+	transition.state = 1
+	await get_tree().create_timer(0.5).timeout
 	await level_manager.next_level()
+	transition.state = 2
+	await get_tree().create_timer(0.5).timeout
 	run_stage(stages[level_manager.current_level_id])
 	
 func win_game():

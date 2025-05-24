@@ -20,10 +20,13 @@ var ability_label: Label
 var can_gain_ability = true
 
 
+
 func _ready():
 	get_node("./Sprite-focus").visible = false
 	add_to_group("player")
 	screen_size = get_viewport_rect().size
+	position.x = screen_size.x / 2
+	position.y = screen_size.y
 
 var vector = Vector2(0, 0)
 var last_vector = Vector2(0, 0)
@@ -101,23 +104,32 @@ func _process(_delta: float) -> void:
 	else:
 		get_node("./Sprite-focus").visible = false
 
-var can_get_hit = true
+var can_get_hit = false
 
-var max_hp = 20
-var hp = 20
+var max_hp = 3
+var hp = 3
 func reset_hp():
 	if items.get("HpBoost") != null:
 		hp = max_hp + (1 * items["HpBoost"])
 	else:
 		hp = max_hp
 
+@onready var explosion = preload("res://scenes/effects/explosion_big.tscn")
 func hit():
-	if can_get_hit:
-		print("Player got hit")
-		respawn()
+	if enabled and can_get_hit:
+		get_node("/root/Main/Debug-UI/HurtFx").a = 1.0
 		hp -= 1
 		if hp <= 0:
+			var e = explosion.instantiate()
+			e.position = position
+			get_node("/root/Main/SubViewportContainer/Main_Viewport").add_child(e)
+			get_node("/root/Main/Debug-UI").game_over()
+			enabled = false
+			visible = false
+			await get_tree().create_timer(4).timeout
 			get_tree().call_deferred("change_scene_to_file", "res://scenes/main.tscn")
+		else:
+			respawn()
 		#if items.get("BlinkExtend") != null:
 		#	await get_tree().create_timer(0.5 * (1 + items["BlinkExtend"] * 0.5)).timeout
 		#else:

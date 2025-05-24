@@ -4,9 +4,7 @@
 [ext_resource type="ArrayMesh" uid="uid://bvr6w2oipwpo5" path="res://scenes/levels/ocean.tres" id="2_56431"]
 [ext_resource type="Script" uid="uid://boi0khglse556" path="res://scripts/ocean.gd" id="3_0vd3p"]
 [ext_resource type="Texture2D" uid="uid://dwpsohevhhoyb" path="res://assets/textures/dayfair.png" id="4_sqcj4"]
-[ext_resource type="Material" uid="uid://bedkkb2bwfqh1" path="res://scenes/levels/storm_particle.tres" id="5_0vd3p"]
-[ext_resource type="QuadMesh" uid="uid://np6instjvj1t" path="res://scenes/levels/storm.tres" id="6_sqcj4"]
-[ext_resource type="QuadMesh" uid="uid://vyubxed6kgoe" path="res://scenes/levels/storm_2.tres" id="7_sqcj4"]
+[ext_resource type="Script" uid="uid://chadt7y505ic4" path="res://scripts/lightning.gd" id="5_56431"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m665o"]
 render_priority = 0
@@ -37,27 +35,36 @@ volumetric_fog_density = 0.0
 volumetric_fog_albedo = Color(0.362829, 0.362829, 0.362829, 1)
 volumetric_fog_length = 128.0
 
-[sub_resource type="Gradient" id="Gradient_m665o"]
+[sub_resource type="Gradient" id="Gradient_mslyy"]
 offsets = PackedFloat32Array(0, 0.121469, 1)
 colors = PackedColorArray(0, 0, 0, 1, 0.217514, 0.217514, 0.217514, 1, 1, 1, 1, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_56431"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_im4cs"]
 
 [sub_resource type="NoiseTexture3D" id="NoiseTexture3D_0vd3p"]
-color_ramp = SubResource("Gradient_m665o")
-noise = SubResource("FastNoiseLite_56431")
+color_ramp = SubResource("Gradient_mslyy")
+noise = SubResource("FastNoiseLite_im4cs")
 
 [sub_resource type="FogMaterial" id="FogMaterial_0vd3p"]
 density = 0.2
 emission = Color(0.289324, 0.282121, 0.388692, 1)
 density_texture = SubResource("NoiseTexture3D_0vd3p")
 
+[sub_resource type="Gradient" id="Gradient_m665o"]
+offsets = PackedFloat32Array(0, 0.121469, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.217514, 0.217514, 0.217514, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_56431"]
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_56431"]
+color_ramp = SubResource("Gradient_m665o")
+noise = SubResource("FastNoiseLite_56431")
+
 [sub_resource type="FogMaterial" id="FogMaterial_m665o"]
 density = 0.4
+emission = Color(0, 0, 0.172549, 1)
 edge_fade = 1e-05
-density_texture = SubResource("NoiseTexture3D_0vd3p")
-
-[sub_resource type="Skin" id="Skin_t3xin"]
+density_texture = SubResource("NoiseTexture3D_56431")
 
 [node name="Storm" type="Node3D"]
 
@@ -97,14 +104,17 @@ size = Vector3(31.9286, 10.6943, 15.3752)
 shape = 0
 material = SubResource("FogMaterial_m665o")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="FogVolume3"]
-transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 1, -4.38255, 0, 3.66284)
-amount = 2
-amount_ratio = 0.5
-fixed_fps = 60
-process_material = ExtResource("5_0vd3p")
-draw_pass_1 = ExtResource("6_sqcj4")
-draw_skin = SubResource("Skin_t3xin")
+[node name="OmniLight3D" type="OmniLight3D" parent="FogVolume3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.0002, 0.426552, 1.10409)
+light_color = Color(1, 1, 0, 1)
+light_energy = 16.0
+script = ExtResource("5_56431")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="FogVolume3/OmniLight3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.6614, -1.51672, -6.39354)
+light_color = Color(1, 1, 0, 1)
+light_energy = 16.0
+script = ExtResource("5_56431")
 
 [node name="FogVolume2" type="FogVolume" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.9767, 39.4213, -19.5122)
@@ -118,14 +128,11 @@ size = Vector3(11.7704, 5, 14.1572)
 shape = 0
 material = SubResource("FogMaterial_m665o")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="FogVolume2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
-amount = 2
-amount_ratio = 0.5
-fixed_fps = 60
-process_material = ExtResource("5_0vd3p")
-draw_pass_1 = ExtResource("7_sqcj4")
-draw_skin = SubResource("Skin_t3xin")
+[node name="OmniLight3D" type="OmniLight3D" parent="FogVolume2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.36924, 0.426552, -0.845144)
+light_color = Color(1, 1, 0, 1)
+light_energy = 16.0
+script = ExtResource("5_56431")
 
 [node name="FogVolume4" type="FogVolume" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.853989, 39.4213, -49.4661)
@@ -139,13 +146,24 @@ size = Vector3(87.8446, 5, 33.3687)
 shape = 0
 material = SubResource("FogMaterial_m665o")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="FogVolume4"]
-transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, -19.3781)
-amount = 4
-amount_ratio = 0.5
-fixed_fps = 60
-process_material = ExtResource("5_0vd3p")
-draw_pass_1 = ExtResource("6_sqcj4")
+[node name="OmniLight3D" type="OmniLight3D" parent="FogVolume4/FogVolume5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.8557, 0.426552, 2.51721)
+light_color = Color(1, 1, 0, 1)
+light_energy = 16.0
+script = ExtResource("5_56431")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="FogVolume4/FogVolume5/OmniLight3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.0807, 0.426552, 1.8158)
+light_color = Color(1, 1, 0, 1)
+light_energy = 16.0
+light_size = 1.0
+script = ExtResource("5_56431")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="FogVolume4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2727, 0.426552, 4.10178)
+light_color = Color(1, 1, 0, 1)
+light_energy = 16.0
+script = ExtResource("5_56431")
 
 [node name="FogVolume6" type="FogVolume" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.85579, 39.4213, 42.7925)
@@ -165,23 +183,17 @@ size = Vector3(15.6595, 11.9985, 18.8625)
 shape = 0
 material = SubResource("FogMaterial_m665o")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="FogVolume6"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 13.9711, -3.41484, 6.81404)
-amount = 2
-amount_ratio = 0.5
-fixed_fps = 60
-process_material = ExtResource("5_0vd3p")
-draw_pass_1 = ExtResource("6_sqcj4")
-draw_skin = SubResource("Skin_t3xin")
+[node name="OmniLight3D" type="OmniLight3D" parent="FogVolume6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.9206, -4.42467, 8.57062)
+light_color = Color(1, 1, 0, 1)
+light_energy = 16.0
+script = ExtResource("5_56431")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="FogVolume6/GPUParticles3D"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -9.72127, 2.06985, -4.02453)
-amount = 2
-amount_ratio = 0.5
-fixed_fps = 60
-process_material = ExtResource("5_0vd3p")
-draw_pass_1 = ExtResource("7_sqcj4")
-draw_skin = SubResource("Skin_t3xin")
+[node name="OmniLight3D2" type="OmniLight3D" parent="FogVolume6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.29436, -1.28163, -7.01104)
+light_color = Color(1, 1, 0, 1)
+light_energy = 16.0
+script = ExtResource("5_56431")
 
 [node name="FogVolume7" type="FogVolume" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.1202, 39.4213, 66.4667)
@@ -189,13 +201,11 @@ size = Vector3(9.41772, 5, 14.1572)
 shape = 0
 material = SubResource("FogMaterial_m665o")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="FogVolume7"]
-amount = 2
-amount_ratio = 0.5
-fixed_fps = 60
-process_material = ExtResource("5_0vd3p")
-draw_pass_1 = ExtResource("6_sqcj4")
-draw_skin = SubResource("Skin_t3xin")
+[node name="OmniLight3D" type="OmniLight3D" parent="FogVolume7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.699449, 1.84911, 2.24014)
+light_color = Color(1, 1, 0, 1)
+light_energy = 16.0
+script = ExtResource("5_56431")
 
 [node name="FogVolume8" type="FogVolume" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.7334, 39.4213, 101.617)
@@ -215,14 +225,17 @@ size = Vector3(15.1787, 5, 24.9254)
 shape = 0
 material = SubResource("FogMaterial_m665o")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="FogVolume8"]
-transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 3, 0, -2.84878, 0)
-amount = 2
-amount_ratio = 0.5
-fixed_fps = 60
-process_material = ExtResource("5_0vd3p")
-draw_pass_1 = ExtResource("7_sqcj4")
-draw_skin = SubResource("Skin_t3xin")
+[node name="OmniLight3D" type="OmniLight3D" parent="FogVolume8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.49192, 0.426552, 8.57062)
+light_color = Color(1, 1, 0, 1)
+light_energy = 16.0
+script = ExtResource("5_56431")
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="FogVolume8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.43983, 0.426552, 0.12307)
+light_color = Color(1, 1, 0, 1)
+light_energy = 16.0
+script = ExtResource("5_56431")
 
 [node name="FogVolume9" type="FogVolume" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.4368, 39.4213, 95.3946)
@@ -230,11 +243,8 @@ size = Vector3(23.0976, 5, 32.8865)
 shape = 0
 material = SubResource("FogMaterial_m665o")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="FogVolume9"]
-transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 0)
-amount = 2
-amount_ratio = 0.5
-fixed_fps = 60
-process_material = ExtResource("5_0vd3p")
-draw_pass_1 = ExtResource("6_sqcj4")
-draw_skin = SubResource("Skin_t3xin")
+[node name="OmniLight3D" type="OmniLight3D" parent="FogVolume9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.426552, -0.0733948)
+light_color = Color(1, 1, 0, 1)
+light_energy = 16.0
+script = ExtResource("5_56431")

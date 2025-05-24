@@ -1,26 +1,48 @@
-[gd_scene load_steps=4 format=3 uid="uid://np1yrs2ujpia"]
+[gd_scene load_steps=7 format=3 uid="uid://np1yrs2ujpia"]
 
 [ext_resource type="Script" uid="uid://5f7wigejikri" path="res://scripts/tracking_enemy_bullet.gd" id="1_pjta7"]
 [ext_resource type="Texture2D" uid="uid://bxl2x1g8bg0yc" path="res://assets/sprites/bullets.png" id="1_qaeyo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pjta7"]
-radius = 16.0
+radius = 8.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pjta7"]
+atlas = ExtResource("1_qaeyo")
+region = Rect2(1, 33, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y7art"]
+atlas = ExtResource("1_qaeyo")
+region = Rect2(1, 49, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_onksd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pjta7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y7art")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="TrackingEnemyBullet" type="Area2D"]
 script = ExtResource("1_pjta7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_pjta7")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(1.19209e-07, 0)
-scale = Vector2(1.66176, 1.75)
-texture = ExtResource("1_qaeyo")
-region_enabled = true
-region_rect = Rect2(0, 33.302, 17.52, 16.375)
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 scale = Vector2(1.45, 1.45)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_onksd")
+autoplay = "default"
+frame_progress = 0.562781
 
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

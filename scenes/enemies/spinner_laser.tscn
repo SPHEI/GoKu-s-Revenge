@@ -60,9 +60,11 @@ script = ExtResource("1_pdbae")
 hp = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_wb2k1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_jh32g")
 autoplay = "default"
 frame = 1
@@ -77,11 +79,13 @@ script = ExtResource("3_tyhnb")
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="l3"]
 z_index = -1
+scale = Vector2(2, 1)
 sprite_frames = SubResource("SpriteFrames_x1m7v")
 autoplay = "default"
 frame_progress = 0.0742079
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="l3"]
+scale = Vector2(2, 1)
 shape = SubResource("RectangleShape2D_lqlj1")
 
 [node name="l2" type="Area2D" parent="."]
@@ -93,11 +97,13 @@ script = ExtResource("3_tyhnb")
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="l2"]
 z_index = -1
+scale = Vector2(2, 1)
 sprite_frames = SubResource("SpriteFrames_x1m7v")
 autoplay = "default"
 frame_progress = 0.0742079
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="l2"]
+scale = Vector2(2, 1)
 shape = SubResource("RectangleShape2D_lqlj1")
 
 [node name="l" type="Area2D" parent="."]
@@ -108,9 +114,11 @@ script = ExtResource("3_tyhnb")
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="l"]
 z_index = -1
+scale = Vector2(2, 1)
 sprite_frames = SubResource("SpriteFrames_x1m7v")
 autoplay = "default"
 frame_progress = 0.0742079
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="l"]
+scale = Vector2(2, 1)
 shape = SubResource("RectangleShape2D_lqlj1")

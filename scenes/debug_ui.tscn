@@ -1,24 +1,38 @@
-[gd_scene load_steps=9 format=3 uid="uid://devmk4at6fcf0"]
+[gd_scene load_steps=30 format=3 uid="uid://devmk4at6fcf0"]
 
 [ext_resource type="Script" uid="uid://bm61d5nseh4u1" path="res://scripts/ui_manager.gd" id="1_bth2w"]
 [ext_resource type="Script" uid="uid://8mkjgu4rvcbl" path="res://scripts/label.gd" id="1_r5sbi"]
+[ext_resource type="Script" uid="uid://c5c2q32lol26o" path="res://scripts/itempickbg.gd" id="2_yw5hf"]
 [ext_resource type="Texture2D" uid="uid://dfgelhend2vpj" path="res://assets/sprites/ui.png" id="3_mogph"]
+[ext_resource type="Texture2D" uid="uid://co72sgy4b5tjp" path="res://assets/sprites/mask.png" id="4_7fxyt"]
+[ext_resource type="Shader" uid="uid://ch5b02ookclc7" path="res://shaders/Plr_Health_Bar.gdshader" id="4_bwadb"]
+[ext_resource type="Texture2D" uid="uid://sgfre03vjmta" path="res://assets/sprites/outline.png" id="4_eato8"]
+[ext_resource type="Texture2D" uid="uid://bw4u3ynoap8ct" path="res://assets/sprites/upgrades.png" id="5_omgkx"]
+[ext_resource type="FontFile" uid="uid://cdhkpp6wfp3x5" path="res://assets/dpcomic.ttf" id="8_ugl6f"]
+[ext_resource type="Script" uid="uid://bavdt4wu4xtsg" path="res://scripts/hurt_fx.gd" id="10_fpwo2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ugl6f"]
+font = ExtResource("8_ugl6f")
+font_size = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_mogph"]
-font_size = 30
-outline_size = 3
+font = ExtResource("8_ugl6f")
+font_size = 60
+outline_size = 6
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_bth2w"]
-font_size = 25
+font = ExtResource("8_ugl6f")
+font_size = 50
 font_color = Color(1, 1, 0, 1)
-outline_size = 5
+outline_size = 10
 outline_color = Color(0, 0.0588235, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_loc82"]
-font_size = 50
+font = ExtResource("8_ugl6f")
+font_size = 80
 font_color = Color(1, 1, 0.317647, 1)
-outline_size = 8
+outline_size = 16
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 6
 shadow_color = Color(0, 0, 0, 0.219608)
@@ -29,7 +43,60 @@ bg_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bth2w"]
 bg_color = Color(1, 0, 0, 1)
 
-[node name="Debug-UI" type="Control"]
+[sub_resource type="LabelSettings" id="LabelSettings_fpwo2"]
+font = ExtResource("8_ugl6f")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_3q5kn"]
+font = ExtResource("8_ugl6f")
+font_size = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mogph"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_omgkx"]
+shader = ExtResource("4_bwadb")
+shader_parameter/lives = 3
+
+[sub_resource type="LabelSettings" id="LabelSettings_3uhy5"]
+font = ExtResource("8_ugl6f")
+font_size = 20
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7fxyt"]
+load_path = "res://.godot/imported/upgrades.png-ac61e941d2250d81e390abe1516564dc.ctex"
+
+[sub_resource type="LabelSettings" id="LabelSettings_jxxn8"]
+font = ExtResource("8_ugl6f")
+font_size = 20
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eato8"]
+load_path = "res://.godot/imported/upgrades.png-ac61e941d2250d81e390abe1516564dc.ctex"
+
+[sub_resource type="LabelSettings" id="LabelSettings_3xr1e"]
+font = ExtResource("8_ugl6f")
+font_size = 20
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ugl6f"]
+load_path = "res://.godot/imported/upgrades.png-ac61e941d2250d81e390abe1516564dc.ctex"
+
+[sub_resource type="LabelSettings" id="LabelSettings_srrvq"]
+font = ExtResource("8_ugl6f")
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_yw5hf"]
+font = ExtResource("8_ugl6f")
+font_size = 60
+
+[sub_resource type="LabelSettings" id="LabelSettings_q5en3"]
+font = ExtResource("8_ugl6f")
+font_size = 80
+font_color = Color(1, 0, 0, 1)
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 6
+shadow_color = Color(0, 0, 0, 0.219608)
+
+[node name="Debug-UI" type="Control" node_paths=PackedStringArray("plr_health_bar", "plr_ability_bar", "crystal", "sphere", "steak", "drug", "level_label", "enemies_label", "bullets_label", "game_over_obj")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,18 +104,37 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_bth2w")
+plr_health_bar = NodePath("Plr Health Bar")
+plr_ability_bar = NodePath("Mask/Plr Ability Bar")
+crystal = NodePath("Focus Crystal Cntr")
+sphere = NodePath("Soul Sphere Cntr")
+steak = NodePath("Steak Cntr")
+drug = NodePath("Demondrug Cntr")
+level_label = NodePath("Level")
+enemies_label = NodePath("Enemies")
+bullets_label = NodePath("Bullets")
+game_over_obj = NodePath("Game Over")
+
+[node name="Bg-Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_top = 540.0
+offset_right = 1280.0
+offset_bottom = 1080.0
+scale = Vector2(1, 1e-05)
+script = ExtResource("2_yw5hf")
 
 [node name="Fps" type="Label" parent="."]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 24.0
 text = "Fps: X"
+label_settings = SubResource("LabelSettings_ugl6f")
 script = ExtResource("1_r5sbi")
 
 [node name="Loading" type="Label" parent="."]
 layout_mode = 0
 offset_left = 1024.0
-offset_top = 1038.0
+offset_top = 1025.0
 offset_right = 1280.0
 offset_bottom = 1080.0
 text = "Loading..."
@@ -58,10 +144,10 @@ vertical_alignment = 2
 
 [node name="ItemDesc" type="Label" parent="."]
 layout_mode = 0
-offset_left = 887.0
+offset_left = 941.0
 offset_top = 436.0
-offset_right = 1225.0
-offset_bottom = 693.0
+offset_right = 1280.0
+offset_bottom = 825.0
 text = "According to all known laws of aviation, there is no way a be should be able to fly."
 label_settings = SubResource("LabelSettings_bth2w")
 autowrap_mode = 2
@@ -80,7 +166,7 @@ layout_mode = 0
 offset_left = 140.0
 offset_top = 10.0
 offset_right = 1140.0
-offset_bottom = 37.0
+offset_bottom = 59.0
 theme_override_styles/background = SubResource("StyleBoxFlat_loc82")
 theme_override_styles/fill = SubResource("StyleBoxFlat_bth2w")
 max_value = 1.0
@@ -88,19 +174,177 @@ step = 0.001
 show_percentage = false
 
 [node name="Items3" type="Label" parent="."]
+visible = false
+layout_mode = 0
 offset_top = 116.0
 offset_right = 66.0
 offset_bottom = 139.0
 text = "Bullets"
+label_settings = SubResource("LabelSettings_fpwo2")
 
 [node name="Items2" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_top = 58.0
 offset_right = 40.0
 offset_bottom = 81.0
 text = "Enemies"
+label_settings = SubResource("LabelSettings_3q5kn")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1600, 540)
 scale = Vector2(4, 4)
 texture = ExtResource("3_mogph")
+
+[node name="Outline" type="Sprite2D" parent="."]
+position = Vector2(1600, 560)
+scale = Vector2(4, 4)
+texture = ExtResource("4_eato8")
+
+[node name="Mask" type="Sprite2D" parent="."]
+clip_children = 1
+position = Vector2(1600, 560)
+scale = Vector2(4, 4)
+texture = ExtResource("4_7fxyt")
+
+[node name="Plr Ability Bar" type="ProgressBar" parent="Mask"]
+offset_left = -71.0
+offset_top = -17.0
+offset_right = 71.0
+offset_bottom = 17.0
+theme_override_constants/outline_size = -1
+theme_override_styles/background = SubResource("StyleBoxFlat_loc82")
+theme_override_styles/fill = SubResource("StyleBoxFlat_mogph")
+max_value = 1.0
+step = 0.001
+value = 1.0
+show_percentage = false
+
+[node name="Plr Health Bar" type="ProgressBar" parent="."]
+material = SubResource("ShaderMaterial_omgkx")
+layout_mode = 0
+offset_left = 1311.0
+offset_top = 356.0
+offset_right = 1879.0
+offset_bottom = 440.0
+theme_override_constants/outline_size = -1
+theme_override_styles/background = SubResource("StyleBoxFlat_loc82")
+theme_override_styles/fill = SubResource("StyleBoxFlat_bth2w")
+max_value = 1.0
+step = 0.001
+value = 1.0
+show_percentage = false
+
+[node name="Focus Crystal Cntr" type="Sprite2D" parent="."]
+position = Vector2(1380, 804)
+scale = Vector2(4, 4)
+texture = ExtResource("5_omgkx")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="Label" type="Label" parent="Focus Crystal Cntr"]
+offset_left = 3.75
+offset_right = 14.75
+offset_bottom = 20.0
+text = "1"
+label_settings = SubResource("LabelSettings_3uhy5")
+
+[node name="Soul Sphere Cntr" type="Sprite2D" parent="."]
+position = Vector2(1520, 800)
+scale = Vector2(4, 4)
+texture = SubResource("CompressedTexture2D_7fxyt")
+region_enabled = true
+region_rect = Rect2(32, 0, 32, 32)
+
+[node name="Label" type="Label" parent="Soul Sphere Cntr"]
+offset_left = 4.0
+offset_top = 1.0
+offset_right = 15.0
+offset_bottom = 20.0
+text = "0"
+label_settings = SubResource("LabelSettings_jxxn8")
+
+[node name="Steak Cntr" type="Sprite2D" parent="."]
+position = Vector2(1672, 800)
+scale = Vector2(4, 4)
+texture = SubResource("CompressedTexture2D_eato8")
+region_enabled = true
+region_rect = Rect2(64, 0, 32, 32)
+
+[node name="Label" type="Label" parent="Steak Cntr"]
+offset_left = 4.0
+offset_top = 1.0
+offset_right = 15.0
+offset_bottom = 20.0
+text = "2"
+label_settings = SubResource("LabelSettings_3xr1e")
+
+[node name="Demondrug Cntr" type="Sprite2D" parent="."]
+position = Vector2(1380, 956)
+scale = Vector2(4, 4)
+texture = SubResource("CompressedTexture2D_ugl6f")
+region_enabled = true
+region_rect = Rect2(96, 0, 32, 32)
+
+[node name="Label" type="Label" parent="Demondrug Cntr"]
+offset_left = 4.0
+offset_top = 1.0
+offset_right = 15.0
+offset_bottom = 20.0
+text = "5"
+label_settings = SubResource("LabelSettings_srrvq")
+
+[node name="Enemies" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1316.0
+offset_top = 180.0
+offset_right = 1884.0
+offset_bottom = 239.0
+text = "Enemies Defeated: 0"
+label_settings = SubResource("LabelSettings_yw5hf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Level" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1472.0
+offset_top = 24.0
+offset_right = 1884.0
+offset_bottom = 88.0
+text = "Current Stage: 0"
+label_settings = SubResource("LabelSettings_yw5hf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Bullets" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1316.0
+offset_top = 112.0
+offset_right = 1884.0
+offset_bottom = 167.0
+text = "Bullets Shot: 0"
+label_settings = SubResource("LabelSettings_yw5hf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Game Over" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 1080.0
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_q5en3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="Game Over"]
+show_behind_parent = true
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 1080.0
+
+[node name="HurtFx" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 1080.0
+script = ExtResource("10_fpwo2")

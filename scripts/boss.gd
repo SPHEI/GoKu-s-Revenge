@@ -96,6 +96,7 @@ func get_hit(damage):
 			get_tree().get_nodes_in_group("player")[0].ability_charge = 100
 			health_bar.value = 0
 			interrupt = true
+			get_node("/root/Main/Debug-UI").enemies += 1
 			await spawn_explosions()
 			queue_free()
 		elif not flashing:
