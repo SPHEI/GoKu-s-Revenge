@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://devmk4at6fcf0"]
+[gd_scene load_steps=30 format=3 uid="uid://devmk4at6fcf0"]
 
 [ext_resource type="Script" uid="uid://bm61d5nseh4u1" path="res://scripts/ui_manager.gd" id="1_bth2w"]
 [ext_resource type="Script" uid="uid://8mkjgu4rvcbl" path="res://scripts/label.gd" id="1_r5sbi"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://sgfre03vjmta" path="res://assets/sprites/outline.png" id="4_eato8"]
 [ext_resource type="Texture2D" uid="uid://bw4u3ynoap8ct" path="res://assets/sprites/upgrades.png" id="5_omgkx"]
 [ext_resource type="FontFile" uid="uid://cdhkpp6wfp3x5" path="res://assets/dpcomic.ttf" id="8_ugl6f"]
+[ext_resource type="Script" uid="uid://bavdt4wu4xtsg" path="res://scripts/hurt_fx.gd" id="10_fpwo2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ugl6f"]
 font = ExtResource("8_ugl6f")
@@ -340,3 +341,9 @@ show_behind_parent = true
 layout_mode = 0
 offset_right = 1280.0
 offset_bottom = 1080.0
+
+[node name="HurtFx" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 1080.0
+script = ExtResource("10_fpwo2")

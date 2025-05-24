@@ -115,6 +115,7 @@ func reset_hp():
 @onready var explosion = preload("res://scenes/effects/explosion_big.tscn")
 func hit():
 	if enabled and can_get_hit:
+		get_node("/root/Main/Debug-UI/HurtFx").a = 1.0
 		hp -= 1
 		if hp <= 0:
 			var e = explosion.instantiate()
