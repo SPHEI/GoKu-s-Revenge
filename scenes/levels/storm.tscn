@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dhgip6a15v3q0"]
+[gd_scene load_steps=18 format=3 uid="uid://dhgip6a15v3q0"]
 
 [ext_resource type="Shader" uid="uid://51u2c83akubc" path="res://shaders/ocean.gdshader" id="1_m665o"]
 [ext_resource type="ArrayMesh" uid="uid://bvr6w2oipwpo5" path="res://scenes/levels/ocean.tres" id="2_56431"]
@@ -35,26 +35,36 @@ volumetric_fog_density = 0.0
 volumetric_fog_albedo = Color(0.362829, 0.362829, 0.362829, 1)
 volumetric_fog_length = 128.0
 
-[sub_resource type="Gradient" id="Gradient_m665o"]
+[sub_resource type="Gradient" id="Gradient_mslyy"]
 offsets = PackedFloat32Array(0, 0.121469, 1)
 colors = PackedColorArray(0, 0, 0, 1, 0.217514, 0.217514, 0.217514, 1, 1, 1, 1, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_56431"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_im4cs"]
 
 [sub_resource type="NoiseTexture3D" id="NoiseTexture3D_0vd3p"]
-color_ramp = SubResource("Gradient_m665o")
-noise = SubResource("FastNoiseLite_56431")
+color_ramp = SubResource("Gradient_mslyy")
+noise = SubResource("FastNoiseLite_im4cs")
 
 [sub_resource type="FogMaterial" id="FogMaterial_0vd3p"]
 density = 0.2
 emission = Color(0.289324, 0.282121, 0.388692, 1)
 density_texture = SubResource("NoiseTexture3D_0vd3p")
 
+[sub_resource type="Gradient" id="Gradient_m665o"]
+offsets = PackedFloat32Array(0, 0.121469, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.217514, 0.217514, 0.217514, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_56431"]
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_56431"]
+color_ramp = SubResource("Gradient_m665o")
+noise = SubResource("FastNoiseLite_56431")
+
 [sub_resource type="FogMaterial" id="FogMaterial_m665o"]
 density = 0.4
 emission = Color(0, 0, 0.172549, 1)
 edge_fade = 1e-05
-density_texture = SubResource("NoiseTexture3D_0vd3p")
+density_texture = SubResource("NoiseTexture3D_56431")
 
 [node name="Storm" type="Node3D"]
 

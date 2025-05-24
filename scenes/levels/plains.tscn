@@ -14,10 +14,10 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nlvgw"]
 albedo_texture = ExtResource("1_xrhlj")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dmdpa"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yaqxf"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_7u3jv"]
-material = SubResource("StandardMaterial3D_dmdpa")
+material = SubResource("StandardMaterial3D_yaqxf")
 size = Vector2(200, 200)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ldg48"]
