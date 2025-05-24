@@ -12,6 +12,8 @@ extends Control
 @export var enemies_label: Label
 @export var bullets_label: Label
 
+@export var game_over_obj: Label
+
 var plr
 var level = 0
 var enemies = 0
@@ -61,3 +63,5 @@ func _process(_delta):
 	level_label.text = "Current Stage: " + str(level)
 	enemies_label.text = "Enemies Defeated: " + str(enemies)
 	bullets_label.text = "Bullets Shot: " + str(bullets)
+func game_over():
+	game_over_obj.visible = true
