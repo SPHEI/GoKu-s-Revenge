@@ -60,7 +60,7 @@ func _process(_delta):
 	plr_health_bar.value = float(plr.hp)/float(mhp)
 	plr_health_bar.material.set_shader_parameter("lives", plr.hp);
 	plr_ability_bar.value = float(plr.ability_charge)/100.0
-	level_label.text = "Current Stage: " + str(level)
+	level_label.text = "Current Stage: " + str(level + 1)
 	enemies_label.text = "Enemies Defeated: " + str(enemies)
 	bullets_label.text = "Bullets Shot: " + str(bullets)
 func game_over():

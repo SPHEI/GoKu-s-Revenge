@@ -87,20 +87,23 @@ func _on_body_entered(body: Node2D):
 		body.hit()
 
 #Call this from player bullet script
+var can_get_hit = true;
 func get_hit(damage):
-	if not interrupt:
-		hp -= damage
-		if health_bar != null:
-			health_bar.value = hp/max_hp
-		if hp <= 0:
-			get_tree().get_nodes_in_group("player")[0].ability_charge = 100
-			health_bar.value = 0
-			interrupt = true
-			get_node("/root/Main/Debug-UI").enemies += 1
-			await spawn_explosions()
-			queue_free()
-		elif not flashing:
-			flash()
+	if can_get_hit:
+		if not interrupt:
+			hp -= damage
+			if health_bar != null:
+				health_bar.value = hp/max_hp
+			if hp <= 0:
+				can_get_hit = false
+				get_tree().get_nodes_in_group("player")[0].ability_charge = 100
+				health_bar.value = 0
+				interrupt = true
+				get_node("/root/Main/Debug-UI").enemies += 1
+				await spawn_explosions()
+				queue_free()
+			elif not flashing:
+				flash()
 		
 func spawn_explosions():
 	var rng = RandomNumberGenerator.new()
