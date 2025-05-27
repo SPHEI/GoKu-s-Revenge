@@ -204,6 +204,10 @@ func update_item_visuals(a: int):
 @export var stages = [
 	[	#Stage 0
 		"wait-1.0",
+		"boss_test_spawn",
+		"wait_until_boss_dead",
+		"pick_items",
+		"wait-1.0",
 		"boss_aunn_spawn",
 		"wait_until_boss_dead",
 		"pick_items",

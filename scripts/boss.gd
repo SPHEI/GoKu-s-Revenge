@@ -28,7 +28,8 @@ var not_moves = [
 	"_on_body_entered",
 	"get_hit",
 	"spawn_explosions",
-	"flash"
+	"flash",
+	"points_on_circle"
 ]
 
 
@@ -44,12 +45,9 @@ func _ready():
 		var a = get_script().get_script_method_list()
 		moves.clear()
 		for i in a:
-			if i.name not in not_moves:
-				if i.name.begins_with("con_"):
-					con_moves.append(i.name)
-				else:
-					moves.append(i.name)
-			
+			if i.name.ends_with("_stage"):
+				moves.append(i.name)
+		
 	print(moves)
 	body_entered.connect(_on_body_entered)
 	
@@ -68,8 +66,6 @@ func logic():
 		print("BOSS LOGIC ERROR: Boss has no moves!")
 		return
 	
-	await call(moves[0]) # first has to be wait
-	call("con_logic")
 	match mode:
 		modes.SEQUENCE:
 			#Goes through all moves in order

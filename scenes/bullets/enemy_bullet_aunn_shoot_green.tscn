@@ -1,0 +1,93 @@
+[gd_scene load_steps=13 format=3 uid="uid://c1xsj0kdaksqj"]
+
+[ext_resource type="Script" uid="uid://wq8232r0bg3y" path="res://scripts/enemy_bullet_aunn_shoot.gd" id="1_m8j1b"]
+[ext_resource type="Texture2D" uid="uid://mg2518fopc0w" path="res://assets/sprites/touhou-12-enemies.png" id="2_kfdbm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l5bg6"]
+atlas = ExtResource("2_kfdbm")
+region = Rect2(515, 33, 32, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dnhq8"]
+atlas = ExtResource("2_kfdbm")
+region = Rect2(547, 33, 32, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h2mkm"]
+atlas = ExtResource("2_kfdbm")
+region = Rect2(579, 33, 32, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tigrs"]
+atlas = ExtResource("2_kfdbm")
+region = Rect2(611, 33, 32, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_05ttr"]
+atlas = ExtResource("2_kfdbm")
+region = Rect2(643, 33, 32, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xv4s5"]
+atlas = ExtResource("2_kfdbm")
+region = Rect2(675, 33, 32, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jhei5"]
+atlas = ExtResource("2_kfdbm")
+region = Rect2(707, 33, 32, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ml5m4"]
+atlas = ExtResource("2_kfdbm")
+region = Rect2(739, 33, 32, 33)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fsx3j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l5bg6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dnhq8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h2mkm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tigrs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_05ttr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xv4s5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jhei5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ml5m4")
+}],
+"loop": true,
+"name": &"bullet_anim",
+"speed": 12.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yqaqm"]
+radius = 8.0
+height = 16.0
+
+[node name="EnemyBulletBasic" type="Area2D"]
+script = ExtResource("1_m8j1b")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_fsx3j")
+animation = &"bullet_anim"
+autoplay = "bullet_anim"
+frame = 7
+frame_progress = 0.635552
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.5, 1.5)
+shape = SubResource("CapsuleShape2D_yqaqm")
+debug_color = Color(0, 0.606448, 0.661204, 0.42)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

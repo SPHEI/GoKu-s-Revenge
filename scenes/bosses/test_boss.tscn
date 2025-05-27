@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dm55l18wu1uij"]
 
 [ext_resource type="Script" uid="uid://chaufv455hrks" path="res://scripts/test_boss.gd" id="1_2ipu8"]
-[ext_resource type="SpriteFrames" uid="uid://04aspyirxm5f" path="res://scenes/bosses/test.tres" id="2_dt46n"]
+[ext_resource type="SpriteFrames" uid="uid://o156h6fqhav7" path="res://scenes/bosses/aunn.tres" id="2_2ipu8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qbl7o"]
 radius = 21.0
@@ -10,11 +10,12 @@ height = 62.0
 [node name="TestBoss" type="Area2D"]
 script = ExtResource("1_2ipu8")
 max_hp = 160.0
-mode = 2
+mode = 0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
 scale = Vector2(2, 2)
-sprite_frames = ExtResource("2_dt46n")
+sprite_frames = ExtResource("2_2ipu8")
 animation = &"move_left"
 autoplay = "idle"
 

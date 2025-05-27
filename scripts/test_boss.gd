@@ -4,12 +4,12 @@ extends Boss
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 
 #Waits for 2 seconds
-func wait():
+func wait_stage():
 	anim.animation = "idle"
 	await get_tree().create_timer(2).timeout
 	
 #Example movement function
-func move_around():
+func move_stage():
 	for i in range(180):
 		if interrupt:
 			break
@@ -33,7 +33,7 @@ func move_around():
 
 #Example shooting function
 @onready var bullet = preload("res://scenes/bullets/enemy_bullet_basic_shoot.tscn")
-func shoot():
+func shoot_stage():
 	anim.animation = "cast"
 	for j in range(4):
 		if interrupt:
