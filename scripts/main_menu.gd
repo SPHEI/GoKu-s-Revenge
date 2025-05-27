@@ -1,18 +1,30 @@
 extends Control
 
-var quit = false
 @export var options: Label
+var selection := 0  # 0 = Play, 1 = Don't, 2 = Credits
+
 func _process(_delta):
-	if Input.is_action_just_pressed("ui_down") or Input.is_action_just_pressed("ui_up"):
-		quit = !quit
+	if Input.is_action_just_pressed("ui_down"):
+		selection = (selection + 1) % 3
 		update_text()
+	elif Input.is_action_just_pressed("ui_up"):
+		selection = (selection + 2) % 3  # equivalent to (selection - 1 + 3) % 3
+		update_text()
+
 	if Input.is_action_just_pressed("ui_shoot"):
-		if quit:
-			get_tree().quit()
-		else:
-			get_tree().call_deferred("change_scene_to_file", "res://scenes/main.tscn")
+		match selection:
+			0:
+				get_tree().call_deferred("change_scene_to_file", "res://scenes/main.tscn")
+			1:
+				get_tree().quit()
+			2:
+				get_tree().change_scene_to_file("res://scenes/Credits.tscn")
+
 func update_text():
-	if quit:
-		options.text = "Play\n>Don't"
-	else:
-		options.text = ">Play\nDon't"
+	match selection:
+		0:
+			options.text = ">Play\nDon't\nCredits"
+		1:
+			options.text = "Play\n>Don't\nCredits"
+		2:
+			options.text = "Play\nDon't\n>Credits"
