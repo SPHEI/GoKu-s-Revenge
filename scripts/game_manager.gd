@@ -21,6 +21,7 @@ extends Node2D
 #Add new bosses here
 @onready var test_boss = preload("res://scenes/bosses/test_boss.tscn")
 @onready var aunn_boss = preload("res://scenes/bosses/aunn.tscn")
+@onready var narumi_boss = preload("res://scenes/bosses/narumi.tscn")
 
 
 @onready var transition = $"SubViewportContainer/Main_Viewport/Transition"
@@ -202,16 +203,6 @@ func update_item_visuals(a: int):
 	
 #STAGES SECTION
 @export var stages = [
-	[	#Stage 0
-		"wait-1.0",
-		"boss_test_spawn",
-		"wait_until_boss_dead",
-		"pick_items",
-		"wait-1.0",
-		"boss_aunn_spawn",
-		"wait_until_boss_dead",
-		"pick_items",
-	],
 	[	#Stage 1
 		"wait-1.0",
 		"bullet_pattern_down",
@@ -230,7 +221,8 @@ func update_item_visuals(a: int):
 		"wait_until_clear",
 		"enemy_pattern_trio_basic_tri",
 		"wait_until_clear",
-		"boss_aunn_spawn",
+		"wait-1.0",
+		"boss_test_spawn",
 		"wait_until_boss_dead",
 		"pick_items",
 	],
@@ -265,7 +257,8 @@ func update_item_visuals(a: int):
 		"wait_until_clear",
 		"enemy_pattern_line_vert_basic_side_tri_both",
 		"wait_until_clear",
-		"boss_test_spawn",
+		"wait-1.0",
+		"boss_aunn_spawn",
 		"wait_until_boss_dead",
 		"pick_items",
 	],
@@ -303,7 +296,8 @@ func update_item_visuals(a: int):
 		"wait-1.0",
 		"enemy_center_spinner_laser",
 		"wait_until_clear",
-		"boss_test_spawn",
+		"wait-1.0",
+		"boss_narumi_spawn",
 		"wait_until_boss_dead",
 		"pick_items",
 	],
@@ -363,6 +357,10 @@ func update_item_visuals(a: int):
 		"wait-0.4",
 		"enemy_pattern_around_spinner_bullets",
 		"wait_until_clear",
+		"wait-3.0",
+		"boss_aunn_spawn",
+		"wait-3.0",
+		"boss_test_spawn",
 		"wait-3.0",
 		"boss_test_spawn",
 		"wait_until_boss_dead",
@@ -585,3 +583,6 @@ func boss_test_spawn():
 	
 func boss_aunn_spawn():
 	point_spawn_boss(aunn_boss, Vector2(640.0,250.0))
+	
+func boss_narumi_spawn():
+	point_spawn_boss(narumi_boss, Vector2(640.0,250.0))
