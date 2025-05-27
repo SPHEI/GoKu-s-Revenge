@@ -9,6 +9,7 @@ height = 62.0
 
 [node name="NarumiBoss" type="Area2D"]
 script = ExtResource("1_ypbm1")
+max_hp = 1200.0
 mode = 0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

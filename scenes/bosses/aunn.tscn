@@ -9,7 +9,7 @@ height = 62.0
 
 [node name="AunnBoss" type="Area2D"]
 script = ExtResource("1_gkor5")
-max_hp = 500.0
+max_hp = 800.0
 mode = 0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

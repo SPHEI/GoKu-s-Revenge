@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name PlayerControler
 
 @export var speed = 200
-@export var focus = 0.7
+@export var focus = 0.6
 
 
 var ability = "ult_clear_screen"
@@ -101,8 +101,11 @@ func get_input(delta: float):
 func _process(_delta: float) -> void:
 	if Input.is_action_pressed("ui_sneak"):
 		get_node("./Sprite-focus").visible = true
+		get_node("./Sprite-focus").rotate(1.0 * _delta)
+		get_node("./Player_basic_spawner").direction = true
 	else:
 		get_node("./Sprite-focus").visible = false
+		get_node("./Player_basic_spawner").direction = false
 
 var can_get_hit = false
 

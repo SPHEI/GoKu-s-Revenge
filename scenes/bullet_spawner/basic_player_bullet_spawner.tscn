@@ -8,11 +8,35 @@ script = ExtResource("1_sk31p")
 [node name="spawner-1" type="Marker2D" parent="."]
 position = Vector2(-40, 0)
 
+[node name="root-1" type="Marker2D" parent="."]
+position = Vector2(-40, 0)
+
+[node name="target-1" type="Marker2D" parent="."]
+position = Vector2(-24, -16)
+
 [node name="spawner-2" type="Marker2D" parent="."]
 position = Vector2(-24, 0)
 
+[node name="root-2" type="Marker2D" parent="."]
+position = Vector2(-24, 0)
+
+[node name="target-2" type="Marker2D" parent="."]
+position = Vector2(-8, -24)
+
 [node name="spawner-3" type="Marker2D" parent="."]
-position = Vector2(40, 0)
+position = Vector2(24, 0)
+
+[node name="root-3" type="Marker2D" parent="."]
+position = Vector2(24, 0)
+
+[node name="target-3" type="Marker2D" parent="."]
+position = Vector2(8, -24)
 
 [node name="spawner-4" type="Marker2D" parent="."]
-position = Vector2(24, 0)
+position = Vector2(40, 0)
+
+[node name="root-4" type="Marker2D" parent="."]
+position = Vector2(40, 0)
+
+[node name="target-4" type="Marker2D" parent="."]
+position = Vector2(24, -16)
