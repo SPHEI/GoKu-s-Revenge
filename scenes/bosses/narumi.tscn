@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://dua20hsck00tt"]
+
+[ext_resource type="Script" uid="uid://bxomtn8karoan" path="res://scripts/narumi-boss.gd" id="1_ypbm1"]
+[ext_resource type="SpriteFrames" uid="uid://5v2rdw4j8yg3" path="res://scenes/bosses/narumi.tres" id="2_ypbm1"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qbl7o"]
+radius = 21.0
+height = 62.0
+
+[node name="NarumiBoss" type="Area2D"]
+script = ExtResource("1_ypbm1")
+mode = 0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2, 2)
+sprite_frames = ExtResource("2_ypbm1")
+animation = &"move_right"
+autoplay = "idle"
+frame = 4
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 0)
+scale = Vector2(2, 2)
+shape = SubResource("CapsuleShape2D_qbl7o")
