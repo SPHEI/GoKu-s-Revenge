@@ -441,7 +441,7 @@ func run_stage(list):
 func win_game():
 	win_text.text = "You won!"
 	await get_tree().create_timer(4.0).timeout
-	get_tree().change_scene_to_file("res://scenes/Main Menu.tscn")
+	get_tree().change_scene_to_file("res://scenes/Credits.tscn")
 	
 	
 #640 is the middle of the screen
