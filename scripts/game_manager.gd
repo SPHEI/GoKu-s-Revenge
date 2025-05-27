@@ -20,6 +20,7 @@ extends Node2D
 @onready var spinner_laser = preload("res://scenes/enemies/spinner_laser.tscn")
 #Add new bosses here
 @onready var test_boss = preload("res://scenes/bosses/test_boss.tscn")
+@onready var aunn_boss = preload("res://scenes/bosses/aunn.tscn")
 
 
 @onready var transition = $"SubViewportContainer/Main_Viewport/Transition"
@@ -201,6 +202,12 @@ func update_item_visuals(a: int):
 	
 #STAGES SECTION
 @export var stages = [
+	[	#Stage 0
+		"wait-1.0",
+		"boss_aunn_spawn",
+		"wait_until_boss_dead",
+		"pick_items",
+	],
 	[	#Stage 1
 		"wait-1.0",
 		"bullet_pattern_down",
@@ -219,7 +226,7 @@ func update_item_visuals(a: int):
 		"wait_until_clear",
 		"enemy_pattern_trio_basic_tri",
 		"wait_until_clear",
-		"boss_test_spawn",
+		"boss_aunn_spawn",
 		"wait_until_boss_dead",
 		"pick_items",
 	],
@@ -571,3 +578,6 @@ func enemy_around_kamikaze():
 #BOSS SECTION
 func boss_test_spawn():
 	point_spawn_boss(test_boss, Vector2(640.0,250.0))
+	
+func boss_aunn_spawn():
+	point_spawn_boss(aunn_boss, Vector2(640.0,250.0))

@@ -14,6 +14,9 @@ var health_bar: ProgressBar
 
 #Leave empty for automatic detection
 @export var moves: Array[String]
+@export var con_moves: Array[String]
+var con_moves_active: bool = false
+
 
 #Used to cancel boss logic on death
 var interrupt = false
@@ -28,6 +31,7 @@ var not_moves = [
 	"flash"
 ]
 
+
 @onready var sprite: AnimatedSprite2D = $"AnimatedSprite2D"
 var shader_material: ShaderMaterial
 
@@ -41,7 +45,11 @@ func _ready():
 		moves.clear()
 		for i in a:
 			if i.name not in not_moves:
-				moves.append(i.name)
+				if i.name.begins_with("con_"):
+					con_moves.append(i.name)
+				else:
+					moves.append(i.name)
+			
 	print(moves)
 	body_entered.connect(_on_body_entered)
 	
@@ -59,6 +67,9 @@ func logic():
 	if moves.is_empty():
 		print("BOSS LOGIC ERROR: Boss has no moves!")
 		return
+	
+	await call(moves[0]) # first has to be wait
+	call("con_logic")
 	match mode:
 		modes.SEQUENCE:
 			#Goes through all moves in order
@@ -79,7 +90,16 @@ func logic():
 			#Straight up picks a random move every time
 			while not interrupt:
 				await call(moves.pick_random())
-				
+
+func con_logic():
+	if !con_moves_active:
+		pass
+	while not interrupt:
+		con_moves_active = true
+		for i in range(con_moves.size()):
+			if not interrupt:
+				await call(con_moves[i])	
+				con_moves_active = false
 				
 #Hits the player if they walk into the boss
 func _on_body_entered(body: Node2D):

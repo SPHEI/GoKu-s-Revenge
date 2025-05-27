@@ -3,64 +3,64 @@
 [ext_resource type="Script" uid="uid://cjajwuhg5poct" path="res://scripts/enemy_bullet_basic_shoot.gd" id="1_bc8ok"]
 [ext_resource type="Texture2D" uid="uid://mg2518fopc0w" path="res://assets/sprites/touhou-12-enemies.png" id="2_cesc3"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_e1rre"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_bc8ok"]
 atlas = ExtResource("2_cesc3")
-region = Rect2(512, 0, 32, 32)
+region = Rect2(515, 66, 32, 33)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_14dk2"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_cesc3"]
 atlas = ExtResource("2_cesc3")
-region = Rect2(544, 0, 32, 32)
+region = Rect2(547, 66, 32, 33)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7b0ih"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_7r657"]
 atlas = ExtResource("2_cesc3")
-region = Rect2(576, 0, 32, 32)
+region = Rect2(579, 66, 32, 33)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_f2iib"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_di6i8"]
 atlas = ExtResource("2_cesc3")
-region = Rect2(608, 0, 32, 32)
+region = Rect2(611, 66, 32, 33)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rgkdp"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_istdm"]
 atlas = ExtResource("2_cesc3")
-region = Rect2(640, 0, 32, 32)
+region = Rect2(643, 66, 32, 33)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gmiji"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_3tprt"]
 atlas = ExtResource("2_cesc3")
-region = Rect2(672, 0, 32, 32)
+region = Rect2(675, 66, 32, 33)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nwojc"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_lnlrn"]
 atlas = ExtResource("2_cesc3")
-region = Rect2(704, 0, 32, 32)
+region = Rect2(707, 66, 32, 33)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ge1i6"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_76jru"]
 atlas = ExtResource("2_cesc3")
-region = Rect2(736, 0, 32, 32)
+region = Rect2(739, 66, 32, 33)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fsx3j"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_e1rre")
+"texture": SubResource("AtlasTexture_bc8ok")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_14dk2")
+"texture": SubResource("AtlasTexture_cesc3")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7b0ih")
+"texture": SubResource("AtlasTexture_7r657")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_f2iib")
+"texture": SubResource("AtlasTexture_di6i8")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rgkdp")
+"texture": SubResource("AtlasTexture_istdm")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_gmiji")
+"texture": SubResource("AtlasTexture_3tprt")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_nwojc")
+"texture": SubResource("AtlasTexture_lnlrn")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ge1i6")
+"texture": SubResource("AtlasTexture_76jru")
 }],
 "loop": true,
 "name": &"bullet_anim",
@@ -79,8 +79,7 @@ scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_fsx3j")
 animation = &"bullet_anim"
 autoplay = "bullet_anim"
-frame = 7
-frame_progress = 0.635552
+frame_progress = 0.548511
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(1.5, 1.5)

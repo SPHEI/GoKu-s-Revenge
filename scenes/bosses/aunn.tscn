@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://jm14d6psm5t2"]
+
+[ext_resource type="Script" uid="uid://i3dl76srrpbl" path="res://scripts/aunn-boss.gd" id="1_gkor5"]
+[ext_resource type="SpriteFrames" uid="uid://04aspyirxm5f" path="res://scenes/bosses/test.tres" id="2_1dt11"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qbl7o"]
+radius = 21.0
+height = 62.0
+
+[node name="AunnBoss" type="Area2D"]
+script = ExtResource("1_gkor5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2, 2)
+sprite_frames = ExtResource("2_1dt11")
+animation = &"cast"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 0)
+scale = Vector2(2, 2)
+shape = SubResource("CapsuleShape2D_qbl7o")
