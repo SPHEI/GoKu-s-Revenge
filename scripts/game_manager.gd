@@ -203,46 +203,170 @@ func update_item_visuals(a: int):
 @export var stages = [
 	[	#Stage 1
 		"wait-1.0",
-		"pick_items",
-		"enemy_pattern_line_vert_basic_side_tri_left",
-		"wait_until_clear",
-		"enemy_pattern_line_vert_basic_side_tri_both",
-		"wait_until_clear",
-		"enemy_pattern_line_horiz_basic_tri",
+		"bullet_pattern_down",
+		"wait-6.0",
+		"enemy_pattern_middle_kamikaze",
 		"wait_until_clear",
 		"enemy_pattern_line_horiz_kamikaze",
 		"wait_until_clear",
-		"bullet_pattern_fan",
+		"enemy_pattern_two_basic",
+		"wait_until_clear",
+		"enemy_pattern_line_horiz_basic",
+		"wait_until_clear",
+		"enemy_pattern_line_horiz_kamikaze",
+		"bullet_pattern_down",
+		"enemy_pattern_line_horiz_kamikaze",
+		"wait_until_clear",
+		"enemy_pattern_trio_basic_tri",
 		"wait_until_clear",
 		"boss_test_spawn",
 		"wait_until_boss_dead",
-		"pick_items"
+		"pick_items",
 	],
 	[	#Stage 2
+		"bullet_pattern_fan",
+		"wait-2.0",
+		"bullet_pattern_fan_left",
+		"wait-10.0",
+		"enemy_pattern_line_horiz_basic",
+		"wait_until_clear",
+		"enemy_pattern_line_vert_basic_side_left",
+		"wait_until_clear",
+		"enemy_pattern_line_vert_basic_side_right",
+		"wait_until_clear",
 		"enemy_pattern_line_horiz_kamikaze",
 		"wait-2.0",
 		"enemy_pattern_line_horiz_kamikaze",
+		"wait-2.0",
+		"enemy_pattern_line_horiz_kamikaze",
+		"wait-2.0",
+		"enemy_pattern_line_vert_basic_side_both",
+		"wait-2.0",
+		"enemy_pattern_line_horiz_kamikaze",
+		"wait-4.0",
+		"bullet_pattern_down",
+		"enemy_pattern_around_spinner_bullets",
 		"wait_until_clear",
-		"bullet_pattern_fan",
-		"wait-1.0",
-		"bullet_pattern_fan",
+		"enemy_pattern_line_horiz_basic_tri",
 		"wait_until_clear",
+		"enemy_pattern_line_horiz_basic_tri",
+		"enemy_pattern_line_vert_basic_side_both",
+		"wait_until_clear",
+		"enemy_pattern_line_vert_basic_side_tri_both",
+		"wait_until_clear",
+		"boss_test_spawn",
+		"wait_until_boss_dead",
 		"pick_items",
-		"win_game"
 	],
 	[	#Stage 3
-		"enemy_center_spinner_laser",
+		"enemy_pattern_middle_laser",
 		"wait_until_clear",
 		"enemy_pattern_line_horiz_laser",
 		"wait_until_clear",
-		"wait-5.0",
-		"pick_items"
+		"enemy_center_spinner_laser",
+		"wait_until_clear",
+		"enemy_pattern_line_horiz_laser",
+		"enemy_center_spinner_laser",
+		"wait_until_clear",
+		"enemy_pattern_line_horiz_kamikaze",
+		"enemy_pattern_line_vert_basic_side_both",
+		"wait-2.0",
+		"enemy_pattern_line_horiz_basic_tri",
+		"wait_until_clear",
+		"enemy_center_spinner_laser",
+		"enemy_pattern_line_vert_basic_side_tri_both",
+		"wait_until_clear",
+		"enemy_pattern_line_horiz_kamikaze",
+		"enemy_pattern_line_horiz_laser",
+		"enemy_pattern_around_spinner_bullets",
+		"wait_until_clear",
+		"bullet_pattern_fan",
+		"wait-2.0",
+		"bullet_pattern_fan_left",
+		"wait-10.0",
+		"wait_until_clear",
+		"bullet_pattern_side",
+		"wait_until_clear",
+		"enemy_pattern_around_spinner_bullets",
+		"enemy_center_spinner_laser",
+		"wait-1.0",
+		"enemy_center_spinner_laser",
+		"wait_until_clear",
+		"boss_test_spawn",
+		"wait_until_boss_dead",
+		"pick_items",
 	],
 	[	#Stage 4
-		"wait-5.0",
-		"pick_items"
+		"enemy_pattern_line_horiz_kamikaze",
+		"wait-0.4",
+		"enemy_pattern_line_horiz_kamikaze",
+		"wait-0.4",
+		"enemy_pattern_line_horiz_kamikaze",
+		"wait-0.4",
+		"enemy_pattern_line_horiz_kamikaze",
+		"wait-0.4",
+		"enemy_pattern_line_horiz_kamikaze",
+		"enemy_pattern_around_spinner_bullets",
+		"wait-0.4",
+		"enemy_pattern_line_horiz_kamikaze",
+		"wait-0.4",
+		"enemy_pattern_line_horiz_kamikaze",
+		"wait-0.4",
+		"enemy_pattern_line_horiz_kamikaze",
+		"wait-0.4",
+		"enemy_pattern_line_horiz_kamikaze",
+		"wait_until_clear",
+		"enemy_center_spinner_laser",
+		"enemy_pattern_line_vert_basic_side_both",
+		"bullet_pattern_back_and_foth",
+		"wait_until_clear",
+		"enemy_pattern_line_vert_basic_side_tri_left",
+		"enemy_pattern_around_spinner_bullets",
+		"enemy_pattern_line_horiz_laser",
+		"bullet_pattern_side",
+		"wait_until_clear",
+		"enemy_center_spinner_laser",
+		"wait-1.0",
+		"enemy_center_spinner_laser",
+		"enemy_pattern_line_horiz_basic_tri",
+		"enemy_pattern_line_horiz_kamikaze",
+		"wait-0.4",
+		"enemy_pattern_line_horiz_kamikaze",
+		"wait-0.4",
+		"enemy_pattern_line_horiz_kamikaze",
+		"wait-0.4",
+		"enemy_pattern_line_horiz_kamikaze",
+		"wait-0.4",
+		"wait_until_clear",
+		"enemy_around_basic_and_tri",
+		"wait_until_clear",
+		"enemy_around_kamikaze",
+		"wait_until_clear",
+		"enemy_pattern_line_horiz_kamikaze",
+		"wait-0.4",
+		"enemy_around_kamikaze",
+		"wait-0.4",
+		"enemy_pattern_line_horiz_kamikaze",
+		"wait-0.4",
+		"enemy_around_kamikaze",
+		"wait-0.4",
+		"enemy_pattern_around_spinner_bullets",
+		"wait_until_clear",
+		"wait-3.0",
+		"boss_test_spawn",
+		"wait_until_boss_dead",
+		"win_game"
 	],
 	[	#Test stage
+		"pick_items",
+		"boss_test_spawn",
+		"wait_until_boss_dead",
+		"enemy_center_spinner_laser",
+		"wait-1.0",
+		"enemy_center_spinner_laser",
+		"wait_until_clear",
+		"bullet_pattern_side",
+		"wait_until_clear",
 		"enemy_center_spinner_laser",
 		"wait_until_clear",
 		"enemy_pattern_line_horiz_laser",
@@ -306,7 +430,7 @@ func run_stage(list):
 func win_game():
 	win_text.text = "You won!"
 	await get_tree().create_timer(4.0).timeout
-	get_tree().change_scene_to_file("res://scenes/main.tscn")
+	get_tree().change_scene_to_file("res://scenes/Main Menu.tscn")
 	
 	
 #640 is the middle of the screen
@@ -314,6 +438,36 @@ func win_game():
 func bullet_pattern_line_horiz_basic(offset: float, dir: Vector2):
 	for i in range(15):
 		spawn_bullet(bullet_basic, Vector2(100.0 * i + offset,-4.0), dir)
+func bullet_pattern_line_vert_basic_left(offset: float, dir: Vector2):
+	for i in range(15):
+		spawn_bullet(bullet_basic, Vector2(-4,100 * i + offset), dir)
+func bullet_pattern_line_vert_basic_right(offset: float, dir: Vector2):
+	for i in range(15):
+		spawn_bullet(bullet_basic, Vector2(1284,100 * i + offset), dir)
+func bullet_pattern_side():
+	var a = false
+	for i in range(10):
+		if a:
+			bullet_pattern_line_vert_basic_left(0.0, Vector2(200.0,0.0))
+			a = false
+		else:
+			bullet_pattern_line_vert_basic_right(50.0, Vector2(-200.0,0.0))
+			a = true
+		await get_tree().create_timer(0.5).timeout
+		if cancel_stage:
+			return
+func bullet_pattern_down():
+	var a = false
+	for i in range(5):
+		if a:
+			bullet_pattern_line_horiz_basic(50.0, Vector2(0.0,100.0))
+			a = false
+		else:
+			bullet_pattern_line_horiz_basic(0.0, Vector2(0.0,100.0))
+			a = true
+		await get_tree().create_timer(2.0).timeout
+		if cancel_stage:
+			return
 func bullet_pattern_back_and_foth():
 	for i in range(10):
 		bullet_pattern_line_horiz_basic(20.0 * i, Vector2(0.0,100.0))
@@ -327,53 +481,93 @@ func bullet_pattern_back_and_foth():
 			return
 func bullet_pattern_fan():
 	for i in range(15):
-		bullet_pattern_line_horiz_basic(0.0, Vector2(1.0 * i,50.0))
-		await get_tree().create_timer(0.2).timeout
+		bullet_pattern_line_horiz_basic(0.0, Vector2(2.0 * i,50.0))
+		await get_tree().create_timer(0.4).timeout
+		if cancel_stage:
+			return
+func bullet_pattern_fan_left():
+	for i in range(15):
+		bullet_pattern_line_horiz_basic(0, Vector2(-2.0 * i,50.0))
+		await get_tree().create_timer(0.4).timeout
 		if cancel_stage:
 			return
 
 #ENEMY PATTERN SECTION
+func enemy_pattern_middle_kamikaze():
+	spawn_enemy(kamikaze, Vector2(640,-4.0))
 func enemy_pattern_line_horiz_kamikaze():
 	for i in range(10):
 		spawn_enemy(kamikaze, Vector2(100.0 + 130.0 * i,-4.0))
 		
+func enemy_pattern_two_basic():
+	spawn_enemy(wah, Vector2(540,-4.0))	
+	spawn_enemy(wah, Vector2(740,-4.0))	
 func enemy_pattern_line_horiz_basic():
 	for i in range(5):
 		spawn_enemy(wah, Vector2(100.0 + 260.0 * i,-4.0))	
-
+func enemy_pattern_trio_basic_tri():
+	spawn_enemy(wah_tri, Vector2(640,-4.0))
+	spawn_enemy(wah_tri, Vector2(440,-4.0))	
+	spawn_enemy(wah_tri, Vector2(840,-4.0))	
 func enemy_pattern_line_horiz_basic_tri():
 	for i in range(5):
 		spawn_enemy(wah_tri, Vector2(100.0 + 260.0 * i,-4.0))	
 		
+func enemy_pattern_middle_laser():
+	spawn_enemy(laser, Vector2(640,-100.0))	
+	
 func enemy_pattern_line_horiz_laser():
 	for i in range(5):
+		if i == 2:
+			continue
 		spawn_enemy(laser, Vector2(100.0 + 260.0 * i,-100.0))	
 		
 func enemy_pattern_line_vert_basic_side_left():
 	for i in range(5):
 		spawn_enemy(wah_side, Vector2(-100.0, 100.0 * i + 100.0))
+		
 func enemy_pattern_line_vert_basic_side_right():
 	for i in range(5):
 		spawn_enemy(wah_side, Vector2(1350.0, 100.0 * i + 100.0))
+		
 func enemy_pattern_line_vert_basic_side_both():
 	enemy_pattern_line_vert_basic_side_left()
 	enemy_pattern_line_vert_basic_side_right()
+	
 func enemy_pattern_line_vert_basic_side_tri_left():
 	for i in range(5):
 		spawn_enemy(wah_side_tri, Vector2(-100.0, 100.0 * i + 100.0))
+		
 func enemy_pattern_line_vert_basic_side_tri_right():
 	for i in range(5):
 		spawn_enemy(wah_side_tri, Vector2(1350.0, 100.0 * i + 100.0))
+		
 func enemy_pattern_line_vert_basic_side_tri_both():
 	enemy_pattern_line_vert_basic_side_tri_left()
 	enemy_pattern_line_vert_basic_side_tri_right()
+	
 func enemy_pattern_around_spinner_bullets():
 	for i in range(5):
 		var angle = i * TAU / 5
 		point_spawn_enemy(spinner_bullets,Vector2(640,500) + Vector2(sin(angle) * 1.25, cos(angle)*-1) * 400.0)
 		await get_tree().create_timer(0.05).timeout
+		
 func enemy_center_spinner_laser():
 	point_spawn_enemy(spinner_laser,Vector2(640,500))
+	
+func enemy_around_basic_and_tri():
+	for i in range(10):
+		var angle = i * TAU / 10
+		if i % 2 == 0:
+			point_spawn_enemy(wah,Vector2(640,500) + Vector2(sin(angle) * 1.25, cos(angle)*-1) * 400.0)
+		else:
+			point_spawn_enemy(wah_tri,Vector2(640,500) + Vector2(sin(angle) * 1.25, cos(angle)*-1) * 400.0)
+		await get_tree().create_timer(0.05).timeout
+func enemy_around_kamikaze():
+	for i in range(10):
+		var angle = i * TAU / 10
+		point_spawn_enemy(kamikaze,Vector2(640,500) + Vector2(sin(angle) * 1.25, cos(angle)*-1) * 400.0)
+		await get_tree().create_timer(0.05).timeout
 #BOSS SECTION
 func boss_test_spawn():
 	point_spawn_boss(test_boss, Vector2(640.0,250.0))

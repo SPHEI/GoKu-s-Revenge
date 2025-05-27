@@ -7,17 +7,21 @@ class_name Enemy
 @onready var sprite: AnimatedSprite2D = $"AnimatedSprite2D"
 @export var hp = 1
 #Call this from player bullet script
+
+var can_get_hit = true;
 func get_hit(damage):
-	hp -= damage
-	if hp <= 0:
-		var e = explosion.instantiate()
-		e.position = position
-		get_node("/root/Main/SubViewportContainer/Main_Viewport").add_child(e)
-		get_tree().get_nodes_in_group("player")[0].inc_ability()
-		get_node("/root/Main/Debug-UI").enemies += 1
-		queue_free()
-	elif not flashing:
-		flash()
+	if can_get_hit:
+		hp -= damage
+		if hp <= 0:
+			can_get_hit = false;
+			var e = explosion.instantiate()
+			e.position = position
+			get_node("/root/Main/SubViewportContainer/Main_Viewport").add_child(e)
+			get_tree().get_nodes_in_group("player")[0].inc_ability()
+			get_node("/root/Main/Debug-UI").enemies += 1
+			queue_free()
+		elif not flashing:
+			flash()
 
 var flashing = false
 func flash():

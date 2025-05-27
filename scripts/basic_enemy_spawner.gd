@@ -5,10 +5,7 @@ extends Enemy
 
 func _ready():
 	add_to_group("enemies")
-	get_tree().create_timer(20).timeout.connect(func(): can_move = false)
-	pass
 
-var can_move = true
 func _process(delta: float) -> void:
-	if can_move:
+	if position.y < 540:
 		position.y += speed * delta

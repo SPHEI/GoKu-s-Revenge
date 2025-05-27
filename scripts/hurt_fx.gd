@@ -9,7 +9,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if a > 0:
-		style.set_bg_color(Color(1,0,0,a))
 		a -= delta * 4
 		if a < 0:
 			a = 0
+		style.set_bg_color(Color(1,0,0,a))
