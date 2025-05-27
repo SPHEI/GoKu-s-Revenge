@@ -14,12 +14,12 @@ var health_bar: ProgressBar
 
 #Leave empty for automatic detection
 @export var moves: Array[String]
-@export var con_moves: Array[String]
-var con_moves_active: bool = false
+@export var background_moves: Array[String]
 
 
 #Used to cancel boss logic on death
 var interrupt = false
+var end = false
 
 #If you add any moves to base class add them here
 var not_moves = [
@@ -47,8 +47,11 @@ func _ready():
 		for i in a:
 			if i.name.ends_with("_stage"):
 				moves.append(i.name)
+			if i.name.ends_with("_background"):
+				background_moves.append(i.name)
 		
 	print(moves)
+	print(background_moves)
 	body_entered.connect(_on_body_entered)
 	
 	hp = max_hp
@@ -66,6 +69,7 @@ func logic():
 		print("BOSS LOGIC ERROR: Boss has no moves!")
 		return
 	
+	call("background_logic")
 	match mode:
 		modes.SEQUENCE:
 			#Goes through all moves in order
@@ -87,15 +91,9 @@ func logic():
 			while not interrupt:
 				await call(moves.pick_random())
 
-func con_logic():
-	if !con_moves_active:
-		pass
+func background_logic():
 	while not interrupt:
-		con_moves_active = true
-		for i in range(con_moves.size()):
-			if not interrupt:
-				await call(con_moves[i])	
-				con_moves_active = false
+		await call(background_moves.pick_random())
 				
 #Hits the player if they walk into the boss
 func _on_body_entered(body: Node2D):

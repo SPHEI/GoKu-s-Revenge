@@ -4,18 +4,51 @@ extends Boss
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 var plr: Node
 
-#Waits for 2 seconds
+
+
+func wait_background():
+	anim.animation = "idle"
+	plr = get_tree().get_nodes_in_group("player")[0]
+	await get_tree().create_timer(1).timeout
+	
+func move_background():
+	for i in range(180):
+		if interrupt:
+			break
+		var angle = (i + 135) * TAU / 180
+		position = Vector2(640,250) + Vector2(sin(angle), cos(angle)-1) * 50.0
+		if cos(angle) < 0:
+			anim.animation = "move_left"
+		elif cos(angle) > 0:
+			anim.animation = "move_right"
+		await get_tree().create_timer(0.01).timeout
+	for i in range(180):
+		if interrupt:
+			break
+		var angle = (i + 135) * TAU / 180
+		position = Vector2(640,250) + Vector2(-sin(angle), cos(angle)-1) * 50.0 - Vector2(100,0)
+		if cos(angle) > 0:
+			anim.animation = "move_left"
+		elif cos(angle) < 0:
+			anim.animation = "move_right"
+		await get_tree().create_timer(0.01).timeout
+
 func wait_stage():
 	anim.animation = "idle"
 	plr = get_tree().get_nodes_in_group("player")[0]
 	await get_tree().create_timer(1).timeout
+	
 
 func first_stage():
-	await call("con_non_spell")
+	anim.animation = "idle"
+	await con_non_spell(20, 100)
 	
 func second_stage():
+	end = false
+	anim.animation = "cast"
 	call("con_spiral")
-	await call("con_non_spell")
+	await con_non_spell(24, 70)
+	end = true
 
 #Example shooting function
 @onready var bullet_green = preload("res://scenes/bullets/enemy_bullet_basic_shoot_green.tscn")
@@ -24,9 +57,7 @@ func second_stage():
 @onready var bullet = preload("res://scenes/bullets/enemy_bullet_basic_shoot.tscn")
 @onready var bullet_aunn = preload("res://scenes/bullets/enemy_bullet_aunn_shoot_green.tscn")
 
-func con_non_spell():
-	var amount = 20
-	var radius = 100
+func con_non_spell( amount , radius):
 	var time = 6
 	var origin = points_on_circle(global_position, 10, amount)
 	var target = points_on_circle(global_position, 10 + radius, amount)
@@ -38,11 +69,9 @@ func con_non_spell():
 			get_node("/root/Main/SubViewportContainer/Main_Viewport").add_child(b)
 		await get_tree().create_timer(2).timeout
 
-func con_spiral():
-	anim.animation = "cast"
-	
+func con_spiral():	
 	for j in range(50):
-		if interrupt:
+		if interrupt or end:
 			break
 		for i in range(4):
 			var b = bullet_yellow.instantiate()
