@@ -112,7 +112,7 @@ func dan( amount , radius):
 			b.position = origin[i]
 			b.target_position = targets[i%3][i]  # Now valid because bullet_aunn.gd defines this property
 			get_node("/root/Main/SubViewportContainer/Main_Viewport").add_child(b)
-		await get_tree().create_timer(2).timeout
+		await get_tree().create_timer(4).timeout
 
 func con_shoot():
 	anim.animation = "cast"
