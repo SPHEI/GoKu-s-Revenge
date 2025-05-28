@@ -18,9 +18,15 @@ func move_background():
 		var angle = (i + 135) * TAU / 180
 		position = Vector2(640,250) + Vector2(sin(angle), cos(angle)-1) * 50.0
 		if cos(angle) < 0:
-			anim.animation = "move_left"
+			if anim.animation != "move_left_loop":
+				anim.animation = "move_left"
+			if anim.frame == 4:
+				anim.animation = "move_left_loop"
 		elif cos(angle) > 0:
-			anim.animation = "move_right"
+			if anim.animation != "move_right_loop":
+				anim.animation = "move_right"
+			if anim.frame == 4:
+				anim.animation = "move_right_loop"
 		await get_tree().create_timer(0.01).timeout
 	for i in range(180):
 		if interrupt:
@@ -28,9 +34,15 @@ func move_background():
 		var angle = (i + 135) * TAU / 180
 		position = Vector2(640,250) + Vector2(-sin(angle), cos(angle)-1) * 50.0 - Vector2(100,0)
 		if cos(angle) > 0:
-			anim.animation = "move_left"
+			if anim.animation != "move_left_loop":
+				anim.animation = "move_left"
+			if anim.frame == 4:
+				anim.animation = "move_left_loop"
 		elif cos(angle) < 0:
-			anim.animation = "move_right"
+			if anim.animation != "move_right_loop":
+				anim.animation = "move_right"
+			if anim.frame == 4:
+				anim.animation = "move_right_loop"
 		await get_tree().create_timer(0.01).timeout
 
 func wait_stage():
