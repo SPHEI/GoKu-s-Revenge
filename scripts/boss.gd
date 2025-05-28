@@ -50,8 +50,6 @@ func _ready():
 			if i.name.ends_with("_background"):
 				background_moves.append(i.name)
 		
-	print(moves)
-	print(background_moves)
 	body_entered.connect(_on_body_entered)
 	
 	hp = max_hp

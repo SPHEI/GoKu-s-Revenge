@@ -36,13 +36,13 @@ func move_background():
 		if cos(angle) > 0:
 			if anim.animation != "move_left_loop":
 				anim.animation = "move_left"
-			if anim.frame == 4:
-				anim.animation = "move_left_loop"
+				if anim.frame == 4:
+					anim.animation = "move_left_loop"
 		elif cos(angle) < 0:
 			if anim.animation != "move_right_loop":
 				anim.animation = "move_right"
-			if anim.frame == 4:
-				anim.animation = "move_right_loop"
+				if anim.frame == 4:
+					anim.animation = "move_right_loop"
 		await get_tree().create_timer(0.01).timeout
 
 func wait_stage():
@@ -54,15 +54,16 @@ func wait_stage():
 func first_stage():
 	end = false
 	anim.animation = "idle"
-	shoot_at_player()
+	con_shoot()
 	await con_non_spell(20, 100)
 	end = true
 	
 func second_stage():
 	end = false
 	anim.animation = "cast"
-	con_shoot()
-	await con_non_spell(24, 70)
+	shoot_at_player()
+	dan_better(20, 150)
+	await dan(30, 100)
 	end = true
 
 func third_stage():
@@ -86,6 +87,8 @@ func con_non_spell( amount , radius):
 	var origin = points_on_circle(global_position, 10, amount)
 	var target = points_on_circle(global_position, 10 + radius, amount)
 	for j in range(time):
+		if interrupt or end:
+			break
 		for i in range(amount):
 			var b = bullet_aunn.instantiate()
 			b.position = origin[i]
@@ -93,6 +96,45 @@ func con_non_spell( amount , radius):
 			get_node("/root/Main/SubViewportContainer/Main_Viewport").add_child(b)
 		await get_tree().create_timer(2).timeout
 
+func dan( amount , radius):
+	var time = 6
+	var origin = points_on_circle(global_position, 10, amount)
+	var targets: Array
+	targets.append(points_on_circle(global_position, 10 + radius, amount))
+	targets.append(points_on_circle(global_position, 10 + radius * 2, amount))
+	targets.append(points_on_circle(global_position, 10 + radius * 3, amount))
+	for j in range(time):
+		if interrupt or end:
+			break
+		for i in range(amount):
+			var b = bullet_aunn.instantiate()
+			b.position = origin[i]
+			b.target_position = targets[i%3][i]  # Now valid because bullet_aunn.gd defines this property
+			get_node("/root/Main/SubViewportContainer/Main_Viewport").add_child(b)
+		await get_tree().create_timer(2).timeout
+		
+func dan_better( amount , radius):
+	var time = 6
+	var stages = 5
+	var origin = points_on_circle(global_position, 10, amount)
+	var targets: Array
+	for x in range(stages):
+		targets.append(points_on_circle(global_position, 10 + radius * x, amount))
+	targets.append(points_on_circle(global_position, 10 + radius * 20, amount))	
+	stages+=1
+	for j in range(time):
+		if interrupt or end:
+			break
+		for i in range(amount):
+			var b = bullet_narumi.instantiate()
+			b.position = origin[i]
+			for x in range(stages):
+				if amount <= i + x:
+					b.target_position.append(targets[x][i + x - amount])
+				else:
+					b.target_position.append(targets[x][i + x])
+			get_node("/root/Main/SubViewportContainer/Main_Viewport").add_child(b)
+		await get_tree().create_timer(0.5).timeout
 
 func points_on_circle(center: Vector2, radius: float, count: int) -> Array:
 	var points = []
@@ -148,4 +190,3 @@ func shoot_at_player():
 			get_node("/root/Main/SubViewportContainer/Main_Viewport").add_child(b)
 		await get_tree().create_timer(0.6).timeout
 		
-	

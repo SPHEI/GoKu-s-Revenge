@@ -204,6 +204,8 @@ func update_item_visuals(a: int):
 #STAGES SECTION
 @export var stages = [
 	[	#Stage 1
+		"boss_aunn_spawn",
+		"wait_until_boss_dead",
 		"wait-1.0",
 		"bullet_pattern_down",
 		"wait-6.0",

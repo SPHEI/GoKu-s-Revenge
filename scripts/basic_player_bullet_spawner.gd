@@ -20,9 +20,6 @@ func _ready() -> void:
 				root.append(marker)
 			if marker.name.begins_with("target-"):
 				target.append(marker)
-	print(root)
-	print(target)
-	print(spawner)
 				
 func spawn(speed, damage):
 	if can_attack:

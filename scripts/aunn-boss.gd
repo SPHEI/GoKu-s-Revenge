@@ -41,13 +41,14 @@ func wait_stage():
 
 func first_stage():
 	anim.animation = "idle"
+	shoot_at_player()
 	await con_non_spell(20, 100)
 	
 func second_stage():
 	end = false
 	anim.animation = "cast"
 	call("con_spiral")
-	await con_non_spell(24, 70)
+	await dan(30, 80)
 	end = true
 
 #Example shooting function
@@ -62,6 +63,8 @@ func con_non_spell( amount , radius):
 	var origin = points_on_circle(global_position, 10, amount)
 	var target = points_on_circle(global_position, 10 + radius, amount)
 	for j in range(time):
+		if interrupt or end:
+			break
 		for i in range(amount):
 			var b = bullet_aunn.instantiate()
 			b.position = origin[i]
@@ -94,7 +97,22 @@ func points_on_circle(center: Vector2, radius: float, count: int) -> Array:
 		points.append(point)
 	return points
 
-
+func dan( amount , radius):
+	var time = 6
+	var origin = points_on_circle(global_position, 10, amount)
+	var targets: Array
+	targets.append(points_on_circle(global_position, 10 + radius, amount))
+	targets.append(points_on_circle(global_position, 10 + radius * 2, amount))
+	targets.append(points_on_circle(global_position, 10 + radius * 3, amount))
+	for j in range(time):
+		if interrupt or end:
+			break
+		for i in range(amount):
+			var b = bullet_aunn.instantiate()
+			b.position = origin[i]
+			b.target_position = targets[i%3][i]  # Now valid because bullet_aunn.gd defines this property
+			get_node("/root/Main/SubViewportContainer/Main_Viewport").add_child(b)
+		await get_tree().create_timer(2).timeout
 
 func con_shoot():
 	anim.animation = "cast"

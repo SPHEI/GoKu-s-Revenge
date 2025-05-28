@@ -1,19 +1,16 @@
 
 extends Area2D
 
-@export var target_position := Vector2.ZERO
-@export var move_speed := 2.0
-@export var arc_height := 10.0  # Controls the curve height
+@export var target_position: Array
+@export var move_speed := 100.0
 
-var _initial_distance: float
-var _direction: Vector2
+
 var epsilon := 1.0
-var plr: Node
+var current_target := 0
 
 func _ready():
 	add_to_group("bullets")
 	body_entered.connect(_on_body_entered)
-	plr = get_tree().get_nodes_in_group("player")[0]
 	await get_tree().create_timer(10).timeout
 	if not entered:
 		queue_free()
@@ -23,24 +20,12 @@ func _ready():
 
 
 func _physics_process(delta):
-	if target_position == Vector2.ZERO:
-		return
+	if current_target < target_position.size() and target_position[current_target] != Vector2.ZERO:
+		global_position = global_position.move_toward(target_position[current_target], move_speed * delta)
 	
-	var new_pos = global_position.move_toward(target_position, move_speed * delta)
-	var remaining_distance = global_position.distance_to(target_position)
-	var progress = 1.0 - (remaining_distance / _initial_distance)
-	var arc_offset = _direction.rotated(PI/2) * arc_height * sin(progress * PI)
-
-	global_position = new_pos + (arc_offset * delta)
-
-
-	#rotation = _direction.angle()
-#	if global_position.distance_to(target_position) <= epsilon:
-#		direction = position.direction_to(plr.global_position)
-#		done = true
-#		move_speed = 1000
-#	else:
-#		global_position += direction * delta * move_speed
+		if global_position.distance_to(target_position[current_target]) <= epsilon:
+			current_target+=1
+	pass
 
 
 
