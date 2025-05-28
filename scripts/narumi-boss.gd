@@ -153,7 +153,7 @@ func con_spiral(dir):
 		if interrupt or end:
 			break
 		for i in range(4):
-			var b = bullet_green.instantiate()
+			var b = bullet.instantiate()
 			b.position = position
 			var angle_offset = deg_to_rad(-25 + j * 20 + i * 4)
 			var angle = dir * angle_offset
