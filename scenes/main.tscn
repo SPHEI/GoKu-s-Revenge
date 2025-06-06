@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://ddiq5usw0sjtv"]
+[gd_scene load_steps=44 format=3 uid="uid://ddiq5usw0sjtv"]
 
 [ext_resource type="Script" uid="uid://16pxynvlvl3k" path="res://scripts/game_manager.gd" id="1_jyhfs"]
 [ext_resource type="Script" uid="uid://ddjib2ynh56nl" path="res://scripts/level_manager.gd" id="2_tbgi4"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://b20vica7mqxxw" path="res://scripts/transition.gd" id="4_tipki"]
 [ext_resource type="PackedScene" uid="uid://bv72s0ha81kqv" path="res://scenes/enemy_bullets_scene.tscn" id="5_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://l6txdkvxu1b0" path="res://player_bullets_scene.tscn" id="6_tefeu"]
+[ext_resource type="Script" uid="uid://c87pnsv1iivnt" path="res://scripts/ai_contact.gd" id="9_85g3d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tipki"]
 atlas = ExtResource("3_o6xl0")
@@ -287,3 +288,7 @@ position = Vector2(640, 920)
 [node name="EnemyBulletsScene" parent="SubViewportContainer/Main_Viewport" instance=ExtResource("5_tbgi4")]
 
 [node name="PlayerBulletsScene" parent="SubViewportContainer/Main_Viewport" instance=ExtResource("6_tefeu")]
+
+[node name="AI contact" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("9_85g3d")

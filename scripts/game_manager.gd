@@ -34,6 +34,9 @@ var bullets: Label = null;
 var boss_health_bar: ProgressBar = null;
 var item_bg_panel: Panel = null;
 
+
+@onready var ai = $"AI contact"
+
 var items = [
 	#[Code name, display name, description]
 	["ShootSpeed", "Focus Crystal", "Increases shooting speed by 50%."],
@@ -141,7 +144,12 @@ func wait_until_boss_dead():
 		if cancel_stage:
 			return
 	boss_health_bar.visible = false
-	
+func wait_for_connection():
+	while not ai.connected:
+		await get_tree().create_timer(0.2).timeout
+		if cancel_stage:
+			return
+
 var current_options = [-1,-1,-1]
 func pick_items():
 	player.enabled = false
@@ -204,6 +212,7 @@ func update_item_visuals(a: int):
 #STAGES SECTION
 @export var stages = [
 	[	#Stage 1
+		"wait_for_connection",
 		"wait-1.0",
 		"bullet_pattern_down",
 		"wait-6.0",

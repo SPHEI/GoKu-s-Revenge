@@ -109,8 +109,8 @@ func _process(_delta: float) -> void:
 
 var can_get_hit = false
 
-var max_hp = 6
-var hp = 6
+var max_hp = 3
+var hp = 3
 func reset_hp():
 	if items.get("HpBoost") != null:
 		hp = max_hp + (1 * items["HpBoost"])
