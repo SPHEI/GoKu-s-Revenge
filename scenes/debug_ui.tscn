@@ -123,6 +123,13 @@ offset_bottom = 1080.0
 scale = Vector2(1, 1e-05)
 script = ExtResource("2_yw5hf")
 
+[node name="AI" type="Label" parent="."]
+offset_top = 188.0
+offset_right = 166.0
+offset_bottom = 218.0
+text = "Mode: Player"
+label_settings = SubResource("LabelSettings_ugl6f")
+
 [node name="Fps" type="Label" parent="."]
 layout_mode = 0
 offset_right = 40.0

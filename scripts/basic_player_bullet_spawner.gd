@@ -10,7 +10,7 @@ var move_speed := 200
 var epsilon = 1.0
 
 func _ready() -> void:
-	var marker_root = get_node("/root/Main/SubViewportContainer/Main_Viewport/PlayerBulletsScene")
+	var _marker_root = get_node("/root/Main/SubViewportContainer/Main_Viewport/PlayerBulletsScene")
 
 	for marker in get_children():
 		if marker is Marker2D:
