@@ -103,10 +103,12 @@ var can_get_hit = true;
 func get_hit(damage):
 	if can_get_hit:
 		if not interrupt:
+			get_node("/root/Main/AI contact").feedback["bosses_hit"] += 1
 			hp -= damage
 			if health_bar != null:
 				health_bar.value = hp/max_hp
 			if hp <= 0:
+				get_node("/root/Main/AI contact").feedback["bosses_defeated"] += 1
 				can_get_hit = false
 				get_tree().get_nodes_in_group("player")[0].ability_charge = 100
 				health_bar.value = 0

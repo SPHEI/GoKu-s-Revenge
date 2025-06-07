@@ -11,8 +11,10 @@ class_name Enemy
 var can_get_hit = true;
 func get_hit(damage):
 	if can_get_hit:
+		get_node("/root/Main/AI contact").feedback["enemies_hit"] += 1
 		hp -= damage
 		if hp <= 0:
+			get_node("/root/Main/AI contact").feedback["enemies_defeated"] += 1
 			can_get_hit = false;
 			var e = explosion.instantiate()
 			e.position = position

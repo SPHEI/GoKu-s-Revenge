@@ -120,10 +120,12 @@ func reset_hp():
 @onready var explosion = preload("res://scenes/effects/explosion_big.tscn")
 func hit():
 	if enabled and can_get_hit:
+		get_node("/root/Main/AI contact").feedback["got_hit"] = true
 		get_node("/root/Main/Debug-UI/HurtFx").a = 1.0
 		hp -= 1
 		if hp <= 0:
 			var e = explosion.instantiate()
+			get_node("/root/Main/AI contact").feedback["died"] = true
 			e.position = position
 			get_node("/root/Main/SubViewportContainer/Main_Viewport").add_child(e)
 			get_node("/root/Main/Debug-UI").game_over()
@@ -155,12 +157,16 @@ func ult_clear_screen():
 	get_node("/root/Main/SubViewportContainer/Main_Viewport").add_child(e)
 	for node in get_tree().get_nodes_in_group("bullets"):
 		node.queue_free()
+		get_node("/root/Main/AI contact").feedback["ult_delets"] += 1
 	for node in get_tree().get_nodes_in_group("bullet"):
 		node.queue_free()
+		get_node("/root/Main/AI contact").feedback["ult_delets"] += 1
 	for node in get_tree().get_nodes_in_group("enemies"):
 		node.queue_free()
+		get_node("/root/Main/AI contact").feedback["ult_delets"] += 1
 	for node in get_tree().get_nodes_in_group("bosses"):
 		node.get_hit(50)
+		get_node("/root/Main/AI contact").feedback["ult_delets"] += 1
 		
 func respawn():
 	can_get_hit = false

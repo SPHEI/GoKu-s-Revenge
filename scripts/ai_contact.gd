@@ -49,6 +49,15 @@ func step():
 	var response = send_state_and_get_action(data)
 	set_input(response)
 
+var feedback = {
+	"enemies_hit" : 0,
+	"enemies_defeated" : 0,
+	"ult_delets" : 0,
+	"bosses_hit" : 0,
+	"bosses_defeated" : 0,
+	"got_hit" : false,
+	"died" : false
+}
 #Get all info that ai needs
 func gather_data() -> Dictionary:
 	var ret: Dictionary
@@ -110,6 +119,19 @@ func gather_data() -> Dictionary:
 			})
 	ret["Bosses"] = boss_array
 	
+	ret["Feedback"] = feedback
+	
+	#Reset feedback after it's used
+	feedback = {
+		"enemies_hit" : 0,
+		"enemies_defeated" : 0,
+		"ult_delets" : 0,
+		"bosses_hit" : 0,
+		"bosses_defeated" : 0,
+		"got_hit" : false,
+		"died" : false
+	}
+	
 	return ret
 
 #Send data and wait for response
@@ -132,12 +154,15 @@ func send_state_and_get_action(state: Dictionary) -> Dictionary:
 				print("Nothing received from server.")
 				OS.delay_msec(100)
 				continue
-			var r = JSON.parse_string(action_str)
-			if r is Dictionary:
-				return r
-			else:
-				print("Invalid JSON received from server. " + action_str)
-				OS.delay_msec(100)
+			var lines := action_str.split("\n", false)
+			for line in lines:
+				if line.strip_edges() != "":
+					var r = JSON.parse_string(line)
+					if r is Dictionary:
+						return r
+					else:
+						print("Invalid JSON received from server. " + action_str)
+						OS.delay_msec(100)
 	return {}
 	
 var ignore_ai = false

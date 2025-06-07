@@ -124,6 +124,7 @@ scale = Vector2(1, 1e-05)
 script = ExtResource("2_yw5hf")
 
 [node name="AI" type="Label" parent="."]
+layout_mode = 0
 offset_top = 188.0
 offset_right = 166.0
 offset_bottom = 218.0
