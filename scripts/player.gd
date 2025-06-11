@@ -123,6 +123,7 @@ func hit():
 		get_node("/root/Main/AI contact").feedback["got_hit"] = true
 		get_node("/root/Main/Debug-UI/HurtFx").a = 1.0
 		hp -= 1
+		ability_charge -= 50
 		if hp <= 0:
 			var e = explosion.instantiate()
 			get_node("/root/Main/AI contact").feedback["died"] = true
@@ -132,9 +133,13 @@ func hit():
 			enabled = false
 			visible = false
 			await get_tree().create_timer(4).timeout
-			get_tree().call_deferred("change_scene_to_file", "res://scenes/main.tscn")
-		else:
-			respawn()
+			get_node("/root/Main/Debug-UI").not_game_over()
+			enabled = true
+			visible = true
+			hp = max_hp
+			ability_charge = 100
+			get_node("/root/Main").reset_game()
+		respawn()
 		#if items.get("BlinkExtend") != null:
 		#	await get_tree().create_timer(0.5 * (1 + items["BlinkExtend"] * 0.5)).timeout
 		#else:
@@ -170,7 +175,6 @@ func ult_clear_screen():
 		
 func respawn():
 	can_get_hit = false
-	ability_charge -= 50
 	if ability_charge < 0:
 		ability_charge = 0
 	position.x = screen_size.x / 2

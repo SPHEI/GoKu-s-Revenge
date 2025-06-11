@@ -65,3 +65,5 @@ func _process(_delta):
 	bullets_label.text = "Bullets Shot: " + str(bullets)
 func game_over():
 	game_over_obj.visible = true
+func not_game_over():
+	game_over_obj.visible = false

@@ -97,7 +97,20 @@ func _process(_delta: float) -> void:
 			transition.state = 2
 			await get_tree().create_timer(0.5).timeout
 			run_stage(stages[level_manager.current_level_id])
-	
+func reset_game():
+	level_manager.current_level_id = 1;
+	cancel_stage = true
+	boss_health_bar.visible = false
+	while cancel_stage:
+		await get_tree().create_timer(0.2).timeout
+	transition.state = 0
+	await get_tree().create_timer(0.1).timeout
+	transition.state = 1
+	await get_tree().create_timer(0.5).timeout
+	await level_manager.previous_level()
+	transition.state = 2
+	await get_tree().create_timer(0.5).timeout
+	run_stage(stages[level_manager.current_level_id])
 func spawn_enemy(type: Resource, pos: Vector2):
 	var b = type.instantiate()
 	b.position = pos
@@ -233,7 +246,6 @@ func update_item_visuals(a: int):
 		"wait-1.0",
 		"boss_test_spawn",
 		"wait_until_boss_dead",
-		"pick_items",
 	],
 	[	#Stage 2
 		"bullet_pattern_fan",
@@ -269,7 +281,6 @@ func update_item_visuals(a: int):
 		"wait-1.0",
 		"boss_aunn_spawn",
 		"wait_until_boss_dead",
-		"pick_items",
 	],
 	[	#Stage 3
 		"enemy_pattern_middle_laser",
@@ -308,7 +319,6 @@ func update_item_visuals(a: int):
 		"wait-1.0",
 		"boss_narumi_spawn",
 		"wait_until_boss_dead",
-		"pick_items",
 	],
 	[	#Stage 4
 		"enemy_pattern_line_horiz_kamikaze",
@@ -419,7 +429,6 @@ func update_item_visuals(a: int):
 		"bullet_pattern_back_and_foth",
 		"wait_until_clear",
 		"wait_until_boss_dead",
-		"pick_items"
 	],
 ]
 
