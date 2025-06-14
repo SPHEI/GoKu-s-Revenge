@@ -110,6 +110,7 @@ func reset_game():
 	await level_manager.previous_level()
 	transition.state = 2
 	await get_tree().create_timer(0.5).timeout
+	ai.pause = false
 	run_stage(stages[level_manager.current_level_id])
 func spawn_enemy(type: Resource, pos: Vector2):
 	var b = type.instantiate()

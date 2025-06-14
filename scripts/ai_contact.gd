@@ -7,6 +7,8 @@ var step_requested := false
 
 var mode_label: Label = null
 
+var pause = false
+
 var plr: Node = null
 func _ready():
 	plr = get_node("/root/Main/SubViewportContainer/Main_Viewport/Player")
@@ -45,6 +47,12 @@ func step():
 	await get_tree().process_frame  # Wait for idle step
 	Engine.time_scale = 0.0
 	step_requested = false
+	if pause:
+		step_requested = true
+		return
+	if feedback['died'] == true:
+		print("a")
+		pause = true
 	var data = gather_data()
 	var response = send_state_and_get_action(data)
 	set_input(response)
@@ -59,6 +67,21 @@ var feedback = {
 	"died" : false,
 	"won" : false
 }
+
+func enemy_to_int(name: String) -> int:
+	match(name):
+		'basic_enemy' : return 1
+		'basic_enemy_side' : return 1
+		'basic_enemy_tri' : return 2
+		'basic_enemy_side_tri' : return 2
+		'kamikaze' : return 3
+		'laser' : return 4
+		'spinner_bullets' : return 5
+		'spinner_laser' : return 6
+		'aunn' : return 7
+		'narumi' : return 8
+		'test_boss' : return 9
+	return 0
 #Get all info that ai needs
 func gather_data() -> Dictionary:
 	var ret: Dictionary
@@ -101,7 +124,7 @@ func gather_data() -> Dictionary:
 	for e in get_tree().get_nodes_in_group("enemies"):
 		enemy_array.append({
 			"position" : {
-				"type" : e.get_script().get_path().get_file().get_basename(),
+				"type" : enemy_to_int(e.get_script().get_path().get_file().get_basename()),
 				"x" : e.position.x,
 				"y" : e.position.y
 				}
@@ -112,7 +135,7 @@ func gather_data() -> Dictionary:
 	for b in get_tree().get_nodes_in_group("bosses"):
 		boss_array.append({
 			"position" : {
-				"type" : b.get_script().get_path().get_file().get_basename(),
+				"type" : enemy_to_int(b.get_script().get_path().get_file().get_basename()),
 				"x" : b.position.x,
 				"y" : b.position.y,
 				"hp" : b.hp
@@ -133,7 +156,7 @@ func gather_data() -> Dictionary:
 		"died" : false,
 		"won" : false
 	}
-	
+	#print(ret)
 	return ret
 
 #Send data and wait for response
@@ -153,7 +176,7 @@ func send_state_and_get_action(state: Dictionary) -> Dictionary:
 			while client.get_available_bytes() > 0:
 				action_str += client.get_utf8_string(client.get_available_bytes())
 			if action_str == "":
-				print("Nothing received from server.")
+				#print("Nothing received from server.")
 				OS.delay_msec(100)
 				continue
 			var lines := action_str.split("\n", false)
