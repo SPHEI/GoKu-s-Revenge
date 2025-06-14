@@ -56,7 +56,8 @@ var feedback = {
 	"bosses_hit" : 0,
 	"bosses_defeated" : 0,
 	"got_hit" : false,
-	"died" : false
+	"died" : false,
+	"won" : false
 }
 #Get all info that ai needs
 func gather_data() -> Dictionary:
@@ -129,7 +130,8 @@ func gather_data() -> Dictionary:
 		"bosses_hit" : 0,
 		"bosses_defeated" : 0,
 		"got_hit" : false,
-		"died" : false
+		"died" : false,
+		"won" : false
 	}
 	
 	return ret

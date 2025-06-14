@@ -390,7 +390,7 @@ func update_item_visuals(a: int):
 		"win_game"
 	],
 	[	#Test stage
-		"pick_items",
+		"win_game",
 		"boss_test_spawn",
 		"wait_until_boss_dead",
 		"enemy_center_spinner_laser",
@@ -460,8 +460,12 @@ func run_stage(list):
 	
 func win_game():
 	win_text.text = "You won!"
+	ai.feedback["won"] = true
 	await get_tree().create_timer(4.0).timeout
-	get_tree().change_scene_to_file("res://scenes/Credits.tscn")
+	reset_game()
+	win_text.text = ""
+	await get_tree().create_timer(4.0).timeout
+	cancel_stage = false
 	
 	
 #640 is the middle of the screen

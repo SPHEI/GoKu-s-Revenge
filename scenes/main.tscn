@@ -266,6 +266,7 @@ frame_progress = 0.0699991
 script = ExtResource("4_tipki")
 
 [node name="3DEnviorment" type="Node3D" parent="SubViewportContainer/Main_Viewport" node_paths=PackedStringArray("ui")]
+visible = false
 script = ExtResource("2_tbgi4")
 ui = NodePath("../../../Debug-UI")
 
