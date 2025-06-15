@@ -13,7 +13,7 @@ config_version=5
 config/name="Touhou GoKu's revenge"
 run/main_scene="uid://ddiq5usw0sjtv"
 config/features=PackedStringArray("4.4", "Forward Plus")
-run/max_fps=60
+run/max_fps=15
 config/icon="res://icon.svg"
 
 [display]
