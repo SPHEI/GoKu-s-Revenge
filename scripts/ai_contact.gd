@@ -51,7 +51,7 @@ func step():
 		step_requested = true
 		return
 	if feedback['died'] == true:
-		print("a")
+		#print("a")
 		pause = true
 	var data = gather_data()
 	var response = send_state_and_get_action(data)
@@ -87,18 +87,18 @@ func gather_data() -> Dictionary:
 	var ret: Dictionary
 	ret["Player"] = {
 		"position" : {
-			"x" : plr.position.x,
-			"y" : plr.position.y
+			"x" : plr.position.x / 1280.0,
+			"y" : plr.position.y / 1080.0
 			},
-		"hp" : plr.hp,
-		"ability_charge" : plr.ability_charge
+		"hp" : plr.hp/plr.max_hp,
+		"ability_charge" : plr.ability_charge/100.0
 		}
 	var plr_bullets_array: Array = []
 	for bullet in get_tree().get_nodes_in_group("player_bullets"):
 		plr_bullets_array.append({
 			"position" : {
-				"x" : bullet.position.x,
-				"y" : bullet.position.y
+				"x" : bullet.position.x / 1280.0,
+				"y" : bullet.position.y / 1080.0
 				}
 			})
 	ret["Player_Bullets"] = plr_bullets_array
@@ -107,15 +107,15 @@ func gather_data() -> Dictionary:
 	for bullet in get_tree().get_nodes_in_group("bullets"):
 		enemy_bullets_array.append({
 			"position" : {
-				"x" : bullet.position.x,
-				"y" : bullet.position.y
+				"x" : bullet.position.x  / 1280.0,
+				"y" : bullet.position.y / 1080.0
 				}
 			})
 	for bullet in get_tree().get_nodes_in_group("bullet"):
 		enemy_bullets_array.append({
 			"position" : {
-				"x" : bullet.position.x,
-				"y" : bullet.position.y
+				"x" : bullet.position.x  / 1280.0,
+				"y" : bullet.position.y / 1080.0
 				}
 			})
 	ret["Enemy_Bullets"] = enemy_bullets_array
@@ -125,8 +125,8 @@ func gather_data() -> Dictionary:
 		enemy_array.append({
 			"position" : {
 				"type" : enemy_to_int(e.get_script().get_path().get_file().get_basename()),
-				"x" : e.position.x,
-				"y" : e.position.y
+				"x" : e.position.x / 1280.0,
+				"y" : e.position.y / 1080.0
 				}
 			})
 	ret["Enemies"] = enemy_array
@@ -136,9 +136,9 @@ func gather_data() -> Dictionary:
 		boss_array.append({
 			"position" : {
 				"type" : enemy_to_int(b.get_script().get_path().get_file().get_basename()),
-				"x" : b.position.x,
-				"y" : b.position.y,
-				"hp" : b.hp
+				"x" : b.position.x / 1280.0,
+				"y" : b.position.y / 1080.0,
+				"hp" : b.hp / b.max_hp
 				}
 			})
 	ret["Bosses"] = boss_array
