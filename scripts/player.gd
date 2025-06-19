@@ -109,8 +109,8 @@ func _process(_delta: float) -> void:
 
 var can_get_hit = false
 
-var max_hp = 3
-var hp = 3
+var max_hp = 1
+var hp = 1
 func reset_hp():
 	if items.get("HpBoost") != null:
 		hp = max_hp + (1 * items["HpBoost"])
@@ -132,7 +132,7 @@ func hit():
 			get_node("/root/Main/Debug-UI").game_over()
 			enabled = false
 			visible = false
-			await get_tree().create_timer(4).timeout
+			await get_tree().create_timer(1).timeout
 			get_node("/root/Main/Debug-UI").not_game_over()
 			enabled = true
 			visible = true

@@ -99,6 +99,7 @@ func _process(_delta: float) -> void:
 			run_stage(stages[level_manager.current_level_id])
 func reset_game():
 	level_manager.current_level_id = 1;
+	player.respawn()
 	cancel_stage = true
 	boss_health_bar.visible = false
 	while cancel_stage:
@@ -228,6 +229,29 @@ func update_item_visuals(a: int):
 	[	#Stage 1
 		"wait_for_connection",
 		"wait-1.0",
+		"bullet_pattern_down",
+		"wait-6.0",
+		"wait_until_clear",
+		"wait-4.0",
+		"win_game",
+		"bullet_pattern_down",
+		"wait-6.0",
+		"bullet_pattern_down",
+		"wait-6.0",
+		"bullet_pattern_down",
+		"wait-6.0",
+		"bullet_pattern_down",
+		"wait-6.0",
+		"bullet_pattern_down",
+		"wait-6.0",
+		"bullet_pattern_down",
+		"wait-6.0",
+		"bullet_pattern_down",
+		"wait-6.0",
+		"bullet_pattern_down",
+		"wait-6.0",
+		"bullet_pattern_down",
+		"wait-6.0",
 		"bullet_pattern_down",
 		"wait-6.0",
 		"enemy_pattern_middle_kamikaze",
@@ -462,18 +486,18 @@ func run_stage(list):
 func win_game():
 	win_text.text = "You won!"
 	ai.feedback["won"] = true
-	await get_tree().create_timer(4.0).timeout
+	await get_tree().create_timer(1.0).timeout
 	reset_game()
 	win_text.text = ""
-	await get_tree().create_timer(4.0).timeout
+	await get_tree().create_timer(1.0).timeout
 	cancel_stage = false
 	
 	
 #640 is the middle of the screen
 #BULLET PATTERN SECTION
 func bullet_pattern_line_horiz_basic(offset: float, dir: Vector2):
-	for i in range(15):
-		spawn_bullet(bullet_basic, Vector2(100.0 * i + offset,-4.0), dir)
+	for i in range(14):
+		spawn_bullet(bullet_basic, Vector2(102.0 * i + offset,-4.0), dir)
 func bullet_pattern_line_vert_basic_left(offset: float, dir: Vector2):
 	for i in range(15):
 		spawn_bullet(bullet_basic, Vector2(-4,100 * i + offset), dir)

@@ -49,8 +49,15 @@ func step():
 	step_requested = false
 	if pause:
 		step_requested = true
+		Input.action_release("ui_shoot")
+		Input.action_release("ui_sneak")
+		Input.action_release("ui_ability")
+		Input.action_release("ui_up")
+		Input.action_release("ui_down")
+		Input.action_release("ui_left")
+		Input.action_release("ui_right")
 		return
-	if feedback['died'] == true:
+	if feedback['died'] or feedback['won'] == true:
 		#print("a")
 		pause = true
 	var data = gather_data()
@@ -95,40 +102,44 @@ func gather_data() -> Dictionary:
 		}
 	var plr_bullets_array: Array = []
 	for bullet in get_tree().get_nodes_in_group("player_bullets"):
-		plr_bullets_array.append({
-			"position" : {
-				"x" : bullet.position.x / 1280.0,
-				"y" : bullet.position.y / 1080.0
-				}
-			})
+		if bullet.position.x > 0 and  bullet.position.x < 1280.0 and bullet.position.y > 0 and bullet.position.y < 1080.0:
+			plr_bullets_array.append({
+				"position" : {
+					"x" : bullet.position.x / 1280.0,
+					"y" : bullet.position.y / 1080.0
+					}
+				})
 	ret["Player_Bullets"] = plr_bullets_array
 
 	var enemy_bullets_array: Array = []
 	for bullet in get_tree().get_nodes_in_group("bullets"):
-		enemy_bullets_array.append({
-			"position" : {
-				"x" : bullet.position.x  / 1280.0,
-				"y" : bullet.position.y / 1080.0
-				}
-			})
+		if bullet.position.x > 0 and  bullet.position.x < 1280.0 and bullet.position.y > 0 and bullet.position.y < 1080.0:
+			enemy_bullets_array.append({
+				"position" : {
+					"x" : bullet.position.x  / 1280.0,
+					"y" : bullet.position.y / 1080.0
+					}
+				})
 	for bullet in get_tree().get_nodes_in_group("bullet"):
-		enemy_bullets_array.append({
-			"position" : {
-				"x" : bullet.position.x  / 1280.0,
-				"y" : bullet.position.y / 1080.0
-				}
-			})
+		if bullet.position.x > 0 and  bullet.position.x < 1280.0 and bullet.position.y > 0 and bullet.position.y < 1080.0:
+			enemy_bullets_array.append({
+				"position" : {
+					"x" : bullet.position.x  / 1280.0,
+					"y" : bullet.position.y / 1080.0
+					}
+				})
 	ret["Enemy_Bullets"] = enemy_bullets_array
 	
 	var enemy_array: Array = []
 	for e in get_tree().get_nodes_in_group("enemies"):
-		enemy_array.append({
-			"position" : {
-				"type" : enemy_to_int(e.get_script().get_path().get_file().get_basename()),
-				"x" : e.position.x / 1280.0,
-				"y" : e.position.y / 1080.0
-				}
-			})
+		if e.position.x > 0 and  e.position.x < 1280.0 and e.position.y > 0 and e.position.y < 1080.0:
+			enemy_array.append({
+				"position" : {
+					"type" : enemy_to_int(e.get_script().get_path().get_file().get_basename()),
+					"x" : e.position.x / 1280.0,
+					"y" : e.position.y / 1080.0
+					}
+				})
 	ret["Enemies"] = enemy_array
 	
 	var boss_array: Array = []

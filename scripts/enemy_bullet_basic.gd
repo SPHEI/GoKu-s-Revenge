@@ -6,7 +6,7 @@ var dir: Vector2 = Vector2(0.0,0.0)
 func _ready():
 	add_to_group("bullet")
 	body_entered.connect(_on_body_entered)
-	await get_tree().create_timer(10).timeout
+	await get_tree().create_timer(1).timeout
 	if not entered:
 		queue_free()
 	

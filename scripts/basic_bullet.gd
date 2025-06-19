@@ -11,7 +11,7 @@ var damage = 1
 func _ready() -> void:
 	add_to_group("player_bullets")
 	area_entered.connect(_on_area_entered)
-	await get_tree().create_timer(10).timeout
+	await get_tree().create_timer(1).timeout
 	if not entered:
 		queue_free()
 
