@@ -75,20 +75,6 @@ var feedback = {
 	"won" : false
 }
 
-func enemy_to_int(name: String) -> int:
-	match(name):
-		'basic_enemy' : return 1
-		'basic_enemy_side' : return 1
-		'basic_enemy_tri' : return 2
-		'basic_enemy_side_tri' : return 2
-		'kamikaze' : return 3
-		'laser' : return 4
-		'spinner_bullets' : return 5
-		'spinner_laser' : return 6
-		'aunn' : return 7
-		'narumi' : return 8
-		'test_boss' : return 9
-	return 0
 #Get all info that ai needs
 func gather_data() -> Dictionary:
 	var ret: Dictionary
@@ -143,12 +129,12 @@ func gather_data() -> Dictionary:
 					}
 				})
 	while len(enemy_bullets_array) > 50:
-		var max = 0
+		var maxx = 0
 		var toDel = -1
 		for i in range(len(enemy_bullets_array)):
 			var x = Vector2(enemy_bullets_array[i]["position"]["x"],enemy_bullets_array[i]["position"]["y"]).distance_to(plr.position)
-			if x > max:
-				max = x
+			if x > maxx:
+				maxx = x
 				toDel = i
 		enemy_bullets_array.remove_at(toDel)
 		
@@ -180,12 +166,12 @@ func gather_data() -> Dictionary:
 					}
 				})
 	while len(enemy_array) > 10:
-		var max = 0
+		var maxx = 0
 		var toDel = -1
 		for i in range(len(enemy_array)):
 			var x = Vector2(enemy_array[i]["position"]["x"],enemy_array[i]["position"]["y"]).distance_to(plr.position)
-			if x > max:
-				max = x
+			if x > maxx:
+				maxx = x
 				toDel = i
 		enemy_array.remove_at(toDel)
 		
