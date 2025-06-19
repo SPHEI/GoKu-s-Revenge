@@ -70,6 +70,8 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	enemies.text = "Enemies: " + str(get_tree().get_node_count_in_group("enemies") + get_tree().get_node_count_in_group("bosses"))
 	bullets.text = "Bullets: " + str(get_tree().get_node_count_in_group("bullets") + get_tree().get_node_count_in_group("bullet"))
+	#bullets.text = "Bullets: " + str(get_tree().get_node_count_in_group("player_bullets"))
+	
 	if not level_manager.updating:
 		if Input.is_action_just_pressed("debug_nextScene"):
 			cancel_stage = true
@@ -228,49 +230,17 @@ func update_item_visuals(a: int):
 @export var stages = [
 	[	#Stage 1
 		"wait_for_connection",
-		"wait-1.0",
 		"bullet_pattern_down",
-		"wait-6.0",
-		"wait_until_clear",
-		"wait-4.0",
-		"win_game",
-		"bullet_pattern_down",
-		"wait-6.0",
-		"bullet_pattern_down",
-		"wait-6.0",
-		"bullet_pattern_down",
-		"wait-6.0",
-		"bullet_pattern_down",
-		"wait-6.0",
-		"bullet_pattern_down",
-		"wait-6.0",
-		"bullet_pattern_down",
-		"wait-6.0",
-		"bullet_pattern_down",
-		"wait-6.0",
-		"bullet_pattern_down",
-		"wait-6.0",
-		"bullet_pattern_down",
-		"wait-6.0",
-		"bullet_pattern_down",
-		"wait-6.0",
-		"enemy_pattern_middle_kamikaze",
-		"wait_until_clear",
-		"enemy_pattern_line_horiz_kamikaze",
 		"wait_until_clear",
 		"enemy_pattern_two_basic",
 		"wait_until_clear",
 		"enemy_pattern_line_horiz_basic",
 		"wait_until_clear",
-		"enemy_pattern_line_horiz_kamikaze",
-		"bullet_pattern_down",
-		"enemy_pattern_line_horiz_kamikaze",
-		"wait_until_clear",
 		"enemy_pattern_trio_basic_tri",
 		"wait_until_clear",
-		"wait-1.0",
 		"boss_test_spawn",
 		"wait_until_boss_dead",
+		"win-game"
 	],
 	[	#Stage 2
 		"bullet_pattern_fan",

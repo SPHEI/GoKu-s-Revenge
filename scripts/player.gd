@@ -74,7 +74,9 @@ func get_input(delta: float):
 
 	
 	position += velocity * delta
-	position = position.clamp(Vector2.ZERO, screen_size)
+	
+	if position.x < 0 || position.x > 1280 || position.y < 0 || position.y > 1080:
+		hit()
 	
 	if can_gain_ability:
 		can_gain_ability = false

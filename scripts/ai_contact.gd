@@ -97,16 +97,23 @@ func gather_data() -> Dictionary:
 			"x" : plr.position.x / 1280.0,
 			"y" : plr.position.y / 1080.0
 			},
-		"hp" : plr.hp/plr.max_hp,
-		"ability_charge" : plr.ability_charge/100.0
 		}
 	var plr_bullets_array: Array = []
 	for bullet in get_tree().get_nodes_in_group("player_bullets"):
+		if len(plr_bullets_array) >= 20:
+			break
 		if bullet.position.x > 0 and  bullet.position.x < 1280.0 and bullet.position.y > 0 and bullet.position.y < 1080.0:
 			plr_bullets_array.append({
 				"position" : {
 					"x" : bullet.position.x / 1280.0,
 					"y" : bullet.position.y / 1080.0
+					}
+				})
+	while len(plr_bullets_array) < 20:
+		plr_bullets_array.append({
+				"position" : {
+					"x" : 0.0,
+					"y" : 0.0
 					}
 				})
 	ret["Player_Bullets"] = plr_bullets_array
@@ -128,6 +135,23 @@ func gather_data() -> Dictionary:
 					"y" : bullet.position.y / 1080.0
 					}
 				})
+	while len(enemy_bullets_array) < 50:
+		enemy_bullets_array.append({
+				"position" : {
+					"x" : 0.0,
+					"y" : 0.0
+					}
+				})
+	while len(enemy_bullets_array) > 50:
+		var max = 0
+		var toDel = -1
+		for i in range(len(enemy_bullets_array)):
+			var x = Vector2(enemy_bullets_array[i]["position"]["x"],enemy_bullets_array[i]["position"]["y"]).distance_to(plr.position)
+			if x > max:
+				max = x
+				toDel = i
+		enemy_bullets_array.remove_at(toDel)
+		
 	ret["Enemy_Bullets"] = enemy_bullets_array
 	
 	var enemy_array: Array = []
@@ -135,24 +159,37 @@ func gather_data() -> Dictionary:
 		if e.position.x > 0 and  e.position.x < 1280.0 and e.position.y > 0 and e.position.y < 1080.0:
 			enemy_array.append({
 				"position" : {
-					"type" : enemy_to_int(e.get_script().get_path().get_file().get_basename()),
 					"x" : e.position.x / 1280.0,
 					"y" : e.position.y / 1080.0
 					}
 				})
+	for e in get_tree().get_nodes_in_group("bosses"):
+		if e.position.x > 0 and  e.position.x < 1280.0 and e.position.y > 0 and e.position.y < 1080.0:
+			enemy_array.append({
+				"position" : {
+					"x" : e.position.x / 1280.0,
+					"y" : e.position.y / 1080.0
+					}
+				})
+				
+	while len(enemy_array) < 10:
+		enemy_array.append({
+				"position" : {
+					"x" : 0.0,
+					"y" : 0.0
+					}
+				})
+	while len(enemy_array) > 10:
+		var max = 0
+		var toDel = -1
+		for i in range(len(enemy_array)):
+			var x = Vector2(enemy_array[i]["position"]["x"],enemy_array[i]["position"]["y"]).distance_to(plr.position)
+			if x > max:
+				max = x
+				toDel = i
+		enemy_array.remove_at(toDel)
+		
 	ret["Enemies"] = enemy_array
-	
-	var boss_array: Array = []
-	for b in get_tree().get_nodes_in_group("bosses"):
-		boss_array.append({
-			"position" : {
-				"type" : enemy_to_int(b.get_script().get_path().get_file().get_basename()),
-				"x" : b.position.x / 1280.0,
-				"y" : b.position.y / 1080.0,
-				"hp" : b.hp / b.max_hp
-				}
-			})
-	ret["Bosses"] = boss_array
 	
 	ret["Feedback"] = feedback
 	
